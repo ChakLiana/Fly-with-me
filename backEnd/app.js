@@ -30,11 +30,13 @@ const uploadMany = multer({ storage: store }).array('files'); // загрузк�
 // прописываем "ручки" 
 app.put('/image', upload, (req, res, next) => {
    req.body.file // файл 
+   res.sendStatus(200)
 });
 app.put('/image', uploadMany, (req, res, next) => {
    req.body.files // массив файлов
+   res.sendStatus(200)
 });
-
+ 
 
 
 dbConnect()
