@@ -1,9 +1,11 @@
-
+import ProfileUser from "./Profiles/ProfileUser";
+import UserRegisterForm from "./Profiles/UserRegisterForm";
 
 function App() {
   return (
-    <div >
-    
+    <div>
+      <UserRegisterForm />
+      {/* <ProfileUser /> */}
     </div>
   );
 }
