@@ -1,4 +1,7 @@
+
 import YandexMap from "./components/YandexMap/YandexMap";
+
+
 
 
 function App() {
@@ -6,8 +9,11 @@ function App() {
 
   return (
 
+
     <div >
       <YandexMap />
+
+
     </div>
   );
 }
