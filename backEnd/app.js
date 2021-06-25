@@ -4,7 +4,7 @@ const logger = require('morgan');
 const dbConnect = require('./src/db/dbConect');
 
 const app = express()
-const PORT = 3007
+const PORT = 8080
 // подключаем multer для поддержки загрузки картинок
 const multer = require('multer') 
 
