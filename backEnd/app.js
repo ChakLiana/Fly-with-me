@@ -1,17 +1,23 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 const logger = require('morgan');
 const dbConnect = require('./src/db/dbConect');
-const app = express()
-const PORT = 8080
+const app = express();
+const PORT = 8080;
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+// Импорт ручек
+const iventRouter = require('./src/routers/iventRouter');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(logger('dev'));
 
-dbConnect()
+dbConnect();
+
+// Подключение ручек
+app.use('/ivent', iventRouter);
 
 app.listen(PORT, () => {
-  console.log('Server has been started on port ', PORT)
-})
+  console.log('Server has been started on port ', PORT);
+});
