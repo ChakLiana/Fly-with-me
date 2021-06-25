@@ -4,7 +4,7 @@ const logger = require('morgan');
 const dbConnect = require('./src/db/dbConect');
 
 const app = express()
-const PORT = 3007
+const PORT = 8080
 // подключаем multer для поддержки загрузки картинок
 const multer = require('multer') 
 
@@ -39,11 +39,13 @@ const uploadMany = multer({ storage: store }).array('files'); // загрузк�
 // прописываем "ручки" 
 app.put('/image', upload, (req, res, next) => {
    req.body.file // файл 
+   res.sendStatus(200)
 });
 app.put('/image', uploadMany, (req, res, next) => {
    req.body.files // массив файлов
+   res.sendStatus(200)
 });
-
+ 
 
 
 dbConnect()
