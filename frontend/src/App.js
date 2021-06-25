@@ -1,11 +1,19 @@
-import ProfileUser from "./Profiles/ProfileUser";
-import UserRegisterForm from "./Profiles/UserRegisterForm";
+
+import YandexMap from "./components/YandexMap/YandexMap";
+
+
+
 
 function App() {
+
+
   return (
-    <div>
-      <UserRegisterForm />
-      {/* <ProfileUser /> */}
+
+
+    <div >
+      <YandexMap />
+
+
     </div>
   );
 }
