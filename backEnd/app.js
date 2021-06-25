@@ -14,7 +14,6 @@ app.use(cors());
 app.use(logger('dev'));
 
 dbConnect();
-
 // Подключение ручек
 app.use('/ivent', iventRouter);
 
