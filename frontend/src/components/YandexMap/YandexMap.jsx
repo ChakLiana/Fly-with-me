@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { YMaps, Map, Placemark, Clusterer, TypeSelector, SearchControl, ZoomControl } from 'react-yandex-maps';
 import { iventInitFromBack, iventCreateOnBack } from '../../redux/actions/iventActions';
 import styles from './yandexMap.module.css';
-
+import Button from '@material-ui/core/Button';
 
 function YandexMap() {
 
@@ -17,10 +17,6 @@ function YandexMap() {
   }, []);
 
   const [curentCoords, setCurentCoords] = useState([]);
-
-  // const getCoords = (placemarkCoords) => {
-  //   setCurentCoords(placemarkCoords);
-  // }
 
   const createIventHandler = (newCoords) => {
     dispatch(iventCreateOnBack(newCoords));
@@ -41,26 +37,28 @@ function YandexMap() {
           <TypeSelector options={{ float: 'right' }} />
           <SearchControl options={{ float: 'left' }} />
           <ZoomControl options={{ float: 'right' }} />
-          <Clusterer options={{ groupByCoordinates: false }}>
-            {curentCoords.length && <Placemark
-              geometry={curentCoords}
-            />}
+          {/* <Clusterer options={{ groupByCoordinates: false }}> */}
+          {curentCoords.length ? <Placemark
+            geometry={curentCoords}
+          /> : null}
 
-            {allIvents.length && allIvents.map((elem) => (
-              < Placemark
-                key={elem._id}
-                geometry={elem.coords}
-                modules={['geoObject.addon.balloon']}
-                properties={{
-                  balloonContentHeader: `<h5>Летаем здесь</h5>`,
-                  balloonContentBody: `<p>${elem.coords}</p>`,
-                  balloonContentFooter: '<p>Будет круто!</p>'
-                }}
-              />
-            ))}
-          </Clusterer>
+          {allIvents.length ? allIvents.map((elem) => (
+            < Placemark
+              key={elem._id}
+              geometry={elem.coords}
+              modules={['geoObject.addon.balloon']}
+              properties={{
+                balloonContentHeader: `<h5>Летаем здесь</h5>`,
+                balloonContentBody: `<p>${elem.coords}</p>`,
+                balloonContentFooter: '<p>Будет круто!</p>'
+              }}
+            />
+          )) : null}
+          {/* </Clusterer> */}
         </Map>
-        <button onClick={() => createIventHandler(curentCoords)}>Создать событие</button>
+        {/* <button onClick={() => createIventHandler(curentCoords)}>Создать событие</button> */}
+        <Button onClick={() => createIventHandler(curentCoords)} variant="contained" color="primary">
+          Создать событие</Button>
         {/* <form >
           <input type="text" />
           <button>Создать событие</button>
