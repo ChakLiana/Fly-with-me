@@ -1,3 +1,15 @@
+
+const express = require("express");
+const cors = require("cors");
+const logger = require("morgan");
+const dbConnect = require("./src/db/dbConect");
+const path = require("path");
+// import files upload library
+const fileUpload = require("express-fileupload");
+
+const app = express();
+
+
 const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
@@ -9,19 +21,48 @@ const passport = require('./src/passport/index');
 
 const app = express()
 const PORT = 8080
+
 // подключаем multer для поддержки загрузки картинок
-const multer = require('multer') 
+const multer = require("multer");
 
-
-
-// Импорт ручек
 const iventRouter = require('./src/routers/iventRouter');
 const routes = require('./src/routers/index');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(logger('dev'));
+
+app.use(logger("dev"));
+
+
+
+
+// start of EXPRESS file uploader section
+app.use(fileUpload());
+
+app.post("/upload", function (req, res) {
+  let sampleFile;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  sampleFile = req.files.file;
+
+  uploadPath = __dirname + "/src/public/images/" + sampleFile.name;
+  console.log("upload PATH _____", uploadPath);
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(uploadPath, function (err) {
+    if (err) return res.status(500).send(err);
+
+    res.send("File uploaded!");
+  });
+});
+
 app.use(session({
   secret:  'this is the default passphrase',
   store: MongoStore.create({ mongoUrl: 
@@ -68,6 +109,9 @@ dbConnect()
 
 
 
+// END OF  EXPRESS file uploader section
+dbConnect();
+
 app.listen(PORT, () => {
-  console.log('Server has been started on port ', PORT);
+  console.log("Server has been started on port ", PORT);
 });
