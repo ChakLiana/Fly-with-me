@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentWeatherGetFromApi } from '../../redux/actions/currentWeatherAction';
+
 
 const useStyles = makeStyles({
   table: {
@@ -14,31 +17,43 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, now, tomorrow, afterTomorrow, inThreeDays) {
+  return { name, now, tomorrow, afterTomorrow, inThreeDays };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function Weather() {
+  const dispatch = useDispatch();
+  const curentCoords = useSelector((state) => state.curentCoords);
+  const currentWeather = useSelector((state) => state.currentWeather);
+
+  useEffect(() => {
+    if (curentCoords.length) {
+      dispatch(currentWeatherGetFromApi(curentCoords));
+    }
+  }, [curentCoords]);
+
   const classes = useStyles();
+
+  // Название строк и содержание ячеек в строках
+  const rows = [
+    createData('Температура воздуха (град.)', `${currentWeather.temp}`, '', '', ''),
+    createData('Сила ветра (м/с)', `${currentWeather.windSpeed}`, '', '', ''),
+    createData('Направление ветра (град)', `${currentWeather.windDirection}`, '', '', ''),
+    createData('Высота облачной базы (м)', `${currentWeather.cloudBaseHeight}`, '', '', ''),
+    createData('Вероятность осадков', `${currentWeather.precipitationProbability}`, '', '', ''),
+  ];
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            {/* Заголовки */}
+            <TableCell>Погодные условия</TableCell>
+            <TableCell align="right">Сейчас</TableCell>
+            <TableCell align="right">Завтра</TableCell>
+            <TableCell align="right">Послезавтра</TableCell>
+            <TableCell align="right">Через 3 дня</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -47,10 +62,10 @@ export default function Weather() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.now}</TableCell>
+              <TableCell align="right">{row.tomorrow}</TableCell>
+              <TableCell align="right">{row.afterTomorrow}</TableCell>
+              <TableCell align="right">{row.inThreeDays}</TableCell>
             </TableRow>
           ))}
         </TableBody>
