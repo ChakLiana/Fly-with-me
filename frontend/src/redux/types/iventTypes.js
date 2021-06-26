@@ -1,2 +1,3 @@
 export const IVENT_INIT = 'IVENT_INIT';
 export const IVENT_CREATE = 'IVENT_CREATE';
+export const CURRENT_COORDS_GET = 'CURRENT_COORDS_GET';
