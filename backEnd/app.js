@@ -1,6 +1,4 @@
-
 const express = require("express");
-const cors = require("cors");
 const logger = require("morgan");
 const dbConnect = require("./src/db/dbConect");
 const path = require("path");
@@ -10,16 +8,12 @@ const fileUpload = require("express-fileupload");
 const app = express();
 
 
-const express = require('express');
 const cors = require('cors');
-const logger = require('morgan');
-const dbConnect = require('./src/db/dbConect');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./src/passport/index');
 
 
-const app = express()
 const PORT = 8080
 
 // подключаем multer для поддержки загрузки картинок
@@ -104,7 +98,6 @@ app.put('/image', uploadMany, (req, res, next) => {
    req.body.files // массив файлов
    res.sendStatus(200)
 });
-dbConnect()
 
 
 
