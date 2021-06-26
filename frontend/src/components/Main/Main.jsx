@@ -13,34 +13,28 @@ import Weather from "../Weather/Weather";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-
-
   },
   right: {
     height: "468.5px",
-    overflow: 'auto',
-
-
+    overflow: "auto",
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
     border: 0,
-
   },
 }));
 
 const Main = () => {
   console.log("Main compot render");
-  const classes = useStyles()
+  const classes = useStyles();
 
-
-  const x = "x"
   return (
 
     <div className={classes.root}>
-      <Grid container spacing={3} >
+      <Grid container spacing={3}>
+
         <Grid item xs={9}>
           <Paper className={classes.paper}>
             <YandexMap />
