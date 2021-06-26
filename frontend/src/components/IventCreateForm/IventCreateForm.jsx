@@ -62,7 +62,7 @@ export default function IventCreateForm() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Дополнительная информация о пользователе
+          Конструктор полета
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField

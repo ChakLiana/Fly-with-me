@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  YMaps,
-  Map,
-  Placemark,
-  Clusterer,
-  TypeSelector,
-  SearchControl,
-  ZoomControl,
-} from "react-yandex-maps";
-import {
-  iventInitFromBack,
-  iventCreateOnBack,
-} from "../../redux/actions/iventActions";
+import { YMaps, Map, Placemark, Clusterer, TypeSelector, SearchControl, ZoomControl } from "react-yandex-maps";
+import { iventInitFromBack, iventCreateOnBack } from "../../redux/actions/iventActions";
+import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
+
 // import styles from "./yandexMap.module.css";
 import { Button } from "@material-ui/core";
 
@@ -27,10 +18,10 @@ function YandexMap() {
     dispatch(iventInitFromBack());
   }, []);
 
-  const [curentCoords, setCurentCoords] = useState([]);
+  const curentCoords = useSelector((state) => state.curentCoords);
 
-  const getCoords = (placemarkCoords) => {
-    setCurentCoords(placemarkCoords);
+  const resaveCoords = (placemarkCoords) => {
+    dispatch(currentCoordsGet(placemarkCoords));
   };
 
   const createIventHandler = (newCoords) => {
@@ -42,7 +33,7 @@ function YandexMap() {
       <Map
         // className="Map"
         style={{ minWidth: 200, minHeight: 400 }}
-        onClick={(event) => setCurentCoords(event.get("coords"))}
+        onClick={(event) => resaveCoords(event.get("coords"))}
         defaultState={{
           center: [55.751574, 37.573856],
           zoom: 9,
@@ -53,33 +44,31 @@ function YandexMap() {
           "control.FullscreenControl",
           "geocode",
         ]}
-        //   className={styles.map}
+      //   className={styles.map}
       >
         <TypeSelector options={{ float: "right" }} />
         <SearchControl options={{ float: "left" }} />
         <ZoomControl options={{ float: "right" }} />
         {/* <Clusterer options={{ groupByCoordinates: false }}> */}
-          {curentCoords.length ? <Placemark geometry={curentCoords} /> : null}
+        {curentCoords.length ? <Placemark geometry={curentCoords} /> : null}
 
-          {allIvents.length
-            ? allIvents.map((elem) => (
-                <Placemark
-                  key={elem._id}
-                  geometry={elem.coords}
-                  modules={["geoObject.addon.balloon"]}
-                  properties={{
-                    balloonContentHeader: `<h5>Летаем здесь</h5>`,
-                    balloonContentBody: `<p>${elem.coords}</p>`,
-                    balloonContentFooter: "<p>Будет круто!</p>",
-                  }}
-                />
-              ))
-            : null}
+        {allIvents.length
+          ? allIvents.map((elem) => (
+            <Placemark
+              key={elem._id}
+              geometry={elem.coords}
+              modules={["geoObject.addon.balloon"]}
+              properties={{
+                balloonContentHeader: `<h5>Летаем здесь</h5>`,
+                balloonContentBody: `<p>${elem.coords}</p>`,
+                balloonContentFooter: "<p>Будет круто!</p>",
+              }}
+            />
+          ))
+          : null}
         {/* </Clusterer> */}
       </Map>
-      {/* <button onClick={() => createIventHandler(curentCoords)}>
-          Создать событие
-        </button> */}
+      
       <form>
         <Button
           color="primary"
