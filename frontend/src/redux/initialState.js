@@ -1,7 +1,13 @@
 const initialState = {
   ivents: [],
   curentCoords: [],
-  currentWeather: {},
+  currentWeather: {
+    temp: '',
+    windSpeed: '',
+    windDirection: '',
+    cloudBaseHeight: '',
+    precipitationProbability: '',
+  },
 };
 
 export default initialState ;
