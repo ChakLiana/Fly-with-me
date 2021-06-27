@@ -1,65 +1,93 @@
-import React, { Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: 5,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+const Nav = () => {
+  const user = useSelector((state) => state.user);
 
-export default function NavBarCompot() {
-  const history = useHistory();
-  const classes = useStyles();
-  console.log("NavBarCompot render");
   return (
-    <div className="NavBarCompot">
-      <AppBar className={classes.root} position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button onClick={() => history.push("/")} color="inherit">
-            Войти
-          </Button>
-          <Button onClick={() => history.push("/signup")} color="inherit">
-            Регистрация
-          </Button>
-          <Button color="inherit">Личный кабинет</Button>
-          <Button color="inherit">Мои полёты</Button>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container">
+        <div className="container-fluid d-flex">
+          <Link className="navbar-brand" to="/">
+            Auth App
+          </Link>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              {user ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/auth/signout"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Sign out
+                    </NavLink>
+                  </li>
 
-          <Button
-            onClick={() => {
-              history.push("/");
-            }}
-            color="inherit"
-          >
-            Выйти
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/user/edit"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Edit
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/flights"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      мои полèты
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/auth/signup"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Sign Up
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/auth/signin"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Sign In
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
+              <li className="nav-item">
+                <NavLink
+                  exact
+                  to="/map"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  map
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
-}
+};
+
+export default Nav;
