@@ -36,11 +36,13 @@ export default function Weather() {
 
   // Название строк и содержание ячеек в строках
   const rows = [
-    createData('Температура воздуха (град.)', `${currentWeather.temp}`, '', '', ''),
-    createData('Сила ветра (м/с)', `${currentWeather.windSpeed}`, '', '', ''),
-    createData('Направление ветра (град)', `${currentWeather.windDirection}`, '', '', ''),
-    createData('Высота облачной базы (м)', `${currentWeather.cloudBaseHeight}`, '', '', ''),
-    createData('Вероятность осадков', `${currentWeather.precipitationProbability}`, '', '', ''),
+    createData('Температура воздуха (\u{00B0}C)', `${currentWeather.todayTemp}`, `${currentWeather.tomorrowTemp}`, `${currentWeather.afterTomorrowTemp}`, `${currentWeather.inThreeDaysTemp}`),
+    createData('Сила ветра (м/с)', `${currentWeather.todayWindSpeed}`, `${currentWeather.tomorrowWindSpeed}`, `${currentWeather.afterTomorrowWindSpeed}`, `${currentWeather.inThreeDaysWindSpeed}`),
+    createData('Направление ветра', `${currentWeather.todayWindDirection}`, `${currentWeather.tomorrowWindDirection}`, `${currentWeather.afterTomorrowWindDirection}`, `${currentWeather.inThreeDaysWindDirection}`),
+    createData('Высота облачной базы (м)', `${currentWeather.todayCloudBaseHeight}`, `${currentWeather.tomorrowCloudBaseHeight}`, `${currentWeather.afterTomorrowCloudBaseHeight}`, `${currentWeather.inThreeDaysCloudBaseHeight}`),
+    createData('Вероятность осадков (%)', `${currentWeather.todayPrecipitationProbability}`, `${currentWeather.tomorrowPrecipitationProbability}`, `${currentWeather.afterTomorrowPrecipitationProbability}`, `${currentWeather.inThreeDaysPrecipitationProbability}`),
+    createData('Грозовая активность (%)', `${currentWeather.todayThunderstormActivity}`, `${currentWeather.tomorrowThunderstormActivity}`, `${currentWeather.afterTomorrowThunderstormActivity}`, `${currentWeather.inThreeDaysThunderstormActivity}`),
+    createData('Облачность (%)', `${currentWeather.todayCloudy}`, `${currentWeather.tomorrowCloudy}`, `${currentWeather.afterTomorrowCloudy}`, `${currentWeather.inThreeDaysCloudy}`),
   ];
 
   return (
