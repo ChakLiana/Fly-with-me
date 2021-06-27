@@ -9,7 +9,7 @@ const Nav = () => {
       <div className="container">
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">
-            Auth App
+            Home
           </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
@@ -43,7 +43,17 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      мои полèты
+                      мои полеты
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/user/cabinet"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Кабинет
                     </NavLink>
                   </li>
                 </>
