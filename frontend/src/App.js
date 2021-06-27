@@ -1,81 +1,71 @@
-import YandexMap from "./components/YandexMap/YandexMap";
-import ProfileUser from "./Profiles/ProfileUser.jsx";
-import NavBarCompot from "./components/NavBarCompot/NavBarCompot";
-import Main from "./components/Main/Main";
-import Login from "./components/auth/Auth/LoginForm";
-import Register from "./components/auth/Auth/SignupForm";
-import { Route, Switch } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import AUTH from "./utils/AUTH";
-import RoleSwitches from "./Profiles/RoleSwitches";
 
-//
+
+import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import PrivateRoute from './components/PrivateRouter/PrivateRouter';
+import UserDetail from './components/UserDetail/UserDetail';
+import Nav from './components/NavBarCompot/NavBarCompot';
+import SignUp from './components/Forms/SignUp/SignUp';
+import SignOut from './components/Forms/SignOut/SignOut';
+import SignIn from './components/Forms/SignIn/SignIn';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from '../src/redux/actions/user.ac';
+import Main from './components/Main/Main';
+import UserEdit from './components/UserEdit/UserEdit';
+import Map from "./components/YandexMap/YandexMap";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    AUTH.getUser().then((response) => {
-      // console.log(response.data);
-      if (!!response.data.user) {
-        setLoggedIn(true);
-        setUser(response.data.user);
-      } else {
-        setLoggedIn(false);
-        setUser(null);
-      }
-    });
-
-    return () => {
-      setLoggedIn(false);
-      setUser(null);
-    };
-  }, []);
-
-  const logout = (event) => {
-    event.preventDefault();
-
-    AUTH.logout().then((response) => {
-      // console.log(response.data);
-      if (response.status === 200) {
-        setLoggedIn(false);
-        setUser(null);
-      }
-    });
-  };
-
-  const login = (username, password) => {
-    AUTH.login(username, password).then((response) => {
-      console.log(response.data);
-      if (response.status === 200) {
-        // update the state
-        setLoggedIn(true);
-        setUser(response.data.user);
-      }
-    });
-  };
-
+    dispatch(checkAuth())
+  }, [])
+  
+  
   return (
-    <div className="App">
-      <Switch>
-        {loggedIn && (
-          <div>
-            <NavBarCompot logout={logout} />
-          </div>
-        )}
-        {!loggedIn && (
-          <div className="auth-wrapper" style={{ paddingTop: 40 }}>
-            <NavBarCompot />
-            <Route exact path="/" component={() => <Login login={login} />} />
-            <Route exact path="/main" component={Main} />
-            <Route exact path="/signup" component={Register} />
+    <Router>
+        <Nav />
 
-            <Route exact path="/profile" component={RoleSwitches} />
-          </div>
-        )}
-      </Switch>
-    </div>
+        <div className="container py-5">
+        <Switch>
+
+          <PrivateRoute path="/users/:id">
+            <UserDetail />
+          </PrivateRoute>
+
+          <PrivateRoute path="/map">
+            <Map />
+          </PrivateRoute>
+
+          <PrivateRoute path="/user/edit">
+            <UserEdit />
+          </PrivateRoute> 
+
+          <Route path="/auth/signup">
+            <SignUp />
+          </Route>
+
+          <Route path="/auth/signin">
+            <SignIn />
+          </Route>
+
+          <Route path="/auth/signout">
+            <SignOut />
+          </Route>
+
+          <Route path="/" >
+            <Main />
+          </Route>
+
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
