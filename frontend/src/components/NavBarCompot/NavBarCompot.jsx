@@ -39,7 +39,7 @@ const Nav = () => {
                   <li className="nav-item">
                     <NavLink
                       exact
-                      to="/flights"
+                      to="/user/flight"
                       className="nav-link"
                       activeClassName="active"
                     >

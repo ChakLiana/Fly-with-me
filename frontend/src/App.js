@@ -18,6 +18,7 @@ import { checkAuth } from '../src/redux/actions/user.ac';
 import Main from './components/Main/Main';
 import UserEdit from './components/UserEdit/UserEdit';
 import Map from "./components/YandexMap/YandexMap";
+import Flight from './components/Flights/Flights'
 
 function App() {
 
@@ -45,6 +46,10 @@ function App() {
 
           <PrivateRoute path="/user/edit">
             <UserEdit />
+          </PrivateRoute> 
+
+          <PrivateRoute path="/user/flight">
+            <Flight />
           </PrivateRoute> 
 
           <Route path="/auth/signup">
