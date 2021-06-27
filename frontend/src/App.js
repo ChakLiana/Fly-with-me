@@ -19,6 +19,7 @@ import Main from './components/Main/Main';
 import UserEdit from './components/UserEdit/UserEdit';
 import Map from "./components/YandexMap/YandexMap";
 import Flight from './components/Flights/Flights'
+import UserCabinet from '../src/Profiles/RoleSwitches'
 
 function App() {
 
@@ -51,7 +52,9 @@ function App() {
           <PrivateRoute path="/user/flight">
             <Flight />
           </PrivateRoute> 
-
+          <PrivateRoute path="/user/cabinet">
+            <UserCabinet />
+          </PrivateRoute> 
           <Route path="/auth/signup">
             <SignUp />
           </Route>
