@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { Grid, Paper, ButtonBase } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Dragger from "../Dragger/Drager";
 
 const useStyles = makeStyles({
   span: {
@@ -118,6 +119,8 @@ export default function ProfilePassenger() {
                 {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
               </Typography>
             </CardContent>
+
+
             <CardActions>
               <Button onClick={handleClick} size="big">
                 Отредактировать данные
@@ -126,6 +129,7 @@ export default function ProfilePassenger() {
           </Card>
         </Grid>
       </Grid>
+            <Dragger />
     </>
   );
 }

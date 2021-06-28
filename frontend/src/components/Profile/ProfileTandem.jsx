@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 // import { editSquareThunk } from "../../redux/actions/tictac";
 import { Grid, Paper, ButtonBase } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import Dragger from "../Dragger/Drager";
 
 const useStyles = makeStyles({
   span: {
@@ -120,6 +121,7 @@ export default function ProfileTandem() {
           </Card>
         </Grid>
       </Grid>
+      <Dragger />
     </>
   );
 }
