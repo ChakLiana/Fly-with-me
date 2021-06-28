@@ -40,7 +40,7 @@ export const signUp = (payload, history) => async (dispatch) => {
     storage.setItem("token", token);
     dispatch(setUser(user.newUser));
 
-    history.replace("/");
+    history.replace("/user/cabinet");
   } else {
     history.replace("/signup");
   }
@@ -60,7 +60,7 @@ export const signIn = (payload, history) => async (dispatch) => {
     const token = user.token;
     storage.setItem("token", token);
     dispatch(setUser(user.currentUser));
-    history.replace('/');
+    history.replace("/");
   } else {
     history.replace("/signin");
   }

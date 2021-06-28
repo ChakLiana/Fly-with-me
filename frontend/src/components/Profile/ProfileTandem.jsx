@@ -4,10 +4,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useSelector } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 // import { editSquareThunk } from "../../redux/actions/tictac";
 import { Grid, Paper, ButtonBase } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   span: {
@@ -35,10 +35,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileUser() {
+export default function ProfileTandem() {
   const curUser = useSelector((state) => state.user);
+
   const classes = useStyles();
-  console.log(curUser);
   // const bull = <span className={classes.bullet}>•</span>;
 
   return (
@@ -46,7 +46,7 @@ export default function ProfileUser() {
       <Grid justify-center>
         <Grid item>
           <Typography variant="h5" component="h2">
-            Личный кабинет пользователя
+            Личный кабинет Тандемщика
           </Typography>
         </Grid>
       </Grid>
@@ -65,7 +65,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                {curUser.nickName}
+                {curUser.email}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Ник:
@@ -75,27 +75,27 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.nickName}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
-                Возраст:
+                Опыт:
               </Typography>
               <Typography
                 className={classes.pos}
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.experience}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
-                Вес:
+                Часы налета:
               </Typography>
               <Typography
                 className={classes.pos}
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.fHours}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Контакт:
@@ -105,7 +105,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.tel}
               </Typography>
               <Typography variant="body2" component="p">
                 <br />

@@ -4,10 +4,11 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useSelector } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 // import { editSquareThunk } from "../../redux/actions/tictac";
 import { Grid, Paper, ButtonBase } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   span: {
@@ -35,12 +36,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileUser() {
+export default function ProfilePassenger() {
   const curUser = useSelector((state) => state.user);
   const classes = useStyles();
-  console.log(curUser);
+  const history = useHistory();
   // const bull = <span className={classes.bullet}>•</span>;
 
+  function handleClick() {
+    history.push("/");
+  }
   return (
     <>
       <Grid justify-center>
@@ -65,7 +69,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                {curUser.nickName}
+                {curUser.email}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Ник:
@@ -75,7 +79,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.nickName}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Возраст:
@@ -85,7 +89,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.age}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Вес:
@@ -95,7 +99,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.weight}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Контакт:
@@ -105,7 +109,7 @@ export default function ProfileUser() {
                 component="span"
                 color="textPrimary"
               >
-                Василий
+                {curUser.tel}
               </Typography>
               <Typography variant="body2" component="p">
                 <br />
@@ -115,7 +119,9 @@ export default function ProfileUser() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="big">Отредактировать данные</Button>
+              <Button onClick={handleClick} size="big">
+                Отредактировать данные
+              </Button>
             </CardActions>
           </Card>
         </Grid>
