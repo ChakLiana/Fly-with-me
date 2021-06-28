@@ -10,7 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory, useLocation } from "react-router";
-
+import axios from "axios";
+import Dragger from "../../Dragger/Drager";
 
 const useStyles = makeStyles({
   textField: {
@@ -69,21 +70,19 @@ export default function UserRegisterForm() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // fetch("http://localhost:8080/user/", {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   // credentials: "include",
-      //   body: JSON.stringify(values),
-      // });
       dispatch(signUp({ ...values, role: "tandem" }, history));
     },
-  });
+  })
+
+
+
+  
 
   return (
     <div className={classes.divPos}>
       <Container maxWidth="sm">
+
+
         <Typography variant="h5" component="h2">
           Введите дополнительную информацию о себе
         </Typography>
