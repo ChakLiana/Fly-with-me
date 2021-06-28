@@ -72,17 +72,11 @@ export default function UserRegisterForm() {
     onSubmit: (values) => {
       dispatch(signUp({ ...values, role: "tandem" }, history));
     },
-  })
-
-
-
-  
+  });
 
   return (
     <div className={classes.divPos}>
       <Container maxWidth="sm">
-
-
         <Typography variant="h5" component="h2">
           Введите дополнительную информацию о себе
         </Typography>
@@ -147,7 +141,7 @@ export default function UserRegisterForm() {
             name="fHours"
             label="часы налета"
             type="text"
-            value={formik.values.tandemhours}
+            value={formik.values.fHours}
             onChange={formik.handleChange}
             error={formik.touched.fHours && Boolean(formik.errors.fHours)}
             helperText={formik.touched.fHours && formik.errors.fHours}

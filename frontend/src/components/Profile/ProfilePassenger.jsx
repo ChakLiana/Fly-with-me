@@ -109,7 +109,7 @@ export default function ProfilePassenger() {
       //   body: JSON.stringify(values),
       // });
       console.log("---------------------------> ", values);
-      // dispatch(signUp({ ...values, role: "passenger" }, history));
+      dispatch(signUp({ ...values, role: "passenger" }, history));
     },
   });
 
@@ -132,10 +132,10 @@ export default function ProfilePassenger() {
               <Grid item>
                 <Card className={classes.root}>
                   <CardContent>
-                    <Typography
-                      className={classes.pos}
-                      color="textSecondary"
-                    ></Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      {" "}
+                      Почтовый адрес:
+                    </Typography>
                     <TextField
                       fullWidth
                       className={classes.textField}
