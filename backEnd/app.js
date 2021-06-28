@@ -10,16 +10,11 @@ const fileUpload = require("express-fileupload");
 const app = express();
 
 
-const express = require('express');
-const cors = require('cors');
-const logger = require('morgan');
-const dbConnect = require('./src/db/dbConect');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./src/passport/index');
 
 
-const app = express()
 const PORT = 8080
 
 // подключаем multer для поддержки загрузки картинок
