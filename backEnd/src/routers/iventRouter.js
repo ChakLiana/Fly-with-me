@@ -45,7 +45,8 @@ router.route('/')
   .post(async (req, res) => {
     try {
       const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
-      const newIvent = await Ivent.create(newIventData);
+      let newIvent = await Ivent.create(newIventData);
+      newIvent = await Ivent.findById(newIvent._id).populate('creator');
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);
