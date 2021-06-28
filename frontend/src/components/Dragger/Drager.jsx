@@ -58,8 +58,6 @@ const Dragger = () => {
 
   return (
     <>
-      <h1>NNNNN</h1>
-
       <div className="Dragger">
         <h3> Dragger component </h3>
         <div
@@ -67,7 +65,7 @@ const Dragger = () => {
           onDragOver={handleOndragOver}
           onDrop={handleOndrop}
         >
-          <p>Drag _ Zone</p>
+          <p>Drag _ Zone </p>
           {flag ? (
             <div className="pic">
               <img src={url} style={{ height: 200, width: 200 }} />
