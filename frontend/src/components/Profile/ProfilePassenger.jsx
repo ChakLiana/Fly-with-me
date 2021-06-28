@@ -4,7 +4,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useSelector } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 // import { editSquareThunk } from "../../redux/actions/tictac";
 import { Grid, Paper, ButtonBase } from "@material-ui/core";
@@ -35,10 +34,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileUser() {
-  const curUser = useSelector((state) => state.user);
+export default function ProfilePassenger() {
   const classes = useStyles();
-  console.log(curUser);
   // const bull = <span className={classes.bullet}>•</span>;
 
   return (
@@ -58,14 +55,14 @@ export default function ProfileUser() {
           <Card className={classes.root}>
             <CardContent>
               <Typography className={classes.pos} color="textSecondary">
-                Почтовый адрес:
+                Имя:
               </Typography>
               <Typography
                 className={classes.pos}
                 component="span"
                 color="textPrimary"
               >
-                {curUser.nickName}
+                Василий
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Ник:
