@@ -18,21 +18,21 @@ const useStyles = makeStyles({
 });
 
 const validationSchema = yup.object({
-  username: yup
+  nickName: yup
     .string("Имя")
     .min(4, "Имя должно состоять не менне чем из 5 букв")
     .required("*Имя обязательно для заполнения"),
-  userage: yup
+  age: yup
     .number("Введите  возраст")
     .max(101, "Вы ввели слишком большое число, проверьте еще раз")
     .required("* Поле возраст обязательно для заполнения")
     .typeError("Возраст должен быть цифрой"),
-  userweight: yup
+  weight: yup
     .number("Введите Ваш вес")
     .max(200, "Вы ввели слишком большое число, проверьте еще раз")
     .required("* Поле вес обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
-  usercontacts: yup
+  tel: yup
     .string()
     .matches(
       /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
@@ -73,14 +73,22 @@ export default function UserRegisterForm() {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      userage: "",
-      userweight: "",
-      usercontacts: "",
+      nickName: "",
+      age: "",
+      weight: "",
+      tel: "",
     },
     validationSchema: validationSchema,
+
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      fetch("http://localhost:8080/user/", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // credentials: "include",
+        body: JSON.stringify(values),
+      });
     },
   });
 
@@ -88,64 +96,58 @@ export default function UserRegisterForm() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Дополнительная информация о пользователе
+          Введите дополнительную информацию о себе
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             className={classes.textField}
-            id="username"
-            name="username"
-            label="Имя пользователя"
+            id="nickName"
+            name="nickName"
+            label="Ваш ник"
             type="text"
-            value={formik.values.username}
+            value={formik.values.nickName}
             onChange={formik.handleChange}
-            error={formik.touched.username && Boolean(formik.errors.username)}
-            helperText={formik.touched.username && formik.errors.username}
+            error={formik.touched.nickName && Boolean(formik.errors.nickName)}
+            helperText={formik.touched.nickName && formik.errors.nickName}
           />
 
           <TextField
             className={classes.textField}
             fullWidth
-            id="userage"
-            name="userage"
-            label="Возраст пользователя"
+            id="age"
+            name="age"
+            label="Ваш возраст"
             type="text"
-            value={formik.values.userage}
+            value={formik.values.age}
             onChange={formik.handleChange}
-            error={formik.touched.userage && Boolean(formik.errors.userage)}
-            helperText={formik.touched.userage && formik.errors.userage}
+            error={formik.touched.age && Boolean(formik.errors.age)}
+            helperText={formik.touched.age && formik.errors.age}
           />
           <TextField
             className={classes.textField}
             fullWidth
-            id="userweight"
-            name="userweight"
-            label="Вес пользователя"
+            id="weight"
+            name="weight"
+            label="Ваш вес"
             type="text"
-            value={formik.values.userweight}
+            value={formik.values.weight}
             onChange={formik.handleChange}
-            error={
-              formik.touched.userweight && Boolean(formik.errors.userweight)
-            }
-            helperText={formik.touched.userweight && formik.errors.userweight}
+            error={formik.touched.weight && Boolean(formik.errors.weight)}
+            helperText={formik.touched.weight && formik.errors.weight}
           />
           <TextField
             className={classes.textField}
             fullWidth
-            id="usercontacts"
-            name="usercontacts"
-            label="Контактная информация"
+            id="tel"
+            name="tel"
+            label="Контактная информация(телефон)"
             // placeholder="+7 (999) 99-99-99"
-            type="text"
-            value={formik.values.usercontacts}
+            type="tel"
+            value={formik.values.tel}
             onChange={formik.handleChange}
-            error={
-              formik.touched.usercontacts && Boolean(formik.errors.usercontacts)
-            }
-            helperText={
-              formik.touched.usercontacts && formik.errors.usercontacts
-            }
+            error={formik.touched.tel && Boolean(formik.errors.tel)}
+            helperText={formik.touched.tel && formik.errors.tel}
             // InputProps={{
             //   inputComponent: CustomInput,
             // }}
@@ -159,142 +161,3 @@ export default function UserRegisterForm() {
     </div>
   );
 }
-
-// import { makeStyles } from "@material-ui/core/styles";
-// import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import Button from "@material-ui/core/Button";
-// import Input from "@material-ui/core/Input";
-// import Typography from "@material-ui/core/Typography";
-// // import { useDispatch, useSelector } from "react-redux";
-// // import { editSquareThunk } from "../../redux/actions/tictac";
-// import { FormControl, InputLabel, FormHelperText } from "@material-ui/core";
-// import { useFormik } from "formik";
-// import * as yup from "yup";
-// import TextField from "@material-ui/core/TextField";
-
-// const validationSchema = yup.object({
-//   name: yup
-//     .string("Введите имя")
-//     .min(4, "Имя должно быть не менее 4 символов")
-//     .required("Имя должно быть"),
-//   password: yup
-//     .string("Enter your password")
-//     .min(8, "Passpropword should be of minimum 8 characters length")
-//     .required("Password is required"),
-// });
-
-// const useStyles = makeStyles({
-//   userForm: {
-//     display: "flex",
-//     flexDirection: "column",
-//   },
-//   span: {
-//     fontSize: 20,
-//   },
-//   root: {
-//     margin: "0 auto",
-//     minWidth: 275,
-//     maxWidth: 800,
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   bullet: {
-//     margin: "0 2px",
-//     transform: "scale(0.8)",
-//   },
-//   title: {
-//     fontSize: 14,
-//   },
-//   pos: {
-//     marginTop: 16,
-//     marginBottom: 16,
-//   },
-// });
-
-// export default function UserRegisterForm() {
-//   const classes = useStyles();
-//   const bull = <span className={classes.bullet}>*</span>;
-//   const formik = useFormik({
-//     initialValues: {
-//       // name: "Ваше имя",
-//       password: "foobar",
-//     },
-//     validationSchema: validationSchema,
-//     onSubmit: (values) => {
-//       alert(JSON.stringify(values, null, 2));
-//     },
-//   });
-
-//   return (
-//     <div>
-//       <Card className={classes.root}>
-//         <CardContent>
-//           <Typography variant="h5" component="h2">
-//             Введите данные для заполнения профиля
-//           </Typography>
-//           <form
-//             onSubmit={formik.handleSubmit}
-//             className={classes.userForm}
-//             component="form"
-//           >
-//             <FormControl>
-//               {/* <InputLabel htmlFor="user-name">Имя</InputLabel> */}
-//               <TextField
-//                 fullWidth
-//                 name="name"
-//                 id="name"
-//                 // aria-describedby="my-helper-user-name"
-//                 value={formik.values.name}
-//                 onChange={formik.handleChange}
-//                 error={formik.touched.name && Boolean(formik.errors.name)}
-//                 helperText={formik.touched.name && formik.errors.name}
-//               />
-//               <FormHelperText id="my-helper-user-name">
-//                 {bull} Введите свое имя
-//               </FormHelperText>
-//             </FormControl>
-//             <FormControl>
-//               <InputLabel htmlFor="user-age">Возраст</InputLabel>
-//               <Input id="user-age" aria-describedby="my-helper-user-age" />
-//               <FormHelperText id="my-helper-user-age">
-//                 {bull} Введите свой возраст
-//               </FormHelperText>
-//             </FormControl>
-//             <FormControl>
-//               <InputLabel htmlFor="">Вес</InputLabel>
-//               <Input
-//                 id="user-weight"
-//                 aria-describedby="my-helper-user-weight"
-//               />
-//               <FormHelperText id="my-helper-user-weight">
-//                 {bull} Введите свой вес
-//               </FormHelperText>
-//             </FormControl>
-//             <FormControl>
-//               <InputLabel htmlFor="user-contact">Контактные данные</InputLabel>
-//               <Input
-//                 id="user-contact"
-//                 aria-describedby="my-helper-user-contact"
-//               />
-//               <FormHelperText id="my-helper-user-contact">
-//                 {bull} Введите контактные данные
-//               </FormHelperText>
-//             </FormControl>
-//           </form>
-//         </CardContent>
-//         <Typography variant="body2" component="p">
-//           <br />* - поля обязательные для заполнения
-//         </Typography>
-//         <CardActions>
-//           <Button type="submit" fullWidth size="big">
-//             Принять изменения
-//           </Button>
-//         </CardActions>
-//       </Card>
-//     </div>
-//   );
-// }

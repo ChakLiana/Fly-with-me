@@ -2,7 +2,7 @@ import { IVENT_INIT, IVENT_CREATE } from '../types/iventTypes';
 
 
 export const iventInitFromBack = () => async (dispatch) => {
-  const response = await fetch('http://localhost:3007/ivent');
+  const response = await fetch('http://localhost:8080/ivent');
   const dataFromBack = await response.json();
 
   dispatch(iventInit(dataFromBack.allIvents));
@@ -17,7 +17,7 @@ export const iventInit = (allIvents) => {
 
 
 export const iventCreateOnBack = (formData) => async (dispatch) => {
-  const response = await fetch('http://localhost:3007/ivent', {
+  const response = await fetch('http://localhost:8080/ivent', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

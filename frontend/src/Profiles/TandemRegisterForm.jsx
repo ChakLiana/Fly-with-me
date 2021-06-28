@@ -12,25 +12,26 @@ const useStyles = makeStyles({
   textField: {
     marginBottom: 30,
   },
-  divPos: {},
+  divPos: {
+    marginTop: 20,
+  },
 });
 
 const validationSchema = yup.object({
-  username: yup
+  nickName: yup
     .string("Имя")
     .min(4, "Имя должно состоять не менне чем из 5 букв")
     .required("*Имя обязательно для заполнения"),
-  userage: yup
+  experience: yup
     .number("Введите  возраст")
     .max(101, "Вы ввели слишком большое число, проверьте еще раз")
     .required("* Поле возраст обязательно для заполнения")
     .typeError("Возраст должен быть цифрой"),
-  userweight: yup
-    .number("Введите Ваш вес")
-    .max(200, "Вы ввели слишком большое число, проверьте еще раз")
-    .required("* Поле вес обязательно для заполнения")
+  fHours: yup
+    .number("Введите количество часов налета")
+    .required("* Поле часы налета обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
-  usercontacts: yup
+  tandemcontacts: yup
     .string()
     .matches(
       /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
@@ -40,21 +41,26 @@ const validationSchema = yup.object({
     .required("* Поле вес обязательно для заполнения"),
 });
 
-export default function IventCreateForm() {
+export default function UserRegisterForm() {
   const classes = useStyles();
-
-  
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      userage: "",
-      userweight: "",
-      usercontacts: "",
+      nickName: "",
+      experience: "",
+      fHours: "",
+      tandemcontacts: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      fetch("http://localhost:8080/user/", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // credentials: "include",
+        body: JSON.stringify(values),
+      });
     },
   });
 
@@ -62,63 +68,63 @@ export default function IventCreateForm() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Конструктор полета
+          Введите дополнительную информацию о себе
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             className={classes.textField}
-            id="username"
-            name="username"
-            label="Имя пользователя"
+            id="nickName"
+            name="nickName"
+            label="Ваш ник"
             type="text"
-            value={formik.values.username}
+            value={formik.values.nickName}
             onChange={formik.handleChange}
-            error={formik.touched.username && Boolean(formik.errors.username)}
-            helperText={formik.touched.username && formik.errors.username}
+            error={formik.touched.nickName && Boolean(formik.errors.nickName)}
+            helperText={formik.touched.nickName && formik.errors.nickName}
           />
 
           <TextField
             className={classes.textField}
             fullWidth
-            id="userage"
-            name="userage"
-            label="Возраст пользователя"
+            id="experience"
+            name="experience"
+            label="Ваш опыт"
             type="text"
-            value={formik.values.userage}
-            onChange={formik.handleChange}
-            error={formik.touched.userage && Boolean(formik.errors.userage)}
-            helperText={formik.touched.userage && formik.errors.userage}
-          />
-          <TextField
-            className={classes.textField}
-            fullWidth
-            id="userweight"
-            name="userweight"
-            label="Вес пользователя"
-            type="text"
-            value={formik.values.userweight}
+            value={formik.values.experience}
             onChange={formik.handleChange}
             error={
-              formik.touched.userweight && Boolean(formik.errors.userweight)
+              formik.touched.experience && Boolean(formik.errors.experience)
             }
-            helperText={formik.touched.userweight && formik.errors.userweight}
+            helperText={formik.touched.experience && formik.errors.experience}
           />
           <TextField
             className={classes.textField}
             fullWidth
-            id="usercontacts"
-            name="usercontacts"
+            id="fHours"
+            name="fHours"
+            label="часы налета"
+            type="text"
+            value={formik.values.tandemhours}
+            onChange={formik.handleChange}
+            error={formik.touched.fHours && Boolean(formik.errors.fHours)}
+            helperText={formik.touched.fHours && formik.errors.fHours}
+          />
+          <TextField
+            className={classes.textField}
+            fullWidth
+            id="tel"
+            name="tel"
             label="Контактная информация"
+            // placeholder="+7 (999) 99-99-99"
             type="text"
-            value={formik.values.usercontacts}
+            value={formik.values.tel}
             onChange={formik.handleChange}
-            error={
-              formik.touched.usercontacts && Boolean(formik.errors.usercontacts)
-            }
-            helperText={
-              formik.touched.usercontacts && formik.errors.usercontacts
-            }
+            error={formik.touched.tel && Boolean(formik.errors.tel)}
+            helperText={formik.touched.tel && formik.errors.tel}
+            // InputProps={{
+            //   inputComponent: CustomInput,
+            // }}
           />
 
           <Button color="textSecondary" variant="contained" type="submit">
