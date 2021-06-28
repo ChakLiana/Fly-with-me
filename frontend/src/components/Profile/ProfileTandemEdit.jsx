@@ -10,14 +10,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory, useLocation } from "react-router";
-import Dragger from "../../Dragger/Drager";
+import axios from "axios";
+import Dragger from "../../components/Dragger/Drager";
 
 const useStyles = makeStyles({
   textField: {
     marginBottom: 30,
   },
   divPos: {
-    // marginTop: 200,
+    // marginTop: 20,
   },
 });
 
@@ -34,15 +35,14 @@ const validationSchema = yup.object({
     .string("Имя")
     .min(4, "Имя должно состоять не менне чем из 5 букв")
     .required("*Имя обязательно для заполнения"),
-  age: yup
+  experience: yup
     .number("Введите  возраст")
     .max(101, "Вы ввели слишком большое число, проверьте еще раз")
     .required("* Поле возраст обязательно для заполнения")
     .typeError("Возраст должен быть цифрой"),
-  weight: yup
-    .number("Введите Ваш вес")
-    .max(200, "Вы ввели слишком большое число, проверьте еще раз")
-    .required("* Поле вес обязательно для заполнения")
+  fHours: yup
+    .number("Введите количество часов налета")
+    .required("* Поле часы налета обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
   tel: yup
     .string()
@@ -62,24 +62,15 @@ export default function UserRegisterForm() {
   const formik = useFormik({
     initialValues: {
       nickName: "",
-      age: "",
-      weight: "",
+      experience: "",
+      fHours: "",
       tel: "",
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
-
     onSubmit: (values) => {
-      // fetch("http://localhost:8080/user/", {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   // credentials: "include",
-      //   body: JSON.stringify(values),
-      // });
-      dispatch(signUp({ ...values, role: "passenger" }, history));
+      dispatch(signUp({ ...values, role: "tandem" }, history));
     },
   });
 
@@ -132,35 +123,37 @@ export default function UserRegisterForm() {
           <TextField
             className={classes.textField}
             fullWidth
-            id="age"
-            name="age"
-            label="Ваш возраст"
+            id="experience"
+            name="experience"
+            label="Ваш опыт"
             type="text"
-            value={formik.values.age}
+            value={formik.values.experience}
             onChange={formik.handleChange}
-            error={formik.touched.age && Boolean(formik.errors.age)}
-            helperText={formik.touched.age && formik.errors.age}
+            error={
+              formik.touched.experience && Boolean(formik.errors.experience)
+            }
+            helperText={formik.touched.experience && formik.errors.experience}
           />
           <TextField
             className={classes.textField}
             fullWidth
-            id="weight"
-            name="weight"
-            label="Ваш вес"
+            id="fHours"
+            name="fHours"
+            label="часы налета"
             type="text"
-            value={formik.values.weight}
+            value={formik.values.tandemhours}
             onChange={formik.handleChange}
-            error={formik.touched.weight && Boolean(formik.errors.weight)}
-            helperText={formik.touched.weight && formik.errors.weight}
+            error={formik.touched.fHours && Boolean(formik.errors.fHours)}
+            helperText={formik.touched.fHours && formik.errors.fHours}
           />
           <TextField
             className={classes.textField}
             fullWidth
             id="tel"
             name="tel"
-            label="Контактная информация(телефон)"
+            label="Контактная информация"
             // placeholder="+7 (999) 99-99-99"
-            type="tel"
+            type="text"
             value={formik.values.tel}
             onChange={formik.handleChange}
             error={formik.touched.tel && Boolean(formik.errors.tel)}
@@ -171,7 +164,7 @@ export default function UserRegisterForm() {
           />
 
           <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
+            Принять изменения
           </Button>
         </form>
       </Container>
