@@ -274,7 +274,7 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
-
+**/node_modules
 # Visual Studio 6 build log
 *.plg
 
@@ -283,6 +283,11 @@ node_modules/
 
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
+# images from BAcK
+**/public/images
+
+
+
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
