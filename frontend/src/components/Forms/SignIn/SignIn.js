@@ -78,7 +78,7 @@ export default function UsersignIn() {
             helperText={formik.touched.password && formik.errors.password}
           />
           <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
+            Войти
           </Button>
         </form>
       </Container>
