@@ -8,7 +8,6 @@ import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 import { Button } from "@material-ui/core";
 
 function YandexMap() {
-  console.log("Yandex MAP compot render");
   const key = "20c11914-368f-4020-b7de-e59f81f0ea0b";
 
   const dispatch = useDispatch();
@@ -27,6 +26,9 @@ function YandexMap() {
   const createIventHandler = (newCoords) => {
     dispatch(iventCreateOnBack(newCoords));
   };
+  window.bla = (a) => {
+    console.log(a);
+  }
 
   return (
     <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
@@ -54,21 +56,22 @@ function YandexMap() {
 
         {allIvents.length
           ? allIvents.map((elem) => (
-            <Placemark
+            < Placemark
               key={elem._id}
               geometry={elem.coords}
               modules={["geoObject.addon.balloon"]}
               properties={{
                 balloonContentHeader: `<h5>Летаем здесь</h5>`,
-                balloonContentBody: `<p>${elem.coords}</p>`,
-                balloonContentFooter: "<p>Будет круто!</p>",
+                balloonContentBody: `<p>${elem._id}</p>`,
+                balloonContentFooter: `<button onclick="window.bla(${(elem.coords[0])})" >Нажми</button>`,
               }}
+
             />
           ))
           : null}
         {/* </Clusterer> */}
       </Map>
-      
+
       <form>
         <Button
           color="primary"
@@ -77,7 +80,7 @@ function YandexMap() {
           Создать событие
         </Button>
       </form>
-    </YMaps>
+    </YMaps >
   );
 }
 
