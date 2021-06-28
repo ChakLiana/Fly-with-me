@@ -51,20 +51,17 @@ const Main = () => {
             </Paper>
           </Grid>}
       </Grid>
-      <Grid container spacing={0}>
-        <Grid item xs={9}>
-          <Paper className={classes.paper}>
-            <Weather />
-          </Paper>
+      {currentUser &&
+        <Grid container spacing={0}>
+          <Grid item xs={9}>
+            <Paper className={classes.paper}>
+              <Weather />
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      }
     </div>
 
-    // <Container maxWidth="sm">
-    //   <div className="Main">
-    //     <YandexMap />
-    //   </div>
-    // </Container>
   );
 };
 export default Main;
