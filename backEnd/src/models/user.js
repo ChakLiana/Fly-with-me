@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
   nickName: {
@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
     unique: true,
     required: true,
   },
-})
+  token: String,
+});
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);

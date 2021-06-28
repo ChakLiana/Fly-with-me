@@ -11,6 +11,7 @@ const Nav = () => {
           <Link className="navbar-brand" to="/">
             Home
           </Link>
+
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
@@ -23,6 +24,16 @@ const Nav = () => {
                       activeClassName="active"
                     >
                       Sign out
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/user/cabinet"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      { <p> ПРИВЕТ!  {user.nickName} </p>}
                     </NavLink>
                   </li>
 
