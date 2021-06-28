@@ -46,7 +46,7 @@ export const signUp = (payload, history) => async (dispatch) => {
   }
 };
 
-export const signIn = (payload, history, from) => async (dispatch) => {
+export const signIn = (payload, history) => async (dispatch) => {
   const response = await fetch(endPoints.signIn(), {
     method: "POST",
     headers: {
@@ -60,7 +60,7 @@ export const signIn = (payload, history, from) => async (dispatch) => {
     const token = user.token;
     storage.setItem("token", token);
     dispatch(setUser(user.currentUser));
-    history.replace(from);
+    history.replace('/');
   } else {
     history.replace("/signin");
   }

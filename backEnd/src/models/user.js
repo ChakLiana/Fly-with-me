@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const userSchema = mongoose.Schema({
-  nickName: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    min: 6,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  token: String,
+
+const userSchema = new Schema({
+  email: { type: String, unique: false },
+  password: { type: String, required: true },
+  nickName: { type: String, unique: false, required: false },
+  age: Number,
+  weight: Number,
+  tel: Number,
+  photo: String,
+  experience: Number,
+  fHours: Number,
+  role: String,
+  ivents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ivent" }],
+  id: String,
 });
 
-module.exports = mongoose.model("User", userSchema);
+// Create reference to User & export
+const User = mongoose.model("User", userSchema);
+module.exports = User;
