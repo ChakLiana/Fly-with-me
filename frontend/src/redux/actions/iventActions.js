@@ -27,8 +27,9 @@ export const iventCreateOnBack = (iventData) => async (dispatch) => {
 
   if (response.status === 200) {
     const newIvent = await response.json();
+    console.log(newIvent);
     dispatch(iventCreate(newIvent));
-
+    
   }
 }
 

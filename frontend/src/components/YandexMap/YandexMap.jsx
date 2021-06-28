@@ -18,6 +18,8 @@ function YandexMap() {
 
   const curentCoords = useSelector((state) => state.curentCoords);
 
+  const currentUser = useSelector((state) => state.user);
+
   const resaveCoords = (placemarkCoords) => {
     dispatch(currentCoordsGet(placemarkCoords));
   };
@@ -50,7 +52,7 @@ function YandexMap() {
         {/* <Clusterer options={{ groupByCoordinates: false }}> */}
         {curentCoords.length ? <Placemark geometry={curentCoords} /> : null}
 
-        {allIvents.length
+        {allIvents.length && currentUser.role === 'passenger'
           ? allIvents.map((elem) => (
             < Placemark
               key={elem._id}
@@ -58,14 +60,32 @@ function YandexMap() {
               modules={["geoObject.addon.balloon"]}
               properties={{
                 balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                balloonContentBody: `<p>${elem._id}</p><p>qekrhe</p>`,
-
-                balloonContentFooter: `<button  class ='btn btn-info' onclick="window.bla(${(elem.coords[0])})" >Нажми</button>`,
+                balloonContentBody: `
+                <p> Когда: ${elem.dateOfEvent}</p>
+                <p>Сколько стоит: ${elem.price} р.</p>
+                <p>Какие требования к пассажиру: ${elem.stopList}</p>
+                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                balloonContentFooter: `<button  class ='btn btn-info' onclick="window.bla(${(elem.coords[0])})" >Полетать</button>`,
               }}
 
             />
-          ))
-          : null}
+          )) : allIvents.length && currentUser.role === 'tandem'
+            ? allIvents.map((elem) => (
+              < Placemark
+                key={elem._id}
+                geometry={elem.coords}
+                modules={["geoObject.addon.balloon"]}
+                properties={{
+                  balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                  balloonContentBody: `
+                <p> Когда: ${elem.dateOfEvent}</p>
+                <p>Сколько стоит: ${elem.price} р.</p>
+                <p>Какие требования к пассажиру: ${elem.stopList}</p>
+                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                }}
+
+              />
+            )) : null}
         {/* </Clusterer> */}
       </Map>
 
