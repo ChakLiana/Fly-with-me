@@ -16,13 +16,13 @@ export const iventInit = (allIvents) => {
 }
 
 
-export const iventCreateOnBack = (formData) => async (dispatch) => {
+export const iventCreateOnBack = (iventData) => async (dispatch) => {
   const response = await fetch('http://localhost:8080/ivent', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ formData }),
+    body: JSON.stringify( iventData ),
   });
 
   if (response.status === 200) {
