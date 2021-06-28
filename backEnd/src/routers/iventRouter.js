@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const Ivent = require('../models/iventModel');
 const fetch = require('node-fetch');
@@ -34,16 +35,17 @@ const normalizationOfWindDirection = (directionInDegrees) => {
 router.route('/')
   .get(async (req, res) => {
     try {
-      const allIvents = await Ivent.find();
+      const allIvents = await Ivent.find().populate('creator');
+      console.log(allIvents);
       res.json({ allIvents });
     } catch (error) {
       console.error(error.message);
     }
   })
   .post(async (req, res) => {
-    const newCoords = req.body.formData;
     try {
-      const newIvent = await Ivent.create({ coords: newCoords });
+      const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
+      const newIvent = await Ivent.create(newIventData);
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);

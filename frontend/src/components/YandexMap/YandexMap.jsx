@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { YMaps, Map, Placemark, Clusterer, TypeSelector, SearchControl, ZoomControl } from "react-yandex-maps";
-import { iventInitFromBack, iventCreateOnBack } from "../../redux/actions/iventActions";
+import { iventInitFromBack } from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 
 // import styles from "./yandexMap.module.css";
-import { Button } from "@material-ui/core";
 
 function YandexMap() {
   const key = "20c11914-368f-4020-b7de-e59f81f0ea0b";
@@ -23,9 +22,6 @@ function YandexMap() {
     dispatch(currentCoordsGet(placemarkCoords));
   };
 
-  const createIventHandler = (newCoords) => {
-    dispatch(iventCreateOnBack(newCoords));
-  };
   window.bla = (a) => {
     console.log(a);
   }
@@ -61,9 +57,10 @@ function YandexMap() {
               geometry={elem.coords}
               modules={["geoObject.addon.balloon"]}
               properties={{
-                balloonContentHeader: `<h5>Летаем здесь</h5>`,
-                balloonContentBody: `<p>${elem._id}</p>`,
-                balloonContentFooter: `<button onclick="window.bla(${(elem.coords[0])})" >Нажми</button>`,
+                balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                balloonContentBody: `<p>${elem._id}</p><p>qekrhe</p>`,
+
+                balloonContentFooter: `<button  class ='btn btn-info' onclick="window.bla(${(elem.coords[0])})" >Нажми</button>`,
               }}
 
             />
@@ -72,14 +69,6 @@ function YandexMap() {
         {/* </Clusterer> */}
       </Map>
 
-      <form>
-        <Button
-          color="primary"
-          onClick={() => createIventHandler(curentCoords)}
-        >
-          Создать событие
-        </Button>
-      </form>
     </YMaps >
   );
 }
