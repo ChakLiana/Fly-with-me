@@ -12,7 +12,7 @@ import Dragger from "../Dragger/Drager";
 import { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../redux/actions/user.ac";
+import { editUser } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
 import { TextField, Container, Typography, Input } from "@material-ui/core";
 
@@ -88,6 +88,10 @@ export default function ProfilePassenger() {
     setIsEdit(true);
     // history.push("/");
   }
+  function handleClickfalse() {
+    setIsEdit(false);
+    // history.push("/");
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -98,18 +102,10 @@ export default function ProfilePassenger() {
       email: curUser.email,
     },
     validationSchema: validationSchema,
-
     onSubmit: (values) => {
-      // fetch("http://localhost:8080/user/", {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   // credentials: "include",
-      //   body: JSON.stringify(values),
-      // });
-      console.log("---------------------------> ", values);
-      dispatch(signUp({ ...values, role: "passenger" }, history));
+      console.log("VALUES to send", values, curUser.id);
+      dispatch(editUser({ ...values, id: curUser.id, token: curUser.token }));
+      handleClickfalse();
     },
   });
 

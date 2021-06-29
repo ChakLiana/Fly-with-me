@@ -1,12 +1,11 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 import { useFormik } from "formik";
-import MaskedInput from "react-text-mask";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { TextField, Container, Typography, Input } from "@material-ui/core";
+import { TextField, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../../redux/actions/user.ac";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   textField: {
@@ -18,6 +17,14 @@ const useStyles = makeStyles({
 });
 
 const validationSchema = yup.object({
+  email: yup
+    .string("email")
+    .email("Некорректный ввод")
+    .required("Поле обязательно для заполнения")
+    .typeError("Некорректный ввод"),
+
+  password: yup.string().required("Поле обязательно для заполнения"),
+
   nickName: yup
     .string("Имя")
     .min(4, "Имя должно состоять не менне чем из 5 букв")
@@ -44,6 +51,8 @@ const validationSchema = yup.object({
 
 export default function UserRegisterForm() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  let history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -51,18 +60,13 @@ export default function UserRegisterForm() {
       age: "",
       weight: "",
       tel: "",
+      email: "",
+      password: "",
     },
     validationSchema: validationSchema,
 
     onSubmit: (values) => {
-      fetch("http://localhost:8080/user/", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // credentials: "include",
-        body: JSON.stringify(values),
-      });
+      dispatch(signUp({ ...values, role: "passenger" }, history));
     },
   });
 
@@ -73,6 +77,32 @@ export default function UserRegisterForm() {
           Введите дополнительную информацию о себе
         </Typography>
         <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            className={classes.textField}
+            id="email"
+            name="email"
+            label="Ваша почта"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+
+          <TextField
+            fullWidth
+            className={classes.textField}
+            id="password"
+            name="password"
+            label="Ваш пароль"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
           <TextField
             fullWidth
             className={classes.textField}
@@ -116,19 +146,15 @@ export default function UserRegisterForm() {
             id="tel"
             name="tel"
             label="Контактная информация(телефон)"
-            // placeholder="+7 (999) 99-99-99"
             type="tel"
             value={formik.values.tel}
             onChange={formik.handleChange}
             error={formik.touched.tel && Boolean(formik.errors.tel)}
             helperText={formik.touched.tel && formik.errors.tel}
-            // InputProps={{
-            //   inputComponent: CustomInput,
-            // }}
           />
 
           <Button color="textSecondary" variant="contained" type="submit">
-            Изменить данные
+            Зарегистрироваться
           </Button>
         </form>
       </Container>
