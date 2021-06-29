@@ -11,7 +11,7 @@ import Dragger from "../Dragger/Drager";
 import { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../redux/actions/user.ac";
+import { editUser, signUp } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
 import { useHistory, useLocation } from "react-router";
 import { TextField, Container, Typography, Input } from "@material-ui/core";
@@ -108,6 +108,11 @@ export default function ProfileTandem() {
     // history.push("/");
   }
 
+  function handleClickfalse() {
+    setIsEdit(false);
+    // history.push("/");
+  }
+
   const formik = useFormik({
     initialValues: {
       nickName: curUser.nickName,
@@ -119,7 +124,10 @@ export default function ProfileTandem() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(signUp({ ...values, role: "tandem" }, history));
+      console.log( "VALUES to send", values, curUser.id)
+      dispatch(editUser({ ...values, id: curUser.id, token: curUser.token }));
+      handleClickfalse()
+
     },
   });
 
