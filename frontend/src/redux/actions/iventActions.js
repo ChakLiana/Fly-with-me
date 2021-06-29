@@ -40,20 +40,20 @@ export const iventCreate = (newIvent) => {
   }
 };
 
-export const iventAddPassengerOnBack = (lotitude, longitude, passengerId) => async (dispatch) => {
+export const iventAddPassengerOnBack = (selectIventId, currentUserId) => async (dispatch) => {
   const response = await fetch('http://localhost:8080/ivent', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ lotitude, longitude, passengerId }),
+    body: JSON.stringify({ selectIventId, currentUserId }),
   });
 
   if (response.status === 200) {
     const iventWitNewPassenger = await response.json();
     dispatch(iventAddPassenger(iventWitNewPassenger));
 
-  } else if (response.status === 404) {
+  } else if (response.status === 418) {
     return;
   }
 };

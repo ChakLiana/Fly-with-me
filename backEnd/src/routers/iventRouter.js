@@ -37,7 +37,7 @@ const normalizationOfWindDirection = (directionInDegrees) => {
 router.route('/')
   .get(async (req, res) => {
     try {
-      const allIvents = await Ivent.find().populate('creator');
+      const allIvents = await Ivent.find().populate('passengers').populate('creator');
       // console.log(allIvents);
       res.json({ allIvents });
     } catch (error) {
@@ -48,7 +48,7 @@ router.route('/')
     try {
       const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
       let newIvent = await Ivent.create(newIventData);
-      newIvent = await Ivent.findById(newIvent._id).populate('creator');
+      newIvent = await Ivent.findById(newIvent._id).populate('passengers').populate('creator');
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);
@@ -259,27 +259,39 @@ router.route('/')
   })
   .patch(async (req, res) => {
     try {
-      const { lotitude, longitude, passengerId } = req.body;
-      const allIvents = await Ivent.find();
-      // Попробовать sort()
-      const selectIventArr = allIvents.filter((elem) => {
-        return (
-          elem.coords[0] === lotitude && elem.coords[1] === longitude
-        );
-      })
+      const { selectIventId, currentUserId } = req.body;
 
-      if (selectIventArr[0].passengers.includes(passengerId)) {
-        console.log('уже');
-        return res.sendStatus(404);
+      let selectIvent = await Ivent.findById(selectIventId);
+      if (selectIvent.passengers.includes(currentUserId)) {
+        //console.log('уже');
+        return res.sendStatus(418);
       }
-
-      let selectIvent = await Ivent.updateOne({ _id: selectIventArr[0]._id }, { $push: { passengers: passengerId } });
-      selectIvent = await Ivent.findById(selectIventArr[0]._id).populate('passengers').populate('creator');
-      return res.status(200).json(selectIvent);
+      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengers: currentUserId } });
+      const selectIventWithNewPassenger = await Ivent.findById(selectIventId).populate('passengers').populate('creator');
+      return res.status(200).json(selectIventWithNewPassenger);
 
     } catch (error) {
       console.error(error.message);
     }
+  });
+
+router.route('/:lotitude/:longitude')
+  .get(async (req, res) => {
+    const { lotitude, longitude } = req.params;
+    try {
+      const allIvents = await Ivent.find();
+      const selectIventArr = allIvents.filter((elem) => {
+        return (
+          String(elem.coords[0]) === lotitude && String(elem.coords[1]) === longitude
+        );
+      })
+      const selectIvent = await Ivent.findById(selectIventArr[0]._id).populate('passengers').populate('creator');
+      res.status(200).json(selectIvent);
+    } catch (error) {
+      console.error(error.message);
+    }
   })
+
+
 
 module.exports = router;
