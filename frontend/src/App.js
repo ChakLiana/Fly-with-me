@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRouter/PrivateRouter";
 import UserDetail from "./components/UserDetail/UserDetail";
 import Nav from "./components/NavBarCompot/NavBarCompot";
-import SignUp from "./components/Forms/SignUp/SignUp";
+
 import SignOut from "./components/Forms/SignOut/SignOut";
 import SignIn from "./components/Forms/SignIn/SignIn";
 import { useEffect } from "react";
@@ -19,9 +19,9 @@ import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(checkAuth());
+  // }, []);
 
   return (
     <Router>

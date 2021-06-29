@@ -9,7 +9,7 @@ const iventRouter = require("./src/routers/iventRouter");
 const User = require("./src/models/user");
 const app = express();
 const checkAuth = require("./src/controllers/auth.controller");
-
+const imageRouter = require ( './src/routers/image.router')
 const PORT = 8080;
 const fileUpload = require("express-fileupload");
 
@@ -63,57 +63,36 @@ async function subName(id) {
 
 app.use(fileUpload());
 
-app.post("/upload", function (req, res) {
-  let sampleFile;
-  let uploadPath;
-  let photoLink = req.body.fileOwner;
+// app.post("/upload", function (req, res) {
+//   let sampleFile;
+//   let uploadPath;
+//   let photoLink = req.body.fileOwner;
 
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send("No files were uploaded.");
-  }
+//   if (!req.files || Object.keys(req.files).length === 0) {
+//     return res.status(400).send("No files were uploaded.");
+//   }
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  sampleFile = req.files.file;
+//   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+//   sampleFile = req.files.file;
 
-  uploadPath = __dirname + "/src/public/images/" + sampleFile.name;
-  console.log("upload PATH =>", uploadPath);
-  subName(photoLink);
+//   uploadPath = __dirname + "/src/public/images/" + sampleFile.name;
+//   console.log("upload PATH =>", uploadPath);
+//   subName(photoLink);
 
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(uploadPath, function (err) {
-    if (err) return res.status(500).send(err);
+//   // Use the mv() method to place the file somewhere on your server
+//   sampleFile.mv(uploadPath, function (err) {
+//     if (err) return res.status(500).send(err);
 
-    res.send("File uploaded!");
-  });
-});
+//     res.send("File uploaded!");
+//   });
+// });
 
 // END of UPload section
 // APP'S ROUTES
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/ivent", iventRouter);
-
-// const store = multer.diskStorage({
-//   destination(req, file, cb) {
-//     cb(null, "./src/public/images"); // папка файлов на сервере
-//   },
-//   filename(req, file, cb) {
-//     cb(null, Date.now() + "_" + file.originalname); // Каждому файлу поставим дату
-//   },
-// });
-// // прописываем функции для приёма файлов
-// const upload = multer({ storage: store }).single("file"); // загрузка одного файла
-// const uploadMany = multer({ storage: store }).array("files"); // загрузка массива файлов
-
-// // прописываем "ручки"
-// app.put("/image", upload, (req, res, next) => {
-//   req.body.file; // файл
-//   res.sendStatus(200);
-// });
-// app.put("/image", uploadMany, (req, res, next) => {
-//   req.body.files; // массив файлов
-//   res.sendStatus(200);
-// });
+app.use("/upload", imageRouter)
 
 app.listen(PORT, () => {
   console.log("Server has been started on PORT ", PORT);

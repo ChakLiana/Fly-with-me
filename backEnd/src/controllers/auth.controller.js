@@ -3,6 +3,9 @@ const { v4: uuidv4 } = require("uuid");
 const userModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 const secret = "009dsf993nnsllIIhjew]]qnysahgdj";
+const chalk = require("chalk");
+
+// Generate JWS token function
 function generateAccessToken(nickName) {
   return jwt.sign(nickName, secret, { expiresIn: "1800s" });
 }
@@ -20,9 +23,11 @@ const signUp = async (req, res) => {
     role,
     id = uuidv4(),
   } = req.body;
-  console.log("REQ BOBY --> ", req.body);
+
+  console.log( chalk.black.bgYellow('Sign UP workinking'))
+  console.log( chalk.yellow("BODY Recieved"), req.body);
   const token = generateAccessToken({ nickName: req.body.nickName });
-  console.log("TOKEN __-->", token);
+  console.log(chalk.bold.green("Token Generated:"), chalk.yellow(token));
   if (nickName && password && email && token) {
     try {
       const hashPassword = await bcrypt.hash(password, 11);
@@ -39,7 +44,7 @@ const signUp = async (req, res) => {
         role,
         id,
       });
-      console.log("NEW USER _____-->", newUser);
+      console.log(chalk.black.bgGreen('NEW USER Created'), newUser);
 
       return res.json({ newUser });
     } catch (error) {
@@ -52,6 +57,7 @@ const signUp = async (req, res) => {
 };
 
 const signIn = async (req, res) => {
+  console.log(chalk.black.bgGreen("SIGN IN IS working"));
   const { password, email } = req.body;
 
   if (password && email) {
@@ -62,7 +68,7 @@ const signIn = async (req, res) => {
         (await bcrypt.compare(password, currentUser.password))
       ) {
         const token = generateAccessToken({ nickName: currentUser.nickName });
-        console.log(token);
+        console.log(chalk.bold.green("Token Generated:"), chalk.yellow(token));
         return res.json({ currentUser, token });
       }
       return res.sendStatus(401);
@@ -75,10 +81,12 @@ const signIn = async (req, res) => {
 };
 
 const signOut = async (req, res) => {
+  console.log(chalk.black.bgGreen("signOUT Complete"));
   return res.sendStatus(200);
 };
 
 const checkAuth = async (req, res, next) => {
+  console.log(" CHECK AUTH ");
   //   try {
   //     const user = await userModel.findById(req.session.user.id, { password: 0 })
   //     return res.json(user)
@@ -87,6 +95,9 @@ const checkAuth = async (req, res, next) => {
   //   }
   // }
 
+  req.headers["authorization"]
+    ? console.log(chalk.green(" CheckAuth TOKEN Header present "))
+    : console.log(chalk.red(" CheckAuth NO TOKEN Header"));
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 

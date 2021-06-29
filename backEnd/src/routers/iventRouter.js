@@ -5,6 +5,7 @@ const Ivent = require('../models/iventModel');
 const User = require('../models/user');
 const fetch = require('node-fetch');
 const { findById } = require('../models/user');
+const authController = require('../controllers/auth.controller')
 
 const normalizationOfWindDirection = (directionInDegrees) => {
   if ((directionInDegrees >= 0 && directionInDegrees < 30) || ((directionInDegrees > 330 && directionInDegrees <= 360))) {
