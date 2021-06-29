@@ -6,7 +6,7 @@ export const currentWeatherGetFromApi = (currentCoords) => async (dispatch) => {
   const longitude = currentCoords[1];
 
   const response = await fetch('http://localhost:8080/ivent', {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

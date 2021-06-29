@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Ivent = require('../models/iventModel');
+const User = require('../models/user');
 const fetch = require('node-fetch');
+const { findById } = require('../models/user');
 
 const normalizationOfWindDirection = (directionInDegrees) => {
   if ((directionInDegrees >= 0 && directionInDegrees < 30) || ((directionInDegrees > 330 && directionInDegrees <= 360))) {
@@ -36,7 +38,7 @@ router.route('/')
   .get(async (req, res) => {
     try {
       const allIvents = await Ivent.find().populate('creator');
-      console.log(allIvents);
+      // console.log(allIvents);
       res.json({ allIvents });
     } catch (error) {
       console.error(error.message);
@@ -52,7 +54,7 @@ router.route('/')
       console.error(error.message);
     }
   })
-  .patch(async (req, res) => {
+  .put(async (req, res) => {
     const meteomaticsLogin = 'student_roman';
     const meteomaticsParol = '06XCKf7hBdqoE';
 
@@ -254,6 +256,30 @@ router.route('/')
 
     res.json(currentWeather);
 
+  })
+  .patch(async (req, res) => {
+    try {
+      const { lotitude, longitude, passengerId } = req.body;
+      const allIvents = await Ivent.find();
+      // Попробовать sort()
+      const selectIventArr = allIvents.filter((elem) => {
+        return (
+          elem.coords[0] === lotitude && elem.coords[1] === longitude
+        );
+      })
+
+      if (selectIventArr[0].passengers.includes(passengerId)) {
+        console.log('уже');
+        return res.sendStatus(404);
+      }
+
+      let selectIvent = await Ivent.updateOne({ _id: selectIventArr[0]._id }, { $push: { passengers: passengerId } });
+      selectIvent = await Ivent.findById(selectIventArr[0]._id).populate('passengers').populate('creator');
+      return res.status(200).json(selectIvent);
+
+    } catch (error) {
+      console.error(error.message);
+    }
   })
 
 module.exports = router;
