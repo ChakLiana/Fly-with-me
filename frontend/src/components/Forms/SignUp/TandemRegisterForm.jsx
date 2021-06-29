@@ -78,7 +78,7 @@ export default function UserRegisterForm() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Введите дополнительную информацию о себе
+          Регистрация
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField

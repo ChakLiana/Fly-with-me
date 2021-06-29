@@ -72,23 +72,25 @@ export default function RoleSwitches() {
 
   return (
     <>
-      <FormGroup>
-        <Typography>
-          Зарегистрироваться в качестве:{" "}
-          {state.checkedA ? <b>"Тандемщик"</b> : <b>Пассажир</b>}
-        </Typography>
-        <FormControlLabel
-          control={
-            <IOSSwitch
-              checked={state.checkedA}
-              onChange={handleChange}
-              name="checkedA"
-            />
-          }
-        />
-      </FormGroup>
+      <Container>
+        <FormGroup>
+          <Typography>
+            Зарегистрироваться в качестве:{" "}
+            {state.checkedA ? <b>Тандемщик</b> : <b>Пассажир</b>}
+          </Typography>
+          <FormControlLabel
+            control={
+              <IOSSwitch
+                checked={state.checkedA}
+                onChange={handleChange}
+                name="checkedA"
+              />
+            }
+          />
+        </FormGroup>
 
-      {state.checkedA ? <TandemRegisterForm /> : <UserRegisterForm />}
+        {state.checkedA ? <TandemRegisterForm /> : <UserRegisterForm />}
+      </Container>
     </>
   );
 }
