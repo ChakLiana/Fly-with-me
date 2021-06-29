@@ -7,7 +7,7 @@ const chalk = require("chalk");
 
 // Generate JWS token function
 function generateAccessToken(nickName) {
-  return jwt.sign(nickName, secret, { expiresIn: "1800s" });
+  return jwt.sign(nickName, secret, { expiresIn: "1d" });
 }
 
 const signUp = async (req, res) => {
@@ -24,8 +24,8 @@ const signUp = async (req, res) => {
     id = uuidv4(),
   } = req.body;
 
-  console.log( chalk.black.bgYellow('Sign UP workinking'))
-  console.log( chalk.yellow("BODY Recieved"), req.body);
+  console.log(chalk.black.bgYellow("Sign UP workinking"));
+  console.log(chalk.yellow("BODY Recieved"), req.body);
   const token = generateAccessToken({ nickName: req.body.nickName });
   console.log(chalk.bold.green("Token Generated:"), chalk.yellow(token));
   if (nickName && password && email && token) {
@@ -44,7 +44,7 @@ const signUp = async (req, res) => {
         role,
         id,
       });
-      console.log(chalk.black.bgGreen('NEW USER Created'), newUser);
+      console.log(chalk.black.bgGreen("NEW USER Created"), newUser);
 
       return res.json({ newUser });
     } catch (error) {
@@ -59,15 +59,18 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   console.log(chalk.black.bgGreen("SIGN IN IS working"));
   const { password, email } = req.body;
+  console.log("Sign in req.body", req.body);
 
   if (password && email) {
     try {
       const currentUser = await userModel.findOne({ email });
+      console.log("sign in current user", currentUser);
       if (
         currentUser &&
         (await bcrypt.compare(password, currentUser.password))
       ) {
         const token = generateAccessToken({ nickName: currentUser.nickName });
+
         console.log(chalk.bold.green("Token Generated:"), chalk.yellow(token));
         return res.json({ currentUser, token });
       }
@@ -102,7 +105,7 @@ const checkAuth = async (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
 
   jwt.verify(token, secret, (err, user) => {
-    console.log(err);
+    // console.log(err);
 
     if (err) return res.sendStatus(403);
 
