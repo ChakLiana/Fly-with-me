@@ -1,14 +1,12 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 import { useFormik } from "formik";
-import MaskedInput from "react-text-mask";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import { TextField, Container, Typography, Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { iventCreateOnBack } from "../../redux/actions/iventActions";
 import moment from "moment";
+
 
 const useStyles = makeStyles({
   textField: {
@@ -34,13 +32,16 @@ const validationSchema = yup.object({
 });
 
 export default function IventCreateForm() {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const date = new Date();
 
   const formatDate = moment(date).format("YYYY-MM-DD[T]HH:mm");
 
-  const coordForNewIvent = useSelector((state) => state.curentCoords);
-  const curWeather = useSelector((state) => state.currentWeather);
+  const curentCoords = useSelector((state) => state.curentCoords);
+  const currentWeather = useSelector((state) => state.currentWeather);
+  const currentUser = useSelector((state) => state.user);
 
   const formik = useFormik({
     initialValues: {
@@ -50,14 +51,15 @@ export default function IventCreateForm() {
       stopList: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      const curData = {
-        ...values,
-        coords: coordForNewIvent,
-        creator: "ID текущего юзера",
-        currentWeather: curWeather,
+    onSubmit: (formValues) => {
+      const iventData = {
+        ...formValues,
+        coords: curentCoords,
+        creator: currentUser._id,
+        currentWeather: currentWeather,
       };
-      alert(JSON.stringify(curData, null, 2));
+      dispatch(iventCreateOnBack(iventData));
+      formik.resetForm();
     },
   });
 
@@ -69,7 +71,7 @@ export default function IventCreateForm() {
         </Typography>
         <Typography variant="h5" component="h2">
           Вы хотите создать событие на точке{" "}
-          {coordForNewIvent.map((coord) => {
+          {curentCoords.map((coord) => {
             return (
               <span>
                 <b>{coord.toFixed(4)} </b>

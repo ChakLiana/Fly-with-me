@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory, useLocation } from "react-router";
 import axios from "axios";
-import Dragger from "../../Dragger/Drager";
+import Dragger from "../../components/Dragger/Drager";
 
 const useStyles = makeStyles({
   textField: {
@@ -141,7 +141,7 @@ export default function UserRegisterForm() {
             name="fHours"
             label="часы налета"
             type="text"
-            value={formik.values.fHours}
+            value={formik.values.tandemhours}
             onChange={formik.handleChange}
             error={formik.touched.fHours && Boolean(formik.errors.fHours)}
             helperText={formik.touched.fHours && formik.errors.fHours}
@@ -164,7 +164,7 @@ export default function UserRegisterForm() {
           />
 
           <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
+            Принять изменения
           </Button>
         </form>
       </Container>

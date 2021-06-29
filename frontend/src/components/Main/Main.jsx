@@ -9,6 +9,8 @@ import ProfileUser from "../../Profiles/ProfileUser";
 import Route from "react-router-dom";
 import IventCreateForm from "../IventCreateForm/IventCreateForm";
 import Weather from "../Weather/Weather";
+import { useSelector } from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Main = () => {
+  const currentUser = useSelector((state) => state.user);
+
   console.log("Main compot render");
   const classes = useStyles();
 
@@ -40,26 +44,24 @@ const Main = () => {
           </Paper>
         </Grid>
 
-        <Grid item xs>
-          <Paper className={(classes.paper, classes.right)}>
-            <IventCreateForm />
-          </Paper>
-        </Grid>
+        {currentUser?.role === 'tandem' &&
+          <Grid item xs>
+            <Paper className={(classes.paper, classes.right)}>
+              <IventCreateForm />
+            </Paper>
+          </Grid>}
       </Grid>
-      <Grid container spacing={0}>
-        <Grid item xs={9}>
-          <Paper className={classes.paper}>
-            <Weather />
-          </Paper>
+      {currentUser &&
+        <Grid container spacing={0}>
+          <Grid item xs={9}>
+            <Paper className={classes.paper}>
+              <Weather />
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      }
     </div>
 
-    // <Container maxWidth="sm">
-    //   <div className="Main">
-    //     <YandexMap />
-    //   </div>
-    // </Container>
   );
 };
 export default Main;

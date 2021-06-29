@@ -8,7 +8,7 @@ const Ivent = mongoose.model("Ivent", {
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   dateOfEvent: Date,
   IventImg: String,
-  users: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  passengers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   price: String,
   description: String,
   stopList: String,

@@ -10,15 +10,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory, useLocation } from "react-router";
-import axios from "axios";
-import Dragger from "../../Dragger/Drager";
+import Dragger from "../../components/Dragger/Drager";
 
 const useStyles = makeStyles({
   textField: {
     marginBottom: 30,
   },
   divPos: {
-    // marginTop: 20,
+    // marginTop: 200,
   },
 });
 
@@ -35,14 +34,15 @@ const validationSchema = yup.object({
     .string("Имя")
     .min(4, "Имя должно состоять не менне чем из 5 букв")
     .required("*Имя обязательно для заполнения"),
-  experience: yup
+  age: yup
     .number("Введите  возраст")
     .max(101, "Вы ввели слишком большое число, проверьте еще раз")
     .required("* Поле возраст обязательно для заполнения")
     .typeError("Возраст должен быть цифрой"),
-  fHours: yup
-    .number("Введите количество часов налета")
-    .required("* Поле часы налета обязательно для заполнения")
+  weight: yup
+    .number("Введите Ваш вес")
+    .max(200, "Вы ввели слишком большое число, проверьте еще раз")
+    .required("* Поле вес обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
   tel: yup
     .string()
@@ -62,15 +62,24 @@ export default function UserRegisterForm() {
   const formik = useFormik({
     initialValues: {
       nickName: "",
-      experience: "",
-      fHours: "",
+      age: "",
+      weight: "",
       tel: "",
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
+
     onSubmit: (values) => {
-      dispatch(signUp({ ...values, role: "tandem" }, history));
+      // fetch("http://localhost:8080/user/", {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   // credentials: "include",
+      //   body: JSON.stringify(values),
+      // });
+      dispatch(signUp({ ...values, role: "passenger" }, history));
     },
   });
 
@@ -123,37 +132,35 @@ export default function UserRegisterForm() {
           <TextField
             className={classes.textField}
             fullWidth
-            id="experience"
-            name="experience"
-            label="Ваш опыт"
+            id="age"
+            name="age"
+            label="Ваш возраст"
             type="text"
-            value={formik.values.experience}
+            value={formik.values.age}
             onChange={formik.handleChange}
-            error={
-              formik.touched.experience && Boolean(formik.errors.experience)
-            }
-            helperText={formik.touched.experience && formik.errors.experience}
+            error={formik.touched.age && Boolean(formik.errors.age)}
+            helperText={formik.touched.age && formik.errors.age}
           />
           <TextField
             className={classes.textField}
             fullWidth
-            id="fHours"
-            name="fHours"
-            label="часы налета"
+            id="weight"
+            name="weight"
+            label="Ваш вес"
             type="text"
-            value={formik.values.fHours}
+            value={formik.values.weight}
             onChange={formik.handleChange}
-            error={formik.touched.fHours && Boolean(formik.errors.fHours)}
-            helperText={formik.touched.fHours && formik.errors.fHours}
+            error={formik.touched.weight && Boolean(formik.errors.weight)}
+            helperText={formik.touched.weight && formik.errors.weight}
           />
           <TextField
             className={classes.textField}
             fullWidth
             id="tel"
             name="tel"
-            label="Контактная информация"
+            label="Контактная информация(телефон)"
             // placeholder="+7 (999) 99-99-99"
-            type="text"
+            type="tel"
             value={formik.values.tel}
             onChange={formik.handleChange}
             error={formik.touched.tel && Boolean(formik.errors.tel)}

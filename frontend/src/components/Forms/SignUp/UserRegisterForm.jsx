@@ -9,7 +9,7 @@ import { TextField, Container, Typography, Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
-import { useHistory, useLocation } from "react-router"
+import { useHistory, useLocation } from "react-router";
 import Dragger from "../../Dragger/Drager";
 
 const useStyles = makeStyles({
@@ -174,7 +174,6 @@ export default function UserRegisterForm() {
             Зарегистрироваться
           </Button>
         </form>
-
       </Container>
     </div>
   );
