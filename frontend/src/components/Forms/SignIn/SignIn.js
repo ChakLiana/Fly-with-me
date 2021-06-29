@@ -18,6 +18,9 @@ const useStyles = makeStyles({
   divPos: {
     // marginTop: 200,
   },
+  btnColor: {
+    backgroundColor: "#29b6f6",
+  },
 });
 
 const validationSchema = yup.object({
@@ -50,7 +53,7 @@ export default function UsersignIn() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Введите дополнительную информацию о себе
+          Войти
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField
@@ -77,8 +80,13 @@ export default function UsersignIn() {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
+          <Button
+            className={classes.btnColor}
+            color="#039be5"
+            variant="contained"
+            type="submit"
+          >
+            Войти
           </Button>
         </form>
       </Container>

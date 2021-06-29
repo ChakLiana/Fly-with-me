@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import "./NavBarCompot.css";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
@@ -33,20 +35,10 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      { <p> ПРИВЕТ!  {user.nickName} </p>}
+                      {<p> ПРИВЕТ! {user.nickName} </p>}
                     </NavLink>
                   </li>
 
-                  <li className="nav-item">
-                    <NavLink
-                      exact
-                      to="/user/edit"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Edit
-                    </NavLink>
-                  </li>
                   <li className="nav-item">
                     <NavLink
                       exact

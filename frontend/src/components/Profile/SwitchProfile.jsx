@@ -2,21 +2,55 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import ProfileTandem from "./ProfileTandem";
 import ProfilePassenger from "./ProfilePassenger";
-import { cornsilk } from "color-name";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    display: "flex",
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: "white",
+    backgroundColor: "rgba(66, 182, 255, 0.1)",
+  },
+  textColor: {
+    color: "white",
+    textAlign: "center",
+  },
+}));
 
 export default function ProfileSwitches() {
-  // return <div>123213213123123213</div>;
   const curUser = useSelector((state) => state.user);
-  console.log(curUser.role);
+  const classes = useStyles();
 
   return (
-    <>
-      <Typography>
-        Добро пожаловать в личный кабинет: <b>{curUser.nickName}</b>
-      </Typography>
-      <Typography>
-        {curUser?.role === "tandem" ? <ProfileTandem /> : <ProfilePassenger />}
-      </Typography>
-    </>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography className={classes.textColor}>
+            Добро пожаловать в личный кабинет: <b>{curUser.nickName}</b>
+          </Typography>
+
+          <Grid item xs={12}>
+            <Typography className={classes.textColor}>
+              Вы выступаете в роли{" "}
+              {curUser?.role === "tandem" ? "Тандемщика" : "Пассажира"}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Typography>
+          {curUser?.role === "tandem" ? (
+            <ProfileTandem />
+          ) : (
+            <ProfilePassenger />
+          )}
+        </Typography>
+      </Grid>
+    </div>
   );
 }

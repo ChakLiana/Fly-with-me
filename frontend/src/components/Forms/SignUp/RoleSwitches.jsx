@@ -21,14 +21,14 @@ const IOSSwitch = withStyles((theme) => ({
       transform: "translateX(16px)",
       color: theme.palette.common.white,
       "& + $track": {
-        backgroundColor: "#52d869",
+        backgroundColor: "#03a9f4",
         opacity: 1,
         border: "none",
       },
     },
     "&$focusVisible $thumb": {
-      color: "#52d869",
-      border: "6px solid #fff",
+      color: "#4caf50",
+      border: "3px solid #fff",
     },
   },
   thumb: {
@@ -72,23 +72,25 @@ export default function RoleSwitches() {
 
   return (
     <>
-      <FormGroup>
-        <Typography>
-          Укажите в качестве кого вы хотите зарегистрироваться:{" "}
-          {state.checkedA ? <b>"Тандемщик"</b> : <b>Пассажир</b>}
-        </Typography>
-        <FormControlLabel
-          control={
-            <IOSSwitch
-              checked={state.checkedA}
-              onChange={handleChange}
-              name="checkedA"
-            />
-          }
-        />
-      </FormGroup>
+      <Container>
+        <FormGroup>
+          <Typography>
+            Зарегистрироваться в качестве:{" "}
+            {state.checkedA ? <b>Тандемщик</b> : <b>Пассажир</b>}
+          </Typography>
+          <FormControlLabel
+            control={
+              <IOSSwitch
+                checked={state.checkedA}
+                onChange={handleChange}
+                name="checkedA"
+              />
+            }
+          />
+        </FormGroup>
 
-      {state.checkedA ? <TandemRegisterForm /> : <UserRegisterForm />}
+        {state.checkedA ? <TandemRegisterForm /> : <UserRegisterForm />}
+      </Container>
     </>
   );
 }

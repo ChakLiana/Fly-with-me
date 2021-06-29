@@ -1,6 +1,7 @@
 import { DELETE_USER, SET_USER, TOKEN_TO_STORE } from "../types/userTypes";
 import * as endPoints from "../../components/config/endPoints";
-const storage = window.localStorage;
+const storage = window.sessionStorage;
+
 
 export const getUserFromServer = (id) => async (dispatch) => {
   const response = await fetch(endPoints.getUser(id), {
@@ -75,29 +76,28 @@ export const signOut = () => async (dispatch) => {
   }
 };
 
-export const checkAuth = () => async (dispatch) => {
-  const response = await fetch(endPoints.checkAuth(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(storage.getItem("token")),
-  });
-  if (response.status === 200) {
-    const user = await response.json();
-    dispatch(setUser(user));
-  }
-};
+// export const checkAuth = () => async (dispatch) => {
+//   const response = await fetch(endPoints.checkAuth(), {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     credentials: "include",
+//     body: JSON.stringify(storage.getItem("token")),
+//   });
+//   if (response.status === 200) {
+//     const user = await response.json();
+//     dispatch(setUser(user));
+//   }
+// };
 
-export const editUser = (user, history) => async (dispatch, getState) => {
-  const {
-    user: { _id: userId },
-  } = getState();
+export const editUser = (user) => async (dispatch) => {
 
-  const response = await fetch(endPoints.editUser(userId), {
+    let token = storage.getItem('token')
+  const response = await fetch("http://localhost:8080/api/v1/users/", {
     method: "PATCH",
     headers: {
+      "authorization": `Bearer ${token} `,
       "Content-Type": "application/json",
     },
     credentials: "include",
@@ -106,10 +106,8 @@ export const editUser = (user, history) => async (dispatch, getState) => {
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    history.replace(`/users/${user._id}`);
-  } else {
-    history.replace("/");
-  }
+ 
+  } // find codes from back 
 };
 
 export const deleteUser = () => ({
