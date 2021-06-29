@@ -19,12 +19,12 @@ const useStyles = makeStyles({
   divPos: {
     padding: 15,
     borderRadius: "3px",
-    backgroundColor: "rgba(0, 0,0, 0.4)",
+    backgroundColor: "rgba(0, 0,0, 0.5)",
     color: "white",
     maxWidth: 500,
   },
   container: {
-    backgroundColor: 'rgba("200, 200,200, 0.3")',
+    backgroundColor: 'rgba("200, 200,200, 0.5")',
   },
   multilineColor: {
     color: "#ffffff !important",

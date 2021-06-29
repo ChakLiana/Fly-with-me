@@ -76,7 +76,7 @@ export default function RoleSwitches() {
         <FormGroup>
           <Typography>
             Зарегистрироваться в качестве:{" "}
-            {state.checkedA ? <b>Тандемщик</b> : <b>Пассажир</b>}
+            {state.checkedA ? <b>Пилота</b> : <b>Пассажира</b>}
           </Typography>
           <FormControlLabel
             control={
