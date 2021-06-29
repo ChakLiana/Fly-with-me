@@ -27,18 +27,11 @@ const useStyles = makeStyles({
     backgroundColor: 'rgba("200, 200,200, 0.3")',
   },
   multilineColor: {
-    color: "white",
-    "&:formLabelFocused": { color: "white" },
+    color: "#ffffff !important",
+    "&::after": {
+      borderColor: "#ffffff",
+    },
   },
-
-  // multilineColor: {
-  //   root: {
-  //     "&&focused": {
-  //       color: "white",
-  //     },
-  //   },
-  //   focused: {},
-  // },
 });
 
 const validationSchema = yup.object({
@@ -111,6 +104,7 @@ export default function UserRegisterForm() {
         </Typography>
         <form className={classes.container} onSubmit={formik.handleSubmit}>
           <TextField
+            classes={{}}
             InputProps={{
               className: classes.multilineColor,
             }}
