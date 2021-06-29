@@ -1,12 +1,17 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { TextField, Container, Typography, Input } from "@material-ui/core";
+import {
+  TextField,
+  Container,
+  Typography,
+  Input,
+  InputAdornment,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { iventCreateOnBack } from "../../redux/actions/iventActions";
 import moment from "moment";
-
 
 const useStyles = makeStyles({
   textField: {
@@ -36,7 +41,6 @@ export default function IventCreateForm() {
 
   const classes = useStyles();
   const date = new Date();
-
   const formatDate = moment(date).format("YYYY-MM-DD[T]HH:mm");
 
   const curentCoords = useSelector((state) => state.curentCoords);
@@ -66,10 +70,10 @@ export default function IventCreateForm() {
   return (
     <div className={classes.divPos}>
       <Container maxWidth="sm">
-        <Typography variant="h4" component="h2">
+        <Typography variant="h5" component="h3">
           Конструктор полета:
         </Typography>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h6" component="h3">
           Вы хотите создать событие на точке{" "}
           {curentCoords.map((coord) => {
             return (
@@ -86,6 +90,7 @@ export default function IventCreateForm() {
             id="dateOfEvent"
             name="dateOfEvent"
             label="Дата события"
+            locale="ru"
             type="datetime-local"
             // defaultValue="2017-05-24T10:30"
             value={formik.values.dateOfEvent}
@@ -108,6 +113,9 @@ export default function IventCreateForm() {
             type="text"
             value={formik.values.price}
             onChange={formik.handleChange}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">₽</InputAdornment>,
+            }}
             error={formik.touched.price && Boolean(formik.errors.price)}
             helperText={formik.touched.price && formik.errors.price}
           />

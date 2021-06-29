@@ -246,13 +246,13 @@ export default function ProfilePassenger() {
         </>
       ) : (
         <>
-          <Grid justify-center>
+          {/* <Grid justify-center>
             <Grid item>
               <Typography variant="h5" component="h2">
                 Личный кабинет пользователя
               </Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
           <Grid container>
             <Grid item>
               <Typography> </Typography>
