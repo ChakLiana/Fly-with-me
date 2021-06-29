@@ -44,16 +44,18 @@ export default function IventModal(props) {
 
   const selectIvent = useSelector(state => state.selectIvent);
   const currentUser = useSelector(state => state.user);
-  const allIvents = useSelector(state => state.ivents);
-
-
-  useEffect(() => {
-    dispatch(getSelectIventFromBack(selectIvent.coords[0], selectIvent.coords[1]));
-  }, [allIvents])
+  
+  // Все ломает, поэтому убрал
+  // useEffect(() => {
+  //   dispatch(getSelectIventFromBack(selectIvent.coords[0], selectIvent.coords[1]));
+  // }, [])
 
 
   const addPassengerHandler = () => {
     dispatch(iventAddPassengerOnBack(selectIvent._id, currentUser._id));
+    // Дописал строчку ниже
+    // Спасает, так как при повторном открытии диспачится обновление текущего события
+    props.handleCloseModal();
   }
 
   const deletePassengerHandler = () => {
@@ -78,6 +80,7 @@ export default function IventModal(props) {
       <p>Цена полета: {selectIvent.price}</p>
       <p>Моб. тел. организатора: {selectIvent.creator.tel}</p>
       <p>Email: {selectIvent.creator.email}</p>
+      {console.log(selectIvent)}
       {selectIvent.passengers.filter((elem) => elem._id === currentUser._id).length ?
         <Button onClick={() => deletePassengerHandler()} data-passenger='delete'
           color="textSecondary" variant="contained">Отказаться</Button> :
@@ -103,4 +106,3 @@ export default function IventModal(props) {
     </div>
   );
 }
-
