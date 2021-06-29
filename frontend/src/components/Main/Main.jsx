@@ -11,14 +11,15 @@ import IventCreateForm from "../IventCreateForm/IventCreateForm";
 import Weather from "../Weather/Weather";
 import { useSelector } from "react-redux";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   right: {
-    height: "468.5px",
+    height: 533,
     overflow: "auto",
+    maxWidth: "400px",
+    margin: "0px auto",
   },
   paper: {
     padding: theme.spacing(2),
@@ -36,32 +37,34 @@ const Main = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        <Grid item xs={9}>
+    <Container className={classes.root}>
+      <Grid container spacing={4}>
+        <Grid item xs={7} md={6}>
           <Paper className={classes.paper}>
             <YandexMap />
           </Paper>
         </Grid>
 
-        {currentUser?.role === 'tandem' &&
-          <Grid item xs>
+        {currentUser?.role === "tandem" && (
+          <Grid item xs={5} md={6}>
             <Paper className={(classes.paper, classes.right)}>
               <IventCreateForm />
             </Paper>
-          </Grid>}
-      </Grid>
-      {currentUser &&
-        <Grid container spacing={0}>
-          <Grid item xs={9}>
-            <Paper className={classes.paper}>
-              <Weather />
-            </Paper>
           </Grid>
-        </Grid>
-      }
-    </div>
-
+        )}
+      </Grid>
+      {currentUser && (
+        <Container>
+          <Grid container spacing={4}>
+            <Grid item xs={10}>
+              <Paper className={classes.paper}>
+                <Weather />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      )}
+    </Container>
   );
 };
 export default Main;

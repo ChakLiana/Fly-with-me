@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 // import { useDispatch, useSelector } from "react-redux";
 // import { editSquareThunk } from "../../redux/actions/tictac";
-import { Grid, Paper, ButtonBase } from "@material-ui/core";
+import { Grid, Paper, ButtonBase, withTheme } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Dragger from "../Dragger/Drager";
 import { useState } from "react";
@@ -15,8 +15,9 @@ import { signUp } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
 import { useHistory, useLocation } from "react-router";
 import { TextField, Container, Typography, Input } from "@material-ui/core";
+import IventList from "../IventList/IventList";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   span: {
     fontSize: 20,
   },
@@ -28,6 +29,8 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    color: "white",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
   bullet: {
     margin: "0 2px",
@@ -35,12 +38,32 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 14,
+    color: "white",
   },
   pos: {
     marginTop: 16,
     marginBottom: 16,
   },
-});
+  paper: {
+    width: 400,
+    height: 400,
+    paper: {
+      padding: theme.spacing(1),
+      textAlign: "center",
+    },
+    // borderRadius: "50%",
+  },
+  dragger: {
+    minWidth: "250px",
+    minHeight: "250px",
+  },
+  textColor: {
+    color: "white",
+  },
+  btnColor: {
+    backgroundColor: "#29b6f6",
+  },
+}));
 
 const validationSchema = yup.object({
   email: yup
@@ -104,7 +127,7 @@ export default function ProfileTandem() {
     <>
       {isEdit ? (
         <>
-          <form onSubmit={formik.handleSubmit}>
+          <form className={classes.textColor} onSubmit={formik.handleSubmit}>
             <Grid justify-center>
               <Grid item>
                 <Typography variant="h5" component="h2">
@@ -226,7 +249,12 @@ export default function ProfileTandem() {
                   </CardContent>
 
                   <CardActions>
-                    <Button type="submit" size="big" variant="contained">
+                    <Button
+                      className={classes.btnColor}
+                      type="submit"
+                      size="big"
+                      variant="contained"
+                    >
                       Принять изменения
                     </Button>
                   </CardActions>
@@ -237,16 +265,18 @@ export default function ProfileTandem() {
         </>
       ) : (
         <>
-          <Grid justify-center>
+          {/* <Grid justify-center>
             <Grid item>
               <Typography variant="h5" component="h2">
                 Личный кабинет Тандемщика
               </Typography>
             </Grid>
-          </Grid>
-          <Grid container>
+          </Grid> */}
+          <Grid container spacing={3}>
             <Grid item>
-              <Typography> </Typography>
+              <Paper className={classes.dragger}>
+                <Dragger />
+              </Paper>
             </Grid>
             <Grid item>
               <Card className={classes.root}>
@@ -309,14 +339,20 @@ export default function ProfileTandem() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button onClick={handleClick} size="big">
+                  <Button
+                    className={classes.btnColor}
+                    onClick={handleClick}
+                    size="big"
+                  >
                     Отредактировать данные
                   </Button>
                 </CardActions>
               </Card>
             </Grid>
+            <Grid item>
+              <IventList />
+            </Grid>
           </Grid>
-          <Dragger />
         </>
       )}
     </>
