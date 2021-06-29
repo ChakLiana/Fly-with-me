@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  wordDescript: {
+    wordBreak: "break-all",
   },
   cardMedia: {
     paddingTop: "56.25%", // 16:9
@@ -64,7 +68,9 @@ export default function IventItem({ el }) {
           <Typography gutterBottom component="h6">
             <b>Место проведения:</b> {el.coords[0]} {el.coords[1]}
           </Typography>
-          <Typography>Описание:{el.description}</Typography>
+          <Typography className={classes.wordDescript}>
+            Описание:{el.description}
+          </Typography>
         </CardContent>
         <CardActions className={classes.card}>
           <Button size="small" color="default">

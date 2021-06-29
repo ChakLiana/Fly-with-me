@@ -53,7 +53,7 @@ export default function UsersignIn() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Введите дополнительную информацию о себе
+          Войти
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField

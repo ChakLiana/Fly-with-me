@@ -266,7 +266,7 @@ export default function ProfilePassenger() {
                   <Typography
                     className={classes.pos}
                     component="span"
-                    color="textPrimary"
+                    color="textWhite"
                   >
                     {curUser.email}
                   </Typography>

@@ -17,8 +17,28 @@ const useStyles = makeStyles({
     marginBottom: 30,
   },
   divPos: {
-    // marginTop: 200,
+    padding: 15,
+    borderRadius: "3px",
+    backgroundColor: "rgba(0, 0,0, 0.4)",
+    color: "white",
+    maxWidth: 500,
   },
+  container: {
+    backgroundColor: 'rgba("200, 200,200, 0.3")',
+  },
+  multilineColor: {
+    color: "white",
+    "&:formLabelFocused": { color: "white" },
+  },
+
+  // multilineColor: {
+  //   root: {
+  //     "&&focused": {
+  //       color: "white",
+  //     },
+  //   },
+  //   focused: {},
+  // },
 });
 
 const validationSchema = yup.object({
@@ -87,10 +107,16 @@ export default function UserRegisterForm() {
     <div className={classes.divPos}>
       <Container maxWidth="sm">
         <Typography variant="h5" component="h2">
-          Введите дополнительную информацию о себе
+          Регистрация
         </Typography>
-        <form onSubmit={formik.handleSubmit}>
+        <form className={classes.container} onSubmit={formik.handleSubmit}>
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="email"
@@ -104,6 +130,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="password"
@@ -117,6 +149,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="nickName"
@@ -130,6 +168,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="age"
@@ -142,6 +186,12 @@ export default function UserRegisterForm() {
             helperText={formik.touched.age && formik.errors.age}
           />
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="weight"
@@ -154,6 +204,12 @@ export default function UserRegisterForm() {
             helperText={formik.touched.weight && formik.errors.weight}
           />
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="tel"
