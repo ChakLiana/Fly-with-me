@@ -1,8 +1,11 @@
 // Dragger compot for dragging and sending images
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Dragger = () => {
+  const curUser = useSelector((state) => state.user._id);
+  console.log("current user ID ", curUser);
   console.log("-=Dragger component render=- ");
 
   // declare image existanse flag
@@ -48,6 +51,7 @@ const Dragger = () => {
     console.log("File for AXIOS", file);
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("fileOwner", curUser);
     console.log("File fo send by axios", file);
     axios
       .post("http://localhost:8080/upload", formData, {
