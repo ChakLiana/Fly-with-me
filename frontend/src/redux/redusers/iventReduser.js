@@ -1,4 +1,4 @@
-import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER } from '../types/iventTypes';
+import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER, SELECT_IVENT_GET } from '../types/iventTypes';
 
 export default function iventReduser(state = [], { type, payload }) {
 
@@ -12,7 +12,7 @@ export default function iventReduser(state = [], { type, payload }) {
     }
 
     case IVENT_ADD_PASSENGER: {
-      const stateWithoutSelectAction = state.filter((elem) => !elem._id);
+      const stateWithoutSelectAction = state.filter((elem) => String(elem._id) !== String(payload._id));
       return [...stateWithoutSelectAction, payload];
     }
 

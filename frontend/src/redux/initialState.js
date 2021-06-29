@@ -36,6 +36,7 @@ const initialState = {
     afterTomorrowCloudy: "",
     inThreeDaysCloudy: "",
   },
+  selectIvent: {},
 };
 
 export default initialState;

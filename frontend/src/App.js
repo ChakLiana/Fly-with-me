@@ -16,6 +16,8 @@ import Flight from "./components/Flights/Flights";
 import UserProfile from "../src/components/Profile/SwitchProfile";
 import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
 
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -63,6 +65,7 @@ function App() {
           <Route path="/">
             <Main />
           </Route>
+
         </Switch>
       </div>
     </Router>
