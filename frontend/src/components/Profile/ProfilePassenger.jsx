@@ -18,12 +18,22 @@ import { TextField, Container, Typography, Input } from "@material-ui/core";
 
 const useStyles = makeStyles({
   textField: {
-    // marginBottom: 30,
+    marginTop: 16,
+    marginBottom: 16,
+  },
+  divPos: {
+    color: "white",
+    maxWidth: 500,
   },
   span: {
     fontSize: 20,
   },
+  whiteText: {
+    color: "white",
+  },
   root: {
+    padding: 15,
+    borderRadius: "3px",
     margin: "0 auto",
     minWidth: 275,
     maxWidth: 800,
@@ -31,6 +41,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0, 0,0, 0.5)",
   },
   bullet: {
     margin: "0 2px",
@@ -42,6 +53,12 @@ const useStyles = makeStyles({
   pos: {
     marginTop: 16,
     marginBottom: 16,
+  },
+  multilineColor: {
+    color: "#ffffff !important",
+    "&::after": {
+      borderColor: "#ffffff",
+    },
   },
 });
 
@@ -117,8 +134,13 @@ export default function ProfilePassenger() {
     <>
       {isEdit ? (
         <>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid justify-center>
+          <form className={classes.divPos} onSubmit={formik.handleSubmit}>
+            <Grid
+              classes={{
+                root: classes.root,
+              }}
+              justify-center
+            >
               <Grid item>
                 <Typography variant="h5" component="h2">
                   Форма для редактирования данных
@@ -132,11 +154,13 @@ export default function ProfilePassenger() {
               <Grid item>
                 <Card className={classes.root}>
                   <CardContent>
-                    <Typography className={classes.pos} color="textSecondary">
-                      {" "}
-                      Почтовый адрес:
-                    </Typography>
                     <TextField
+                      InputProps={{
+                        className: classes.multilineColor,
+                      }}
+                      InputLabelProps={{
+                        className: classes.multilineColor,
+                      }}
                       fullWidth
                       className={classes.textField}
                       id="email"
@@ -151,11 +175,13 @@ export default function ProfilePassenger() {
                       helperText={formik.touched.email && formik.errors.email}
                     />
 
-                    <Typography className={classes.pos} color="textSecondary">
-                      Ник:
-                    </Typography>
-
                     <TextField
+                      InputProps={{
+                        className: classes.multilineColor,
+                      }}
+                      InputLabelProps={{
+                        className: classes.multilineColor,
+                      }}
                       fullWidth
                       className={classes.textField}
                       id="nickName"
@@ -173,11 +199,13 @@ export default function ProfilePassenger() {
                       }
                     />
 
-                    <Typography className={classes.pos} color="textSecondary">
-                      Возраст:
-                    </Typography>
-
                     <TextField
+                      InputProps={{
+                        className: classes.multilineColor,
+                      }}
+                      InputLabelProps={{
+                        className: classes.multilineColor,
+                      }}
                       className={classes.textField}
                       fullWidth
                       id="age"
@@ -190,11 +218,13 @@ export default function ProfilePassenger() {
                       helperText={formik.touched.age && formik.errors.age}
                     />
 
-                    <Typography className={classes.pos} color="textSecondary">
-                      Вес:
-                    </Typography>
-
                     <TextField
+                      InputProps={{
+                        className: classes.multilineColor,
+                      }}
+                      InputLabelProps={{
+                        className: classes.multilineColor,
+                      }}
                       className={classes.textField}
                       fullWidth
                       id="weight"
@@ -209,11 +239,13 @@ export default function ProfilePassenger() {
                       helperText={formik.touched.weight && formik.errors.weight}
                     />
 
-                    <Typography className={classes.pos} color="textSecondary">
-                      Контакт:
-                    </Typography>
-
                     <TextField
+                      InputProps={{
+                        className: classes.multilineColor,
+                      }}
+                      InputLabelProps={{
+                        className: classes.multilineColor,
+                      }}
                       className={classes.textField}
                       fullWidth
                       id="tel"
@@ -226,7 +258,11 @@ export default function ProfilePassenger() {
                       helperText={formik.touched.tel && formik.errors.tel}
                     />
 
-                    <Typography variant="body2" component="p">
+                    <Typography
+                      className={classes.whiteText}
+                      variant="body2"
+                      component="p"
+                    >
                       <br />
                       Для редактирования информации о себе нажмите кнопку:
                       <br />
@@ -259,8 +295,8 @@ export default function ProfilePassenger() {
             </Grid>
             <Grid item>
               <Card className={classes.root}>
-                <CardContent>
-                  <Typography className={classes.pos} color="textSecondary">
+                <CardContent className={classes.whiteText}>
+                  <Typography className={classes.pos}>
                     Почтовый адрес:
                   </Typography>
                   <Typography
@@ -270,44 +306,20 @@ export default function ProfilePassenger() {
                   >
                     {curUser.email}
                   </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    Ник:
-                  </Typography>
-                  <Typography
-                    className={classes.pos}
-                    component="span"
-                    color="textPrimary"
-                  >
+                  <Typography className={classes.pos}>Ник:</Typography>
+                  <Typography className={classes.pos} component="span">
                     {curUser.nickName}
                   </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    Возраст:
-                  </Typography>
-                  <Typography
-                    className={classes.pos}
-                    component="span"
-                    color="textPrimary"
-                  >
+                  <Typography className={classes.pos}>Возраст:</Typography>
+                  <Typography className={classes.pos} component="span">
                     {curUser.age}
                   </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    Вес:
-                  </Typography>
-                  <Typography
-                    className={classes.pos}
-                    component="span"
-                    color="textPrimary"
-                  >
+                  <Typography className={classes.pos}>Вес:</Typography>
+                  <Typography className={classes.pos} component="span">
                     {curUser.weight}
                   </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    Контакт:
-                  </Typography>
-                  <Typography
-                    className={classes.pos}
-                    component="span"
-                    color="textPrimary"
-                  >
+                  <Typography className={classes.pos}>Контакт:</Typography>
+                  <Typography className={classes.pos} component="span" c>
                     {curUser.tel}
                   </Typography>
                   <Typography variant="body2" component="p">

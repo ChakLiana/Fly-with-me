@@ -19,6 +19,17 @@ const useStyles = makeStyles({
   },
   divPos: {
     // marginTop: 20,
+    padding: 15,
+    borderRadius: "3px",
+    backgroundColor: "rgba(0, 0,0, 0.5)",
+    color: "white",
+    maxWidth: 500,
+  },
+  multilineColor: {
+    color: "#ffffff !important",
+    "&::after": {
+      borderColor: "#ffffff",
+    },
   },
 });
 
@@ -82,6 +93,12 @@ export default function UserRegisterForm() {
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="email"
@@ -95,6 +112,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="password"
@@ -108,6 +131,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             fullWidth
             className={classes.textField}
             id="nickName"
@@ -121,6 +150,12 @@ export default function UserRegisterForm() {
           />
 
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="experience"
@@ -135,6 +170,12 @@ export default function UserRegisterForm() {
             helperText={formik.touched.experience && formik.errors.experience}
           />
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="fHours"
@@ -147,6 +188,12 @@ export default function UserRegisterForm() {
             helperText={formik.touched.fHours && formik.errors.fHours}
           />
           <TextField
+            InputProps={{
+              className: classes.multilineColor,
+            }}
+            InputLabelProps={{
+              className: classes.multilineColor,
+            }}
             className={classes.textField}
             fullWidth
             id="tel"
