@@ -13,6 +13,7 @@ const userSchema = new Schema({
   experience: Number,
   fHours: Number,
   role: String,
+  token: String,
   ivents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ivent" }],
   id: String,
 });
