@@ -9,7 +9,7 @@ import {
   SearchControl,
   ZoomControl,
 } from "react-yandex-maps";
-import { iventInitFromBack } from "../../redux/actions/iventActions";
+import { iventInitFromBack, iventAddPassengerOnBack } from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 
 // import styles from "./yandexMap.module.css";
@@ -32,8 +32,9 @@ function YandexMap() {
     dispatch(currentCoordsGet(placemarkCoords));
   };
 
-  window.bla = (a) => {
-    console.log(a);
+  // Решить проблему с ID пассажира
+  window.addPassengerHalper = (lotitude, longitude,) => {
+    dispatch(iventAddPassengerOnBack(lotitude, longitude, currentUser._id));
   };
 
   return (
@@ -41,7 +42,10 @@ function YandexMap() {
       {currentUser ? (
         <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
           <Map
+
+            userId={currentUser._id}
             style={{ minWidth: 200, minHeight: 500 }}
+
             onClick={(event) => resaveCoords(event.get("coords"))}
             defaultState={{
               center: [55.751574, 37.573856],
@@ -73,14 +77,16 @@ function YandexMap() {
                 <p>Сколько стоит: ${elem.price} р.</p>
                 <p>Какие требования к пассажиру: ${elem.stopList}</p>
                 <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                      balloonContentFooter: `<button  class ='btn btn-info' onclick="window.bla(${elem.coords[0]})" >Полетать</button>`,
-                    }}
-                  />
-                ))
+
+                    balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Полетать</button>`,
+                  }} />
+              ))
+
               : allIvents.length && currentUser?.role === "tandem"
               ? allIvents.map((elem) => (
                   <Placemark
                     key={elem._id}
+                    
                     geometry={elem.coords}
                     modules={["geoObject.addon.balloon"]}
                     properties={{
@@ -89,11 +95,11 @@ function YandexMap() {
                 <p> Когда: ${elem.dateOfEvent}</p>
                 <p>Сколько стоит: ${elem.price} р.</p>
                 <p>Какие требования к пассажиру: ${elem.stopList}</p>
-                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                    }}
-                  />
-                ))
-              : null}
+
+                <p> Координаты старта: ${elem.coords[0]}</p>`,
+                    }} />
+                )) : null}
+
             {/* </Clusterer> */}
           </Map>
         </YMaps>
