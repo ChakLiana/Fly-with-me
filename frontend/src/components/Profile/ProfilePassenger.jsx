@@ -9,12 +9,14 @@ import { Grid, Paper, ButtonBase } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Dragger from "../Dragger/Drager";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { editUser } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
 import { TextField, Container, Typography, Input } from "@material-ui/core";
+
+
 
 const useStyles = makeStyles({
   textField: {
@@ -93,7 +95,8 @@ const validationSchema = yup.object({
     .required("* Поле вес обязательно для заполнения"),
 });
 
-export default function ProfilePassenger() {
+function ProfilePassenger() {
+  console.log("ProfilePassenger Compot render");
   const curUser = useSelector((state) => state.user);
   const classes = useStyles();
   const history = useHistory();
@@ -120,7 +123,14 @@ export default function ProfilePassenger() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("VALUES to send", values, curUser.id);
+      console.log(
+        "VALUES to send",
+        values,
+        "Current User ID =",
+        curUser.id,
+        "TOKEN",
+        curUser.token
+      );
       dispatch(editUser({ ...values, id: curUser.id, token: curUser.token }));
       handleClickfalse();
     },
@@ -340,3 +350,5 @@ export default function ProfilePassenger() {
     </>
   );
 }
+
+export default React.memo(ProfilePassenger);

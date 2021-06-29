@@ -105,7 +105,7 @@ const checkAuth = async (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
 
   jwt.verify(token, secret, (err, user) => {
-    // console.log(err);
+    console.log(err);
 
     if (err) return res.sendStatus(403);
 
