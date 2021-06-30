@@ -1,9 +1,24 @@
 // Dragger compot for dragging and sending images
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import "./Dragger.css";
+import { addPhotoAC } from "../../redux/actions/photoAC";
+
 
 const Dragger = () => {
+  //small function to console.log in 'then`s`
+  function middle(income) {
+    console.log("AXIOS HAS GET", income);
+    return income;
+  }
+
+  // find is the user logged 
+
+  const photo = useSelector( state => state.user.photo)
+  console.log("USER PHOTO", photo)
+  const dispatch = useDispatch();
+
   const curUser = useSelector((state) => state.user._id);
   // console.log("current user ID ", curUser);
   // console.log("-=Dragger component render=- ");
@@ -57,27 +72,29 @@ const Dragger = () => {
       .post("http://localhost:8080/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => console.log("AXIOS RES ", res.data));
+      .then((res) => middle( res.data))
+      .then((res) => dispatch(addPhotoAC(res)));
   };
 
   return (
     <>
+    { photo ? <img src={photo} /> :
       <div className="Dragger">
         <div
           className="drop_zone"
           onDragOver={handleOndragOver}
           onDrop={handleOndrop}
         >
-          <h1>DRAG IMAGE HERE </h1>
           {flag ? (
             <div className="pic">
               <img src={url} style={{ height: 200, width: 200 }} />
             </div>
           ) : (
-            <p>Nothing to show</p>
+            <h5> перетащите картинку сюда</h5>
           )}
         </div>
       </div>
+}
     </>
   );
 };

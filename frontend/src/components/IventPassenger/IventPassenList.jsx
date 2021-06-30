@@ -40,7 +40,7 @@ export default function IventListPassenger() {
       ) : null}
       {accept.length ? (
         <>
-          <p>Подтверждено </p>
+          <h3>Подтверждено </h3>
 
           <Grid container spacing={1} justify="center">
             {accept.map((el) => {

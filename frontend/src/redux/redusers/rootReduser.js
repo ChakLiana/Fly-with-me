@@ -6,6 +6,7 @@ import userReducer from './userReducer';
 import selectIventReduser from "./selectIventReduser";
 
 
+
 const rootReduser = combineReducers({
   user: userReducer,
   ivents: iventReduser,
