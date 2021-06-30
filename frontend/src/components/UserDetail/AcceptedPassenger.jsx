@@ -1,23 +1,23 @@
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
-  CardMedia,
+  // CardMedia,
   CardContent,
   Typography,
   Card,
   CardActions,
   Button,
 } from "@material-ui/core";
-import moment from "moment";
-import localization from "moment/locale/ru";
-import { Link, useParams } from "react-router-dom";
+// import moment from "moment";
+// import localization from "moment/locale/ru";
+// import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "theme.palette.background.paper",
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
+    backgroundColor: "#7CFC00",
     maxWidth: 250,
     height: "100%",
     display: "flex",
@@ -58,16 +59,16 @@ export default function AcceptedPassenger({ passenger }) {
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
-            Пользователь<b> {passenger.nickName}</b> хочет полетать
+            Пользователь<b> {passenger.nickName}</b> добавлен в полет
           </Typography>{" "}
           <Typography>
             <b>Вес:</b> {passenger.weight} кг.
           </Typography>
+          <Typography>
+            <b>Контактная информация:</b> {passenger.tel} .
+          </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="primary">
-            Принять заявку
-          </Button>
           <Button size="small" color="secondary">
             Отклонить заявку
           </Button>

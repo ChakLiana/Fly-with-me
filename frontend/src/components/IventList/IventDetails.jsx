@@ -124,9 +124,15 @@ export default function IventDetails() {
                 <Grid item xs={12}>
                   {" "}
                   <Typography className={classes.wordDescript}>
-                    Одобренные:
+                    Ожидают:
                   </Typography>
-                  <PendingPassenger passenger={curIvent.passengers[0]} />
+                  {curIvent.passengerPending.length !== 0 ? (
+                    curIvent.passengerPending.map((pas) => (
+                      <PendingPassenger passenger={pas} />
+                    ))
+                  ) : (
+                    <p>пока пусто </p>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
@@ -140,9 +146,15 @@ export default function IventDetails() {
                 <Grid item xs={12}>
                   {" "}
                   <Typography className={classes.wordDescript}>
-                    Ожидают:
+                    Одобренные:
                   </Typography>
-                  <AcceptedPassenger passenger={curIvent.passengers[0]} />
+                  {curIvent.passengerAccepted.length !== 0 ? (
+                    curIvent.passengerAccepted.map((pas) => (
+                      <AcceptedPassenger passenger={curIvent.passengers[0]} />
+                    ))
+                  ) : (
+                    <h3>пока никто не одобрен </h3>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
