@@ -1,4 +1,4 @@
-import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER, IVENT_DELETE_PASSENGER } from '../types/iventTypes';
+import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER, IVENT_DELETE_PASSENGER, IVENT_ACCEPT_PASSENGER, IVENT_REJECT_PASSENGER, IVENT_PENDING_PASSENGER } from '../types/iventTypes';
 
 
 export const iventInitFromBack = () => async (dispatch) => {
@@ -86,6 +86,81 @@ export const iventDeletePassenger = (iventWithOutNewPassenger) => {
   return {
     type: IVENT_DELETE_PASSENGER,
     payload: iventWithOutNewPassenger,
+  }
+};
+
+export const iventAcceptPassengerOnBack = (selectIventId, selectUserId) => async (dispatch) => {
+  const response = await fetch('http://localhost:8080/ivent/status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ selectIventId, selectUserId }),
+  });
+
+  if (response.status === 200) {
+    const iventWithAcceptPassenger = await response.json();
+    dispatch(iventAcceptPassenger(iventWithAcceptPassenger));
+
+  } else if (response.status === 418) {
+    return;
+  }
+};
+
+export const iventAcceptPassenger = (iventWithAcceptPassenger) => {
+  return {
+    type: IVENT_ACCEPT_PASSENGER,
+    payload: iventWithAcceptPassenger,
+  }
+};
+
+export const iventRejectPassengerOnBack = (selectIventId, selectUserId) => async (dispatch) => {
+  const response = await fetch('http://localhost:8080/ivent/status', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ selectIventId, selectUserId }),
+  });
+
+  if (response.status === 200) {
+    const iventWithRejectPassenger = await response.json();
+    dispatch(iventRejectPassenger(iventWithRejectPassenger));
+
+  } else if (response.status === 418) {
+    return;
+  }
+};
+
+export const iventRejectPassenger = (iventWithRejectPassenger) => {
+  return {
+    type: IVENT_REJECT_PASSENGER,
+    payload: iventWithRejectPassenger,
+  }
+};
+
+export const iventPendingPassengerOnBack = (selectIventId, selectUserId) => async (dispatch) => {
+  const response = await fetch('http://localhost:8080/ivent/status', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ selectIventId, selectUserId }),
+  });
+
+  if (response.status === 200) {
+    const iventWithPendingPassenger = await response.json();
+    dispatch(iventPendingPassenger(iventWithPendingPassenger));
+
+  } else if (response.status === 418) {
+    return;
+  }
+};
+
+export const iventPendingPassenger = (iventWithPendingPassenger) => {
+  return {
+    type: IVENT_PENDING_PASSENGER,
+    payload: iventWithPendingPassenger,
   }
 };
 

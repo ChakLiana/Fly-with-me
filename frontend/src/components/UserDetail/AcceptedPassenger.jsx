@@ -11,6 +11,8 @@ import {
 // import moment from "moment";
 // import localization from "moment/locale/ru";
 // import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { iventRejectPassengerOnBack, iventPendingPassengerOnBack } from "../../redux/actions/iventActions";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,7 +51,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AcceptedPassenger({ passenger }) {
+export default function AcceptedPassenger({ currentIventId ,passenger }) {
+  const dispatch = useDispatch();
+
+  const pendingPasengerHandler = (currentIventId, passengerId) => {
+    dispatch(iventPendingPassengerOnBack(currentIventId, passengerId));
+  }
+
+  const rejectPasengerHandler = (currentIventId, passengerId) => {
+    dispatch(iventRejectPassengerOnBack(currentIventId, passengerId));
+  }
+
   console.log("passenger ------------> ", passenger);
 
   const classes = useStyles();
@@ -59,17 +71,20 @@ export default function AcceptedPassenger({ passenger }) {
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
-            Пользователь<b> {passenger.nickName}</b> добавлен в полет
+            Пользователь<b> {passenger?.nickName}</b> добавлен в полет
           </Typography>{" "}
           <Typography>
-            <b>Вес:</b> {passenger.weight} кг.
+            <b>Вес:</b> {passenger?.weight} кг.
           </Typography>
           <Typography>
-            <b>Контактная информация:</b> {passenger.tel} .
+            <b>Контактная информация:</b> {passenger?.tel} .
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="secondary">
+          <Button onClick={() => pendingPasengerHandler(currentIventId, passenger._id)} size="small" color="secondary">
+            Вернуть в ожидание
+          </Button>
+          <Button onClick={() => rejectPasengerHandler(currentIventId, passenger._id)} size="small" color="secondary">
             Отклонить заявку
           </Button>
         </CardActions>
