@@ -15,6 +15,7 @@ import Map from "./components/YandexMap/YandexMap";
 import Flight from "./components/Flights/Flights";
 import UserProfile from "../src/components/Profile/SwitchProfile";
 import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
+import Testing from "./components/TestingCompot/TestingCompot";
 
 
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <Router>
       <Nav />
+   
 
       <div className="container py-5">
         <Switch>
