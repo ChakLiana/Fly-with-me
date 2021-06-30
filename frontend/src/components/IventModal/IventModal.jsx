@@ -53,8 +53,6 @@ export default function IventModal(props) {
     props.handleCloseModal();
   }
 
-  };
-
 
 
   const classes = useStyles();
