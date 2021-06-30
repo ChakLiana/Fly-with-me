@@ -3,18 +3,16 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-// import { useDispatch, useSelector } from "react-redux";
-// import { editSquareThunk } from "../../redux/actions/tictac";
-import { Grid, Paper, ButtonBase, withTheme } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Dragger from "../Dragger/Drager";
 import { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { editUser, signUp } from "../../redux/actions/user.ac";
+import { editUser } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
-import { useHistory, useLocation } from "react-router";
-import { TextField, Container, Typography, Input } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { TextField, Typography } from "@material-ui/core";
 import IventList from "../IventList/IventList";
 
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +96,7 @@ export default function ProfileTandem() {
   const curUser = useSelector((state) => state.user);
 
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   // const bull = <span className={classes.bullet}>•</span>;
@@ -124,10 +122,9 @@ export default function ProfileTandem() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log( "VALUES to send", values, curUser.id)
+      console.log("VALUES to send", values, curUser.id);
       dispatch(editUser({ ...values, id: curUser.id, token: curUser.token }));
-      handleClickfalse()
-
+      handleClickfalse();
     },
   });
 

@@ -4,13 +4,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import UserRegisterForm from "../../Profiles/UserRegisterForm";
-import ProfileUser from "../../Profiles/ProfileUser";
-import Route from "react-router-dom";
 import IventCreateForm from "../IventCreateForm/IventCreateForm";
 import Weather from "../Weather/Weather";
 import { useSelector } from "react-redux";
-import SpringModal from "../IventModal/IventModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {

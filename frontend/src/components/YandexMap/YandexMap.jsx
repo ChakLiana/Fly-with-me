@@ -4,18 +4,14 @@ import {
   YMaps,
   Map,
   Placemark,
-  Clusterer,
   TypeSelector,
   SearchControl,
   ZoomControl,
 } from "react-yandex-maps";
 import { iventInitFromBack } from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
-import { getSelectIventFromBack } from '../../redux/actions/selectIventActions';
+import { getSelectIventFromBack } from "../../redux/actions/selectIventActions";
 import IventModal from "../IventModal/IventModal";
-
-
-// import styles from "./yandexMap.module.css";
 
 function YandexMap() {
   const key = "20c11914-368f-4020-b7de-e59f81f0ea0b";
@@ -44,14 +40,12 @@ function YandexMap() {
 
   const handleCloseModal = () => {
     setmodalState(false);
-
   };
-
 
   return (
     <>
-      {currentUser ?
-        (<>
+      {currentUser ? (
+        <>
           <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
             <Map
               userId={currentUser._id}
@@ -66,57 +60,60 @@ function YandexMap() {
                 "control.ZoomControl",
                 "control.FullscreenControl",
                 "geocode",
-              ]} >
+              ]}
+            >
               <TypeSelector options={{ float: "right" }} />
               <SearchControl options={{ float: "left" }} />
               <ZoomControl options={{ float: "right" }} />
               {/* <Clusterer options={{ groupByCoordinates: false }}> */}
-              {curentCoords.length ? <Placemark geometry={curentCoords} /> : null}
+              {curentCoords.length ? (
+                <Placemark geometry={curentCoords} />
+              ) : null}
 
-              {allIvents.length && currentUser?.role === "passenger" ?
-                allIvents.map((elem) => (
-                  <Placemark
-                    key={elem._id}
-                    preset={'islands#violetIcon'}
-                    geometry={elem.coords}
-                    modules={["geoObject.addon.balloon"]}
-                    options={{ iconColor: '#5cb85c' }}
-                    properties={{
-                      balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                      balloonContentBody: `
-                <p> Когда: ${elem.dateOfEvent}</p>
-                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                      balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                      // balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                    }}
-                  />
-                ))
-                : allIvents.length && currentUser?.role === "tandem"
-                  ? allIvents.map((elem) => (
+              {allIvents.length && currentUser?.role === "passenger"
+                ? allIvents.map((elem) => (
                     <Placemark
                       key={elem._id}
-
+                      preset={"islands#violetIcon"}
                       geometry={elem.coords}
                       modules={["geoObject.addon.balloon"]}
-                      options={{ iconColor: '#5cb85c' }}
+                      options={{ iconColor: "#5cb85c" }}
                       properties={{
                         balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
                         balloonContentBody: `
                 <p> Когда: ${elem.dateOfEvent}</p>
                 <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                      }} />
-                  )) : null}
+                        balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
+                        // balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
+                      }}
+                    />
+                  ))
+                : allIvents.length && currentUser?.role === "tandem"
+                ? allIvents.map((elem) => (
+                    <Placemark
+                      key={elem._id}
+                      geometry={elem.coords}
+                      modules={["geoObject.addon.balloon"]}
+                      options={{ iconColor: "#5cb85c" }}
+                      properties={{
+                        balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                        balloonContentBody: `
+                <p> Когда: ${elem.dateOfEvent}</p>
+                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                      }}
+                    />
+                  ))
+                : null}
               {/* </Clusterer> */}
             </Map>
           </YMaps>
-          {selectIvent.passengers &&
-            < IventModal open={modalState} handleCloseModal={handleCloseModal} />
-          }
-
-        </>) :
-
+          {selectIvent.passengers && (
+            <IventModal open={modalState} handleCloseModal={handleCloseModal} />
+          )}
+        </>
+      ) : (
         // Если user не залогинен
-        (<YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
+        <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
           <Map
             style={{ minWidth: 200, minHeight: 400 }}
             defaultState={{
@@ -128,30 +125,34 @@ function YandexMap() {
               "control.ZoomControl",
               "control.FullscreenControl",
               "geocode",
-            ]} >
+            ]}
+          >
             <TypeSelector options={{ float: "right" }} />
             <SearchControl options={{ float: "left" }} />
             <ZoomControl options={{ float: "right" }} />
             {/* <Clusterer options={{ groupByCoordinates: false }}> */}
-            {allIvents.length ? allIvents.map((elem) => (
-              <Placemark
-                key={elem._id}
-                geometry={elem.coords}
-                modules={["geoObject.addon.balloon"]}
-                options={{ iconColor: '#5cb85c' }}
-                properties={{
-                  balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                  balloonContentBody: `
+            {allIvents.length
+              ? allIvents.map((elem) => (
+                  <Placemark
+                    key={elem._id}
+                    geometry={elem.coords}
+                    modules={["geoObject.addon.balloon"]}
+                    options={{ iconColor: "#5cb85c" }}
+                    properties={{
+                      balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                      balloonContentBody: `
                 <p> Когда: ${elem.dateOfEvent}</p>
                 <p>Сколько стоит: ${elem.price} р.</p>
                 <p>Какие требования к пассажиру: ${elem.stopList}</p>
                 <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                }}
-              />
-            )) : null}
+                    }}
+                  />
+                ))
+              : null}
             {/* </Clusterer> */}
           </Map>
-        </YMaps>)}
+        </YMaps>
+      )}
     </>
   );
 }

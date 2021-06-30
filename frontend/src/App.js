@@ -6,9 +6,9 @@ import Nav from "./components/NavBarCompot/NavBarCompot";
 
 import SignOut from "./components/Forms/SignOut/SignOut";
 import SignIn from "./components/Forms/SignIn/SignIn";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { checkAuth } from "../src/redux/actions/user.ac";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
+// import { checkAuth } from "../src/redux/actions/user.ac";
 import Main from "./components/Main/Main";
 import UserEdit from "./components/UserEdit/UserEdit";
 import Map from "./components/YandexMap/YandexMap";
@@ -19,7 +19,7 @@ import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
 
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(checkAuth());

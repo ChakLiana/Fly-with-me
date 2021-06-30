@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+// import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 
 
@@ -8,8 +8,8 @@ const UserDetail = () => {
   const {id} = useParams()
   const [currentUser, setCurrentUser] = useState(null)
 
-  const dispatch = useDispatch()
-  const loader = useSelector(state => state.loader)
+  // const dispatch = useDispatch()
+  // const loader = useSelector(state => state.loader)
 
 
   useEffect(() => {

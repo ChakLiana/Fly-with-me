@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useHistory, useLocation } from "react-router"
+import { useHistory} from "react-router"
 import { signUp } from "../../../redux/actions/user.ac"
 
 const SignUp = () => {
