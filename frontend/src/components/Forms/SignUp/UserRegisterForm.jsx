@@ -13,6 +13,9 @@ import { useHistory, useLocation } from "react-router";
 import Dragger from "../../Dragger/Drager";
 
 const useStyles = makeStyles({
+  whiteText: {
+    color: "white",
+  },
   textField: {
     marginBottom: 30,
   },
