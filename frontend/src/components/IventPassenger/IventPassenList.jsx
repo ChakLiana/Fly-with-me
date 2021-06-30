@@ -30,7 +30,7 @@ export default function IventListPassenger() {
     <>
       {pending.length ? (
         <>
-          <p>Ожидает подтверждения</p>
+          <h3>Ожидает подтверждения</h3>
           <Grid container spacing={1} justify="center">
             {pending.map((el) => {
               return <IventPasseng key={el._id} el={el} />;
@@ -40,7 +40,7 @@ export default function IventListPassenger() {
       ) : null}
       {accept.length ? (
         <>
-          <p>Подтверждено </p>
+          <h3>Подтверждено </h3>
 
           <Grid container spacing={1} justify="center">
             {accept.map((el) => {

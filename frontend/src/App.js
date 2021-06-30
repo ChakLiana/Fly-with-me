@@ -33,7 +33,7 @@ function App() {
     <Router>
       <Nav />
 
-   <Testing /> 
+   {/* <Testing />  */}
 
 
       <div className="container py-5 ">

@@ -418,11 +418,7 @@ export default function ProfileTandem() {
                 justify="center"
                 alignItems="center"
                 spacing={3}
-              >
-                <Grid item>
-                  <IventList />
-                </Grid>
-              </Grid>
+              ></Grid>
             </Grid>
           </Grid>
         </>
