@@ -6,10 +6,11 @@ const { dbConnectionURL, connect } = require("./src/db/db");
 const authRouter = require("./src/routers/auth.router");
 const usersRouter = require("./src/routers/users.router");
 const iventRouter = require("./src/routers/iventRouter");
+const tandemRouter = require("./src/routers/tandem.router");
 const User = require("./src/models/user");
 const app = express();
 const checkAuth = require("./src/controllers/auth.controller");
-const imageRouter = require ( './src/routers/image.router')
+const imageRouter = require("./src/routers/image.router");
 const PORT = 8080;
 const fileUpload = require("express-fileupload");
 
@@ -92,7 +93,8 @@ app.use(fileUpload());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/ivent", iventRouter);
-app.use("/upload", imageRouter)
+app.use("/upload", imageRouter);
+app.use("/ivent/tandem", tandemRouter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on PORT ", PORT);
