@@ -38,7 +38,8 @@ const normalizationOfWindDirection = (directionInDegrees) => {
 router.route('/')
   .get(async (req, res) => {
     try {
-      const allIvents = await Ivent.find().populate('passengers').populate('creator');
+      const allIvents = await Ivent.find().populate('passengerPending').populate('passengerAccepted')
+      .populate('passengerRejected').populate('creator');
       // console.log(allIvents);
       res.json({ allIvents });
     } catch (error) {
@@ -49,7 +50,8 @@ router.route('/')
     try {
       const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
       let newIvent = await Ivent.create(newIventData);
-      newIvent = await Ivent.findById(newIvent._id).populate('passengers').populate('creator');
+      newIvent = await Ivent.findById(newIvent._id).populate('passengerPending').populate('passengerAccepted')
+      .populate('passengerRejected').populate('creator');
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);

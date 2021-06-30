@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import localization from "moment/locale/ru";
+import { iventDeletePassengerOnBack } from "../../redux/actions/iventActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -45,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function IventPasseng({ el }) {
+  const user = useSelector((state) => state.user);
+  console.log("user", user);
+  const dispatch = useDispatch();
+  const deletePassengerHandler = (selectIventId, curUserId) => {
+    dispatch(iventDeletePassengerOnBack(selectIventId, curUserId));
+  };
+
   // console.log("element v  ivent", el);
 
   const classes = useStyles();
@@ -79,7 +88,11 @@ export default function IventPasseng({ el }) {
           <Button size="small" color="primary">
             Редактировать
           </Button>
-          <Button size="small" color="secondary">
+          <Button
+            onClick={() => deletePassengerHandler(el._id, user._id)}
+            size="small"
+            color="secondary"
+          >
             Удалить
           </Button>
         </CardActions>
