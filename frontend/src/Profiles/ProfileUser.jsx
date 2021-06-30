@@ -5,9 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
-// import { editSquareThunk } from "../../redux/actions/tictac";
-import { Grid, Paper, ButtonBase } from "@material-ui/core";
+
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   span: {
@@ -39,7 +38,6 @@ export default function ProfileUser() {
   const curUser = useSelector((state) => state.user);
   const classes = useStyles();
   console.log(curUser);
-  // const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <>

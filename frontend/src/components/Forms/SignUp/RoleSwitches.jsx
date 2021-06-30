@@ -1,9 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
 import { FormGroup, Container, FormControlLabel } from "@material-ui/core";
 import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TandemRegisterForm from "./TandemRegisterForm";
 import UserRegisterForm from "./UserRegisterForm";
