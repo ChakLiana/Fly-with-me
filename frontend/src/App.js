@@ -16,6 +16,7 @@ import Flight from "./components/Flights/Flights";
 import UserProfile from "../src/components/Profile/SwitchProfile";
 import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
 import Testing from "./components/TestingCompot/TestingCompot";
+import IventDetail from "./components/IventList/IventDetails";
 
 function App() {
   // const dispatch = useDispatch();
@@ -27,12 +28,15 @@ function App() {
   return (
     <Router>
       <Nav />
-   
 
       <div className="container py-5 ">
         <Switch>
           <PrivateRoute path="/users/:id">
             <UserDetail />
+          </PrivateRoute>
+
+          <PrivateRoute path="/ivent/:id">
+            <IventDetail />
           </PrivateRoute>
 
           <PrivateRoute path="/map">
