@@ -11,7 +11,7 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { editUser } from "../../redux/actions/user.ac";
 import { useFormik } from "formik";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import { TextField, Typography, Container } from "@material-ui/core";
 import IventList from "../IventList/IventList";
 

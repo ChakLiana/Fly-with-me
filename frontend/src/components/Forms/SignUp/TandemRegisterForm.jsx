@@ -58,7 +58,7 @@ const validationSchema = yup.object({
       "Неправильно введен номер телефона"
     )
 
-    .required("* Поле вес обязательно для заполнения"),
+    .required("* Поле обязательно для заполнения"),
 });
 
 export default function UserRegisterForm() {
