@@ -86,7 +86,7 @@ export default function IventPasseng({ el }) {
             size="small"
             color="secondary"
           >
-            Удалить
+            Oтказаться
           </Button>
         </CardActions>
       </Card>

@@ -17,7 +17,7 @@ import { useParams } from "react-router";
 import WeatherForItem from "../Weather/WeatherForItem.jsx";
 import PendingPassenger from "../UserDetail/PendingPassenger";
 import AcceptedPassenger from "../UserDetail/AcceptedPassenger";
-
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -57,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function IventDetails() {
+  const history = useHistory();
+
+  function GoBackHandler() {
+    window.history.back();
+  }
   const { id } = useParams();
   const ivents = useSelector((state) => state.ivents);
   const curIvent = ivents.find((el) => el._id === id);
@@ -101,6 +106,15 @@ export default function IventDetails() {
               {/* <Button size="small" color="primary">
               Редактировать
             </Button> */}
+
+              <Button
+                onClick={() => GoBackHandler()}
+                size="small"
+                color="secondary"
+              >
+                Назад
+              </Button>
+
             </CardActions>
           </Card>
         </Grid>

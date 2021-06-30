@@ -78,7 +78,7 @@ const Dragger = () => {
 
   return (
     <>
-    { photo ? <img src={photo} /> :
+    { photo ? <div className="userPhoto"> <img src={photo} />  </div>:
       <div className="Dragger">
         <div
           className="drop_zone"
