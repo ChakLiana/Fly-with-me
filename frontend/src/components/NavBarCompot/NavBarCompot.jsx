@@ -10,7 +10,7 @@ const Nav = () => {
       <div className="container">
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">
-            Home
+            На главную
           </Link>
 
           <div className="collapse navbar-collapse" id="navbarNav">
@@ -24,17 +24,7 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      Sign out
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      exact
-                      to="/user/cabinet"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      {<p> ПРИВЕТ! {user.nickName} </p>}
+                      Выйти
                     </NavLink>
                   </li>
 
@@ -45,7 +35,7 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      мои полеты
+                      Мои полеты
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -55,7 +45,22 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      Кабинет
+                      Личный кабинет
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      exact
+                      to="/user/cabinet"
+                      className="nav-link"
+                      activeClassName="active"
+                      color="primary"
+                    >
+                      {
+                        <p>
+                          Вы зашли как<b> {user.nickName} </b>
+                        </p>
+                      }
                     </NavLink>
                   </li>
                 </>
@@ -68,7 +73,7 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      Sign Up
+                      Зарегистрироваться
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -78,22 +83,22 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                     >
-                      Sign In
+                      Войти
                     </NavLink>
                   </li>
                 </>
               )}
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink
                   exact
                   to="/map"
                   className="nav-link"
                   activeClassName="active"
                 >
-                  map
+                  Карта
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

@@ -8,10 +8,18 @@ import {
   SearchControl,
   ZoomControl,
 } from "react-yandex-maps";
-import { iventInitFromBack } from "../../redux/actions/iventActions";
+
+import {
+  iventInitFromBack,
+//   iventAddPassengerOnBack,
+} from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 import { getSelectIventFromBack } from "../../redux/actions/selectIventActions";
+import { useHistory } from "react-router";
 import IventModal from "../IventModal/IventModal";
+
+// import styles from "./yandexMap.module.css";
+
 
 function YandexMap() {
   const key = "20c11914-368f-4020-b7de-e59f81f0ea0b";
@@ -49,7 +57,7 @@ function YandexMap() {
           <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
             <Map
               userId={currentUser._id}
-              style={{ minWidth: 200, minHeight: 400 }}
+              style={{ minWidth: 400, minHeight: 500 }}
               onClick={(event) => resaveCoords(event.get("coords"))}
               defaultState={{
                 center: [55.751574, 37.573856],
@@ -74,10 +82,12 @@ function YandexMap() {
                 ? allIvents.map((elem) => (
                     <Placemark
                       key={elem._id}
+
                       preset={"islands#violetIcon"}
                       geometry={elem.coords}
                       modules={["geoObject.addon.balloon"]}
                       options={{ iconColor: "#5cb85c" }}
+
                       properties={{
                         balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
                         balloonContentBody: `
@@ -115,7 +125,7 @@ function YandexMap() {
         // Если user не залогинен
         <YMaps query={{ lang: "ru_RU", ns: "use-load-option", apikey: key }}>
           <Map
-            style={{ minWidth: 200, minHeight: 400 }}
+            style={{ minWidth: 200, minHeight: 500 }}
             defaultState={{
               center: [55.751574, 37.573856],
               zoom: 9,
@@ -137,7 +147,9 @@ function YandexMap() {
                     key={elem._id}
                     geometry={elem.coords}
                     modules={["geoObject.addon.balloon"]}
+
                     options={{ iconColor: "#5cb85c" }}
+
                     properties={{
                       balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
                       balloonContentBody: `

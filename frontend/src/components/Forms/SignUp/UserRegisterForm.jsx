@@ -8,6 +8,9 @@ import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
+  whiteText: {
+    color: "white",
+  },
   textField: {
     marginBottom: 30,
   },

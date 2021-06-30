@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    height: 533,
   },
   right: {
     height: 533,
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     borderRadius: 0,
     border: 0,
+    backgroundColor: "rgba(0, 0,0, 0.5)",
   },
 }));
 
@@ -35,32 +37,35 @@ const Main = () => {
 
   return (
     <Container className={classes.root}>
-      <Grid container spacing={4}>
-        <Grid item xs={7} md={6}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={12}>
           <Paper className={classes.paper}>
             <YandexMap />
           </Paper>
         </Grid>
-
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="stretch"
+        spacing={2}
+      >
+        {currentUser && (
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>
+              <Weather />
+            </Paper>
+          </Grid>
+        )}
         {currentUser?.role === "tandem" && (
-          <Grid item xs={5} md={6}>
-            <Paper className={(classes.paper, classes.right)}>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
               <IventCreateForm />
             </Paper>
           </Grid>
         )}
       </Grid>
-      {currentUser && (
-        <Container>
-          <Grid container spacing={4}>
-            <Grid item xs={10}>
-              <Paper className={classes.paper}>
-                <Weather />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      )}
     </Container>
   );
 };

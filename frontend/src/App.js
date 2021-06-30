@@ -16,8 +16,6 @@ import Flight from "./components/Flights/Flights";
 import UserProfile from "../src/components/Profile/SwitchProfile";
 import RoleSwitches from "./components/Forms/SignUp/RoleSwitches";
 
-
-
 function App() {
   // const dispatch = useDispatch();
 
@@ -29,7 +27,7 @@ function App() {
     <Router>
       <Nav />
 
-      <div className="container py-5">
+      <div className="container py-5 ">
         <Switch>
           <PrivateRoute path="/users/:id">
             <UserDetail />
@@ -65,7 +63,6 @@ function App() {
           <Route path="/">
             <Main />
           </Route>
-
         </Switch>
       </div>
     </Router>

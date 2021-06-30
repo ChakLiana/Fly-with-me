@@ -38,18 +38,12 @@ export default function ProfileSwitches() {
           <Grid item xs={12}>
             <Typography className={classes.textColor}>
               Вы выступаете в роли{" "}
-              {curUser?.role === "tandem" ? "Тандемщика" : "Пассажира"}
+              {curUser?.role === "tandem" ? "Пилота" : "Пассажира"}
             </Typography>
           </Grid>
         </Grid>
 
-        <Typography>
-          {curUser?.role === "tandem" ? (
-            <ProfileTandem />
-          ) : (
-            <ProfilePassenger />
-          )}
-        </Typography>
+        {curUser?.role === "tandem" ? <ProfileTandem /> : <ProfilePassenger />}
       </Grid>
     </div>
   );

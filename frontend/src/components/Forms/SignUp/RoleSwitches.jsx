@@ -5,6 +5,7 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import TandemRegisterForm from "./TandemRegisterForm";
 import UserRegisterForm from "./UserRegisterForm";
+import { makeStyles } from "@material-ui/core/styles";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -59,6 +60,12 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
+const useStyles = makeStyles({
+  whiteText: {
+    color: "white",
+  },
+});
+
 export default function RoleSwitches() {
   const [state, setState] = React.useState({
     checkedA: true,
@@ -67,12 +74,13 @@ export default function RoleSwitches() {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+  const classes = useStyles();
 
   return (
     <>
-      <Container>
+      <Container maxWidth="sm">
         <FormGroup>
-          <Typography>
+          <Typography className={classes.whiteText}>
             Зарегистрироваться в качестве:{" "}
             {state.checkedA ? <b>Пилота</b> : <b>Пассажира</b>}
           </Typography>
