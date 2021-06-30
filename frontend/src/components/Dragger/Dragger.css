@@ -1,0 +1,13 @@
+.Dragger { 
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+}
+.drop_zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
