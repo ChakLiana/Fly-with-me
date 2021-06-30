@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import "./NavBarCompot.css";
+import SignalCompot from "../Signal/Signal";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
@@ -56,12 +57,14 @@ const Nav = () => {
                       activeClassName="active"
                       color="primary"
                     >
+                     
                       {
                         <p>
                           Вы зашли как<b> {user.nickName} </b>
                         </p>
                       }
                     </NavLink>
+                    <SignalCompot />
                   </li>
                 </>
               ) : (
