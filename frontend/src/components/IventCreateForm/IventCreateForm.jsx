@@ -6,8 +6,8 @@ import {
   TextField,
   Container,
   Typography,
-  Input,
   InputAdornment,
+  Paper,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,10 @@ const useStyles = makeStyles({
     marginBottom: 15,
   },
   divPos: {},
+  paper: {
+    minWidth: "100%",
+    padding: 15,
+  },
 });
 
 const validationSchema = yup.object({
@@ -71,88 +75,94 @@ export default function IventCreateForm() {
   return (
     <div className={classes.divPos}>
       <Container maxWidth="sm">
-        <Typography variant="h5" component="h3">
-          Конструктор полета:
-        </Typography>
-        <Typography variant="h6" component="h3">
-          Вы хотите создать событие на точке{" "}
-          {curentCoords.map((coord) => {
-            return (
-              <span>
-                <b>{coord.toFixed(4)} </b>
-              </span>
-            );
-          })}
-        </Typography>
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            className={classes.textField}
-            id="dateOfEvent"
-            name="dateOfEvent"
-            label="Дата события"
-            locale="ru"
-            type="datetime-local"
-            // defaultValue="2017-05-24T10:30"
-            value={formik.values.dateOfEvent}
-            onChange={formik.handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            error={
-              formik.touched.dateOfEvent && Boolean(formik.errors.dateOfEvent)
-            }
-            helperText={formik.touched.dateOfEvent && formik.errors.dateOfEvent}
-          />
+        <Paper className={classes.paper}>
+          <Typography variant="h5" component="h3">
+            Конструктор полета:
+          </Typography>
+          <Typography variant="h6" component="h3">
+            Вы хотите создать событие на точке{" "}
+            {curentCoords.map((coord) => {
+              return (
+                <span>
+                  <b>{coord.toFixed(4)} </b>
+                </span>
+              );
+            })}
+          </Typography>
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              className={classes.textField}
+              id="dateOfEvent"
+              name="dateOfEvent"
+              label="Дата события"
+              locale="ru"
+              type="datetime-local"
+              // defaultValue="2017-05-24T10:30"
+              value={formik.values.dateOfEvent}
+              onChange={formik.handleChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              error={
+                formik.touched.dateOfEvent && Boolean(formik.errors.dateOfEvent)
+              }
+              helperText={
+                formik.touched.dateOfEvent && formik.errors.dateOfEvent
+              }
+            />
 
-          <TextField
-            className={classes.textField}
-            fullWidth
-            id="price"
-            name="price"
-            label="Цена"
-            type="text"
-            value={formik.values.price}
-            onChange={formik.handleChange}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">₽</InputAdornment>,
-            }}
-            error={formik.touched.price && Boolean(formik.errors.price)}
-            helperText={formik.touched.price && formik.errors.price}
-          />
-          <TextField
-            className={classes.textField}
-            fullWidth
-            id="stopList"
-            name="stopList"
-            label="Ограничения"
-            type="text"
-            value={formik.values.stopList}
-            onChange={formik.handleChange}
-            error={formik.touched.stopList && Boolean(formik.errors.stopList)}
-            helperText={formik.touched.stopList && formik.errors.stopList}
-          />
-          <TextField
-            className={classes.textField}
-            fullWidth
-            multiline
-            variant="outlined"
-            rows={4}
-            id="description"
-            name="description"
-            label="Описание события"
-            type="text"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-          />
-          <Button color="textSecondary" variant="contained" type="submit">
-            Создать событие
-          </Button>
-        </form>
+            <TextField
+              className={classes.textField}
+              fullWidth
+              id="price"
+              name="price"
+              label="Цена"
+              type="text"
+              value={formik.values.price}
+              onChange={formik.handleChange}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">₽</InputAdornment>,
+              }}
+              error={formik.touched.price && Boolean(formik.errors.price)}
+              helperText={formik.touched.price && formik.errors.price}
+            />
+            <TextField
+              className={classes.textField}
+              fullWidth
+              id="stopList"
+              name="stopList"
+              label="Ограничения"
+              type="text"
+              value={formik.values.stopList}
+              onChange={formik.handleChange}
+              error={formik.touched.stopList && Boolean(formik.errors.stopList)}
+              helperText={formik.touched.stopList && formik.errors.stopList}
+            />
+            <TextField
+              className={classes.textField}
+              fullWidth
+              multiline
+              variant="outlined"
+              rows={4}
+              id="description"
+              name="description"
+              label="Описание события"
+              type="text"
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+            />
+            <Button color="textSecondary" variant="contained" type="submit">
+              Создать событие
+            </Button>
+          </form>
+        </Paper>
       </Container>
     </div>
   );

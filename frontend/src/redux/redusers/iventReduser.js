@@ -1,4 +1,6 @@
+
 import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER, IVENT_DELETE_PASSENGER } from '../types/iventTypes';
+
 
 export default function iventReduser(state = [], { type, payload }) {
 

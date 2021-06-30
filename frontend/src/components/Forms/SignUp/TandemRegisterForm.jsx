@@ -1,17 +1,13 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
+
 import { useFormik } from "formik";
-import MaskedInput from "react-text-mask";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { TextField, Container, Typography, Input } from "@material-ui/core";
+import { TextField, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
-import { useHistory, useLocation } from "react-router";
-import axios from "axios";
-import Dragger from "../../Dragger/Drager";
+import { useHistory } from "react-router";
+
 
 const useStyles = makeStyles({
   textField: {

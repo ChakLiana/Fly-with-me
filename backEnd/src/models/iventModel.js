@@ -9,6 +9,11 @@ const Ivent = mongoose.model("Ivent", {
   dateOfEvent: Date,
   IventImg: String,
   passengers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+
+  passengerPending: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  passengerAccepted: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  passengerRejected: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+
   price: String,
   description: String,
   stopList: String,
