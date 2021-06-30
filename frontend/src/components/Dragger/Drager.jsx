@@ -36,7 +36,7 @@ const Dragger = () => {
     // declare the file reciever
     let recievedFile = event.dataTransfer.files[0];
     console.log("DATA Transfer is ----> ", recievedFile);
-
+    // call make URL function
     handleFile(recievedFile);
 
     console.log("working file is ", recievedFile);
@@ -63,13 +63,12 @@ const Dragger = () => {
   return (
     <>
       <div className="Dragger">
-        <h3> Dragger component </h3>
         <div
           className="drop_zone"
           onDragOver={handleOndragOver}
           onDrop={handleOndrop}
         >
-          <p>Drag _ Zone </p>
+          <h1>DRAG IMAGE HERE </h1>
           {flag ? (
             <div className="pic">
               <img src={url} style={{ height: 200, width: 200 }} />
