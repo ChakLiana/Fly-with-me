@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import localization from "moment/locale/ru";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -33,55 +33,43 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
+    "& .MuiButtonBase-root": {
+      fontSize: "14px",
+    },
+    "& .MuiTypography-root": {
+      fontSize: "14px",
+    },
   },
   wordDescript: {
     wordBreak: "break-all",
-  },
-  cardMedia: {
-    paddingTop: "56.25%", // 16:9
   },
   cardContent: {
     flexGrow: 1,
   },
 }));
 
-export default function IventItem({ el }) {
-  console.log("element v  ivent", el);
+export default function AcceptedPassenger({ passenger }) {
+  console.log("passenger ------------> ", passenger);
 
   const classes = useStyles();
 
-  const curDate = moment(el.dateOfEvent)
-    .locale("ru", localization)
-    .format("MMMM Do YYYY, h:mm:ss a");
   return (
     <Grid item>
       <Card className={classes.card}>
-        <CardMedia
-          className={classes.cardMedia}
-          image="https://source.unsplash.com/random"
-          title="Image title"
-        />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom component="h6">
-            <b>Дата проведения:</b> {curDate}
+          <Typography>
+            Пользователь<b> {passenger.nickName}</b> хочет полетать
           </Typography>{" "}
-          <Typography gutterBottom component="h6">
-            <b>Место проведения:</b> {el.coords[0]} {el.coords[1]}
-          </Typography>
-          <Typography className={classes.wordDescript}>
-            Описание:{el.description}
+          <Typography>
+            <b>Вес:</b> {passenger.weight} кг.
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="default">
-            <Link to={`/ivent/${el._id}`}>Подробнее</Link>
-          </Button>
-
           <Button size="small" color="primary">
-            Редактировать
+            Принять заявку
           </Button>
           <Button size="small" color="secondary">
-            Удалить
+            Отклонить заявку
           </Button>
         </CardActions>
       </Card>
