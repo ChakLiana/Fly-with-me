@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IventItem({ el }) {
+export default function UserCard({ el }) {
   console.log("element v  ivent", el);
 
   const classes = useStyles();

@@ -38,7 +38,8 @@ const normalizationOfWindDirection = (directionInDegrees) => {
 router.route('/')
   .get(async (req, res) => {
     try {
-      const allIvents = await Ivent.find().populate('passengers').populate('creator');
+      const allIvents = await Ivent.find().populate('passengerPending').populate('passengerAccepted')
+      .populate('passengerRejected').populate('creator');
       // console.log(allIvents);
       res.json({ allIvents });
     } catch (error) {
@@ -49,7 +50,8 @@ router.route('/')
     try {
       const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
       let newIvent = await Ivent.create(newIventData);
-      newIvent = await Ivent.findById(newIvent._id).populate('passengers').populate('creator');
+      newIvent = await Ivent.findById(newIvent._id).populate('passengerPending').populate('passengerAccepted')
+      .populate('passengerRejected').populate('creator');
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);
@@ -263,11 +265,15 @@ router.route('/')
       const { selectIventId, currentUserId } = req.body;
 
       let selectIvent = await Ivent.findById(selectIventId);
-      if (selectIvent.passengers.includes(currentUserId)) {
+      if (selectIvent.passengerPending.includes(currentUserId) ||
+        selectIvent.passengerAccepted.includes(currentUserId) ||
+        selectIvent.passengerRejected.includes(currentUserId)) {
         return res.sendStatus(418);
       }
-      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengers: currentUserId } });
-      const selectIventWithNewPassenger = await Ivent.findById(selectIventId).populate('passengers').populate('creator');
+      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengerPending: currentUserId } });
+      const selectIventWithNewPassenger = await Ivent.findById(selectIventId)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');
       return res.status(200).json(selectIventWithNewPassenger);
 
     } catch (error) {
@@ -279,12 +285,21 @@ router.route('/')
       const { selectIventId, currentUserId } = req.body;
 
       let selectIvent = await Ivent.findById(selectIventId);
-      if (!selectIvent.passengers.includes(currentUserId)) {
+      if (!selectIvent.passengerPending.includes(currentUserId) &&
+        !selectIvent.passengerAccepted.includes(currentUserId) &&
+        !selectIvent.passengerRejected.includes(currentUserId)) {
         return res.sendStatus(418);
+      } else if (selectIvent.passengerPending.includes(currentUserId)) {
+        selectIvent.passengerPending.splice(selectIvent.passengerPending.indexOf(currentUserId), 1);
+      } else if (selectIvent.passengerAccepted.includes(currentUserId)) {
+        selectIvent.passengerAccepted.splice(selectIvent.passengerAccepted.indexOf(currentUserId), 1);
+      } else if (selectIvent.passengerRejected.includes(currentUserId)) {
+        selectIvent.passengerRejected.splice(selectIvent.passengerRejected.indexOf(currentUserId), 1);
       }
-      selectIvent.passengers.splice(selectIvent.passengers.indexOf(currentUserId), 1);
       await selectIvent.save();
-      const selectIventWithOutNewPassenger = await Ivent.findById(selectIventId).populate('passengers').populate('creator');
+      const selectIventWithOutNewPassenger = await Ivent.findById(selectIventId)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');
       return res.status(200).json(selectIventWithOutNewPassenger);
 
     } catch (error) {
@@ -302,7 +317,9 @@ router.route('/:lotitude/:longitude')
           String(elem.coords[0]) === lotitude && String(elem.coords[1]) === longitude
         );
       })
-      const selectIvent = await Ivent.findById(selectIventArr[0]._id).populate('passengers').populate('creator');
+      const selectIvent = await Ivent.findById(selectIventArr[0]._id)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');;
       res.status(200).json(selectIvent);
     } catch (error) {
       console.error(error.message);
