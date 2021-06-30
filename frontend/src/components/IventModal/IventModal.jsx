@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment";
 import localization from "moment/locale/ru";
 import Button from "@material-ui/core/Button";
-import { iventAddPassengerOnBack } from "../../redux/actions/iventActions";
-import { getSelectIventFromBack } from "../../redux/actions/selectIventActions";
+import { iventAddPassengerOnBack, iventDeletePassengerOnBack } from "../../redux/actions/iventActions";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -44,22 +43,16 @@ export default function IventModal(props) {
 
   const selectIvent = useSelector(state => state.selectIvent);
   const currentUser = useSelector(state => state.user);
-  
-  // Все ломает, поэтому убрал
-  // useEffect(() => {
-  //   dispatch(getSelectIventFromBack(selectIvent.coords[0], selectIvent.coords[1]));
-  // }, [])
 
 
   const addPassengerHandler = () => {
     dispatch(iventAddPassengerOnBack(selectIvent._id, currentUser._id));
-    // Дописал строчку ниже
-    // Спасает, так как при повторном открытии диспачится обновление текущего события
     props.handleCloseModal();
   }
 
   const deletePassengerHandler = () => {
-
+    dispatch(iventDeletePassengerOnBack(selectIvent._id, currentUser._id));
+    props.handleCloseModal();
   }
 
   const classes = useStyles();
