@@ -81,19 +81,12 @@ export default function IventPasseng({ el }) {
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="default">
-            Подробнее
-          </Button>
-
-          <Button size="small" color="primary">
-            Редактировать
-          </Button>
           <Button
             onClick={() => deletePassengerHandler(el._id, user._id)}
             size="small"
             color="secondary"
           >
-            Удалить
+            Oтказаться
           </Button>
         </CardActions>
       </Card>
