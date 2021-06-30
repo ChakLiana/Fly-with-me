@@ -11,7 +11,7 @@ import {
 
 import {
   iventInitFromBack,
-//   iventAddPassengerOnBack,
+  //   iventAddPassengerOnBack,
 } from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 import { getSelectIventFromBack } from "../../redux/actions/selectIventActions";
@@ -80,26 +80,26 @@ function YandexMap() {
 
               {allIvents.length && currentUser?.role === "passenger"
                 ? allIvents.map((elem) => (
-                    <Placemark
-                      key={elem._id}
+                  <Placemark
+                    key={elem._id}
 
-                      preset={"islands#violetIcon"}
-                      geometry={elem.coords}
-                      modules={["geoObject.addon.balloon"]}
-                      options={{ iconColor: "#5cb85c" }}
+                    preset={"islands#violetIcon"}
+                    geometry={elem.coords}
+                    modules={["geoObject.addon.balloon"]}
+                    options={{ iconColor: "#5cb85c" }}
 
-                      properties={{
-                        balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                        balloonContentBody: `
+                    properties={{
+                      balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                      balloonContentBody: `
                 <p> Когда: ${elem.dateOfEvent}</p>
                 <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                        balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                        // balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                      }}
-                    />
-                  ))
+                      balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
+                      // balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
+                    }}
+                  />
+                ))
                 : allIvents.length && currentUser?.role === "tandem"
-                ? allIvents.map((elem) => (
+                  ? allIvents.map((elem) => (
                     <Placemark
                       key={elem._id}
                       geometry={elem.coords}
@@ -113,11 +113,11 @@ function YandexMap() {
                       }}
                     />
                   ))
-                : null}
+                  : null}
               {/* </Clusterer> */}
             </Map>
           </YMaps>
-          {selectIvent.passengers && (
+          {(selectIvent.passengerPending || selectIvent.passengerAccepted) && (
             <IventModal open={modalState} handleCloseModal={handleCloseModal} />
           )}
         </>
@@ -143,23 +143,23 @@ function YandexMap() {
             {/* <Clusterer options={{ groupByCoordinates: false }}> */}
             {allIvents.length
               ? allIvents.map((elem) => (
-                  <Placemark
-                    key={elem._id}
-                    geometry={elem.coords}
-                    modules={["geoObject.addon.balloon"]}
+                <Placemark
+                  key={elem._id}
+                  geometry={elem.coords}
+                  modules={["geoObject.addon.balloon"]}
 
-                    options={{ iconColor: "#5cb85c" }}
+                  options={{ iconColor: "#5cb85c" }}
 
-                    properties={{
-                      balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                      balloonContentBody: `
+                  properties={{
+                    balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                    balloonContentBody: `
                 <p> Когда: ${elem.dateOfEvent}</p>
                 <p>Сколько стоит: ${elem.price} р.</p>
                 <p>Какие требования к пассажиру: ${elem.stopList}</p>
                 <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                    }}
-                  />
-                ))
+                  }}
+                />
+              ))
               : null}
             {/* </Clusterer> */}
           </Map>

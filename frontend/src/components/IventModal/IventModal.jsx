@@ -79,8 +79,9 @@ export default function IventModal(props) {
       <p>Моб. тел. организатора: {selectIvent.creator.tel}</p>
       <p>Email: {selectIvent.creator.email}</p>
       {console.log(selectIvent)}
-      {selectIvent.passengers.filter((elem) => elem._id === currentUser._id)
-        .length ? (
+      {(selectIvent.passengerPending.filter((elem) => elem._id === currentUser._id)
+        .length || selectIvent.passengerAccepted.filter((elem) => elem._id === currentUser._id)
+          .length) ? (
         <Button
           onClick={() => deletePassengerHandler()}
           data-passenger="delete"
@@ -89,7 +90,9 @@ export default function IventModal(props) {
         >
           Отказаться
         </Button>
-      ) : (
+      ) : selectIvent.passengerRejected.filter((elem) => elem._id === currentUser._id)
+        .length ? <p>Вам отказано</p> : 
+        (
         <Button
           onClick={() => addPassengerHandler()}
           data-passenger="add"
