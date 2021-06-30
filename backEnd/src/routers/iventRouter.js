@@ -264,12 +264,28 @@ router.route('/')
 
       let selectIvent = await Ivent.findById(selectIventId);
       if (selectIvent.passengers.includes(currentUserId)) {
-        //console.log('уже');
         return res.sendStatus(418);
       }
       await Ivent.updateOne({ _id: selectIventId }, { $push: { passengers: currentUserId } });
       const selectIventWithNewPassenger = await Ivent.findById(selectIventId).populate('passengers').populate('creator');
       return res.status(200).json(selectIventWithNewPassenger);
+
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+  .delete(async (req, res) => {
+    try {
+      const { selectIventId, currentUserId } = req.body;
+
+      let selectIvent = await Ivent.findById(selectIventId);
+      if (!selectIvent.passengers.includes(currentUserId)) {
+        return res.sendStatus(418);
+      }
+      selectIvent.passengers.splice(selectIvent.passengers.indexOf(currentUserId), 1);
+      await selectIvent.save();
+      const selectIventWithOutNewPassenger = await Ivent.findById(selectIventId).populate('passengers').populate('creator');
+      return res.status(200).json(selectIventWithOutNewPassenger);
 
     } catch (error) {
       console.error(error.message);

@@ -1,4 +1,4 @@
-import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER } from '../types/iventTypes';
+import { IVENT_INIT, IVENT_CREATE, IVENT_ADD_PASSENGER, IVENT_DELETE_PASSENGER } from '../types/iventTypes';
 
 
 export const iventInitFromBack = () => async (dispatch) => {
@@ -49,19 +49,46 @@ export const iventAddPassengerOnBack = (selectIventId, currentUserId) => async (
   });
 
   if (response.status === 200) {
-    const iventWitNewPassenger = await response.json();
-    dispatch(iventAddPassenger(iventWitNewPassenger));
+    const iventWithNewPassenger = await response.json();
+    dispatch(iventAddPassenger(iventWithNewPassenger));
 
   } else if (response.status === 418) {
     return;
   }
 };
 
-export const iventAddPassenger = (iventWitNewPassenger) => {
+export const iventAddPassenger = (iventWithNewPassenger) => {
   return {
     type: IVENT_ADD_PASSENGER,
-    payload: iventWitNewPassenger,
+    payload: iventWithNewPassenger,
   }
 };
+
+export const iventDeletePassengerOnBack = (selectIventId, currentUserId) => async (dispatch) => {
+  const response = await fetch('http://localhost:8080/ivent', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ selectIventId, currentUserId }),
+  });
+
+  if (response.status === 200) {
+    const iventWithOutNewPassenger = await response.json();
+    dispatch(iventDeletePassenger(iventWithOutNewPassenger));
+
+  } else if (response.status === 418) {
+    return;
+  }
+};
+
+export const iventDeletePassenger = (iventWithOutNewPassenger) => {
+  return {
+    type: IVENT_DELETE_PASSENGER,
+    payload: iventWithOutNewPassenger,
+  }
+};
+
+
 
 
