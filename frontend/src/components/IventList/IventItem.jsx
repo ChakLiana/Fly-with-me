@@ -11,6 +11,9 @@ import {
 import moment from "moment";
 import localization from "moment/locale/ru";
 import { Link } from "react-router-dom";
+import { iventDeleteOnBack } from "../../redux/actions/iventActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,6 +52,12 @@ export default function IventItem({ el }) {
   console.log("element v  ivent", el);
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  function deleteHandler(id) {
+    console.log("dispatch id-------------- djsxs", id);
+    dispatch(iventDeleteOnBack(id));
+  }
 
   const curDate = moment(el.dateOfEvent)
     .locale("ru", localization)
@@ -80,8 +89,12 @@ export default function IventItem({ el }) {
           <Button size="small" color="primary">
             Редактировать
           </Button>
-          <Button size="small" color="secondary">
-            Удалить
+          <Button
+            onClick={() => deleteHandler(el._id)}
+            size="small"
+            color="secondary"
+          >
+            Удалить событие
           </Button>
         </CardActions>
       </Card>
