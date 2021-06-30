@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import localization from "moment/locale/ru";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import WeatherForItem from "../Weather/WeatherForItem.jsx";
 import PendingPassenger from "../UserDetail/PendingPassenger";
@@ -106,6 +106,7 @@ export default function IventDetails() {
               {/* <Button size="small" color="primary">
               Редактировать
             </Button> */}
+
               <Button
                 onClick={() => GoBackHandler()}
                 size="small"
@@ -113,6 +114,7 @@ export default function IventDetails() {
               >
                 Назад
               </Button>
+
             </CardActions>
           </Card>
         </Grid>
