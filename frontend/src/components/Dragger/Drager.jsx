@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 
 const Dragger = () => {
   const curUser = useSelector((state) => state.user._id);
-  console.log("current user ID ", curUser);
-  console.log("-=Dragger component render=- ");
+  // console.log("current user ID ", curUser);
+  // console.log("-=Dragger component render=- ");
 
   // declare image existanse flag
   const [flag, setFlag] = useState(false);

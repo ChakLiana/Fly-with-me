@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ProfileTandem from "./ProfileTandem";
 import ProfilePassenger from "./ProfilePassenger";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,18 +38,12 @@ export default function ProfileSwitches() {
           <Grid item xs={12}>
             <Typography className={classes.textColor}>
               Вы выступаете в роли{" "}
-              {curUser?.role === "tandem" ? "Тандемщика" : "Пассажира"}
+              {curUser?.role === "tandem" ? "Пилота" : "Пассажира"}
             </Typography>
           </Grid>
         </Grid>
 
-        <Typography>
-          {curUser?.role === "tandem" ? (
-            <ProfileTandem />
-          ) : (
-            <ProfilePassenger />
-          )}
-        </Typography>
+        {curUser?.role === "tandem" ? <ProfileTandem /> : <ProfilePassenger />}
       </Grid>
     </div>
   );
