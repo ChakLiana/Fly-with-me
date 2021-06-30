@@ -39,14 +39,8 @@ export default function iventReduser(state = [], { type, payload }) {
       const stateWithoutSelectIvent = state.filter((elem) => String(elem._id) !== String(payload._id));
       return [...stateWithoutSelectIvent, payload];
 
-      const stateWithoutSelectAction = state.filter(
-        (elem) => String(elem._id) !== String(payload._id)
-      );
-      return [...stateWithoutSelectAction, payload];
     }
 
-  
-    }
     case IVENT_DELETE: {
       console.log("в делитеееееееееееееееееееееее");
       const stateWithoutDeleteIvent = state.filter(
