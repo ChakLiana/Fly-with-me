@@ -8,6 +8,9 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { iventAcceptPassengerOnBack, iventRejectPassengerOnBack } from "../../redux/actions/iventActions";
+
 // import moment from "moment";
 // import localization from "moment/locale/ru";
 // import { Link, useParams } from "react-router-dom";
@@ -48,8 +51,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PendingPassenger({ passenger }) {
-  console.log("passenger ------------> ", passenger);
+export default function PendingPassenger({ passenger, currentIventId }) {
+  const dispatch = useDispatch();
+
+  const acceptPasengerHandler = (currentIventId, passengerId) => {
+    dispatch(iventAcceptPassengerOnBack(currentIventId, passengerId));
+  }
+
+  const rejectPasengerHandler = (currentIventId, passengerId) => {
+    dispatch(iventRejectPassengerOnBack(currentIventId, passengerId));
+  }
 
   const classes = useStyles();
 
@@ -58,17 +69,17 @@ export default function PendingPassenger({ passenger }) {
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
-            Пользователь<b> {passenger.nickName}</b> хочет полетать
+            Пользователь<b> {passenger?.nickName}</b> хочет полетать
           </Typography>{" "}
           <Typography>
-            <b>Вес:</b> {passenger.weight} кг.
+            <b>Вес:</b> {passenger?.weight} кг.
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="primary">
+          <Button onClick={() => acceptPasengerHandler(currentIventId, passenger._id)} size="small" color="primary">
             Принять заявку
           </Button>
-          <Button size="small" color="secondary">
+          <Button onClick={() => rejectPasengerHandler(currentIventId, passenger._id)} size="small" color="secondary">
             Отклонить заявку
           </Button>
         </CardActions>

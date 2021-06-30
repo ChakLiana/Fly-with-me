@@ -139,7 +139,7 @@ export default function IventDetails() {
                   </Typography>
                   {curIvent.passengerPending.length !== 0 ? (
                     curIvent.passengerPending.map((pas) => (
-                      <PendingPassenger passenger={pas} />
+                      <PendingPassenger currentIventId={curIvent._id} passenger={pas} />
                     ))
                   ) : (
                     <p>пока пусто </p>
@@ -161,7 +161,7 @@ export default function IventDetails() {
                   </Typography>
                   {curIvent.passengerAccepted.length !== 0 ? (
                     curIvent.passengerAccepted.map((pas) => (
-                      <AcceptedPassenger passenger={curIvent.passengers[0]} />
+                      <AcceptedPassenger currentIventId={curIvent._id} passenger={pas} />
                     ))
                   ) : (
                     <h3>пока никто не одобрен </h3>

@@ -4,7 +4,6 @@ const router = express.Router();
 const Ivent = require('../models/iventModel');
 const User = require('../models/user');
 const fetch = require('node-fetch');
-const { findById } = require('../models/user');
 const authController = require('../controllers/auth.controller')
 
 const normalizationOfWindDirection = (directionInDegrees) => {
@@ -36,22 +35,23 @@ const normalizationOfWindDirection = (directionInDegrees) => {
 }
 
 router.route('/')
+  //get all events from data base
   .get(async (req, res) => {
     try {
       const allIvents = await Ivent.find().populate('passengerPending').populate('passengerAccepted')
-      .populate('passengerRejected').populate('creator');
-      // console.log(allIvents);
+        .populate('passengerRejected').populate('creator');
       res.json({ allIvents });
     } catch (error) {
       console.error(error.message);
     }
   })
+  // create new event
   .post(async (req, res) => {
     try {
       const newIventData = { ...req.body, creator: mongoose.Types.ObjectId(req.body.creator) };
       let newIvent = await Ivent.create(newIventData);
       newIvent = await Ivent.findById(newIvent._id).populate('passengerPending').populate('passengerAccepted')
-      .populate('passengerRejected').populate('creator');
+        .populate('passengerRejected').populate('creator');
       res.status(200).json(newIvent);
     } catch (error) {
       console.error(error.message);
@@ -260,6 +260,7 @@ router.route('/')
     res.json(currentWeather);
 
   })
+  //passenger add himsalf in event
   .patch(async (req, res) => {
     try {
       const { selectIventId, currentUserId } = req.body;
@@ -280,6 +281,7 @@ router.route('/')
       console.error(error.message);
     }
   })
+  //passenger delete himsalfe from ivent
   .delete(async (req, res) => {
     try {
       const { selectIventId, currentUserId } = req.body;
@@ -307,6 +309,7 @@ router.route('/')
     }
   });
 
+// get select event for modal
 router.route('/:lotitude/:longitude')
   .get(async (req, res) => {
     const { lotitude, longitude } = req.params;
@@ -321,6 +324,75 @@ router.route('/:lotitude/:longitude')
         .populate('passengerPending').populate('passengerAccepted')
         .populate('passengerRejected').populate('creator');;
       res.status(200).json(selectIvent);
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+
+router.route('/status')
+  // to accept
+  .post(async (req, res) => {
+    try {
+      const { selectIventId, selectUserId } = req.body;
+
+      const selectIvent = await Ivent.findById(selectIventId);
+      if (!selectIvent.passengerPending.includes(selectUserId)) {
+        return res.sendStatus(418);
+      }
+      selectIvent.passengerPending.splice(selectIvent.passengerPending.indexOf(selectUserId), 1);
+      await selectIvent.save();
+      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengerAccepted: selectUserId } });
+
+      const selectIventWithAcceptPassenger = await Ivent.findById(selectIventId)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');
+      return res.status(200).json(selectIventWithAcceptPassenger);
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+  // to reject
+  .delete(async (req, res) => {
+    try {
+      const { selectIventId, selectUserId } = req.body;
+
+      const selectIvent = await Ivent.findById(selectIventId);
+      if (selectIvent.passengerRejected.includes(selectUserId)) {
+        return res.sendStatus(418);
+      } else if (selectIvent.passengerPending.includes(selectUserId)) {
+        selectIvent.passengerPending.splice(selectIvent.passengerPending.indexOf(selectUserId), 1);
+      } else if (selectIvent.passengerAccepted.includes(selectUserId)) {
+        selectIvent.passengerAccepted.splice(selectIvent.passengerAccepted.indexOf(selectUserId), 1);
+      }
+      await selectIvent.save();
+      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengerRejected: selectUserId } });
+
+      const selectIventWithRejectPassenger = await Ivent.findById(selectIventId)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');
+      return res.status(200).json(selectIventWithRejectPassenger);
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+  // to pending
+  .patch(async (req, res) => {
+    try {
+      const { selectIventId, selectUserId } = req.body;
+
+      const selectIvent = await Ivent.findById(selectIventId);
+      if (!selectIvent.passengerAccepted.includes(selectUserId)) {
+        return res.sendStatus(418);
+      }
+      selectIvent.passengerAccepted.splice(selectIvent.passengerAccepted.indexOf(selectUserId), 1);
+      await selectIvent.save();
+
+      await Ivent.updateOne({ _id: selectIventId }, { $push: { passengerPending: selectUserId } });
+
+      const selectIventWithPendingPassenger = await Ivent.findById(selectIventId)
+        .populate('passengerPending').populate('passengerAccepted')
+        .populate('passengerRejected').populate('creator');
+      return res.status(200).json(selectIventWithPendingPassenger);
     } catch (error) {
       console.error(error.message);
     }
