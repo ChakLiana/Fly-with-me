@@ -52,14 +52,14 @@ const Main = () => {
         spacing={2}
       >
         {currentUser && (
-          <Grid item xs={7}>
+          <Grid item xs={8}>
             <Paper className={classes.paper}>
               <Weather />
             </Paper>
           </Grid>
         )}
         {currentUser?.role === "tandem" && (
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <Paper className={classes.paper}>
               <IventCreateForm />
             </Paper>

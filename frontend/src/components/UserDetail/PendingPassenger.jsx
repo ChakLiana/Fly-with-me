@@ -8,6 +8,8 @@ import {
   CardActions,
   Button,
   ListItem,
+  Box,
+  Container,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import {
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    maxWidth: 250,
+    // width: 200,
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiButtonBase-root": {
       fontSize: "14px",
     },
+
     "& .MuiTypography-root": {
       fontSize: "14px",
     },
@@ -52,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     wordBreak: "break-all",
   },
   cardContent: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
 }));
 
