@@ -8,6 +8,7 @@ import {
   Typography,
   InputAdornment,
   Paper,
+  Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -154,9 +155,11 @@ export default function IventCreateForm() {
             }
             helperText={formik.touched.description && formik.errors.description}
           />
+
           <Button color="textSecondary" variant="contained" type="submit">
             Создать событие
           </Button>
+
         </form>
       </Paper>
     </div>

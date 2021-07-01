@@ -15,13 +15,20 @@ import { currentWeatherGetFromApi } from '../../redux/actions/currentWeatherActi
 
 const useStyles = makeStyles({
   table: {
+    th: {
+      "& .MuiTableCell-root": {
+        fontSize: "16px",
+        textAlign: "left"
+      },
+    },
     height: 600,
     fontSize: "14px",
     "& .MuiTableCell-root": {
       fontSize: "16px",
-      textAlign: "left",
+      textAlign: "center",
     },
   },
+
 });
 
 function createData(name, now, tomorrow, afterTomorrow, inThreeDays) {
@@ -117,10 +124,10 @@ export default function Weather() {
           <TableRow>
             {/* Заголовки */}
             <TableCell>Погодные условия</TableCell>
-            <TableCell align="right">Сейчас</TableCell>
-            <TableCell align="right">Завтра</TableCell>
-            <TableCell align="right">Послезавтра</TableCell>
-            <TableCell align="right">Через 3 дня</TableCell>
+            <TableCell >Сейчас</TableCell>
+            <TableCell >Завтра</TableCell>
+            <TableCell >Послезавтра</TableCell>
+            <TableCell >Через 3 дня</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -129,10 +136,10 @@ export default function Weather() {
               <TableCell component="th" scope="row">
                 <b>{row.name}</b>
               </TableCell>
-              <TableCell align="right">{row.now}</TableCell>
-              <TableCell align="right">{row.tomorrow}</TableCell>
-              <TableCell align="right">{row.afterTomorrow}</TableCell>
-              <TableCell align="right">{row.inThreeDays}</TableCell>
+              <TableCell >{row.now}</TableCell>
+              <TableCell >{row.tomorrow}</TableCell>
+              <TableCell >{row.afterTomorrow}</TableCell>
+              <TableCell >{row.inThreeDays}</TableCell>
             </TableRow>
           ))}
         </TableBody>

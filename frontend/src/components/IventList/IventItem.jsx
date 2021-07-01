@@ -82,19 +82,16 @@ export default function IventItem({ el }) {
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button size="small" color="default">
+          <Button size="small" color="primary">
             <Link to={`/ivent/${el._id}`}>Подробнее</Link>
           </Button>
 
-          <Button size="small" color="primary">
-            Редактировать
-          </Button>
           <Button
             onClick={() => deleteHandler(el._id)}
             size="small"
             color="secondary"
           >
-            Удалить событие
+            Удалить
           </Button>
         </CardActions>
       </Card>
