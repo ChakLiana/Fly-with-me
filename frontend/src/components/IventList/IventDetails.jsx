@@ -130,33 +130,43 @@ export default function IventDetails() {
             <Grid item xs={5}>
               <Grid
                 container
+                spacing={2}
                 direction="column"
-                justify="space-around"
-                alignItems="center"
+                justify="flex-start"
+                alignItems="flex-start"
               >
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  container
+                  spacing={2}
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="flex-start"
+                  xs={12}
+                >
                   {" "}
                   <Typography className={classes.wordDescript}>
                     Ожидают:
                   </Typography>
-                  <List>
-                    {curIvent.passengerPending.length !== 0 ? (
-                      curIvent.passengerPending.map((pas) => (
-                        <PendingPassenger
-                          currentIventId={curIvent._id}
-                          passenger={pas}
-                        />
-                      ))
-                    ) : (
-                      <p>пока пусто </p>
-                    )}
-                  </List>
+                  {curIvent.passengerPending.length !== 0 ? (
+                    curIvent.passengerPending.map((pas) => (
+                      <PendingPassenger
+                        currentIventId={curIvent._id}
+                        passenger={pas}
+                      />
+                    ))
+                  ) : (
+                    <Typography className={classes.wordDescript}>
+                      Пока пусто
+                    </Typography>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={5}>
               <Grid
                 container
+                spacing={2}
                 direction="column"
                 justify="space-around"
                 alignItems="center"
@@ -175,7 +185,7 @@ export default function IventDetails() {
                     ))
                   ) : (
                     <Typography className={classes.wordDescript}>
-                      пока никто не одобрен{" "}
+                      Пока пусто{" "}
                     </Typography>
                   )}
                 </Grid>

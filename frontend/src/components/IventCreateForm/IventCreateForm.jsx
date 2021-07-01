@@ -22,6 +22,7 @@ const useStyles = makeStyles({
   paper: {
     minWidth: "100%",
     padding: 15,
+    height: 600,
   },
 });
 
@@ -75,11 +76,11 @@ export default function IventCreateForm() {
   return (
     <div className={classes.divPos}>
       <Paper className={classes.paper}>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h6" component="h3">
           Конструктор полета:
         </Typography>
-        <Typography variant="h6" component="h3">
-          Вы хотите создать событие на точке{" "}
+        <Typography>
+          координаты:{" "}
           {curentCoords.map((coord) => {
             return (
               <span>
@@ -141,7 +142,7 @@ export default function IventCreateForm() {
             fullWidth
             multiline
             variant="outlined"
-            rows={4}
+            rows={8}
             id="description"
             name="description"
             label="Описание события"
