@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { useDispatch, useSelector } from "react-redux";
-import { currentWeatherGetFromApi } from "../../redux/actions/currentWeatherAction";
+
+import React, { useEffect, useRef } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentWeatherGetFromApi } from '../../redux/actions/currentWeatherAction';
+
+
 
 const useStyles = makeStyles({
   table: {
@@ -29,10 +32,26 @@ export default function Weather() {
   const dispatch = useDispatch();
   const curentCoords = useSelector((state) => state.curentCoords);
   const currentWeather = useSelector((state) => state.currentWeather);
+  const apiFlag = useRef(false)
+  const prevCoords = useRef(null)
 
   useEffect(() => {
-    if (curentCoords.length) {
-      dispatch(currentWeatherGetFromApi(curentCoords));
+
+    function apiCall(coords) {
+      dispatch(currentWeatherGetFromApi(coords))
+      apiFlag.current = true
+      setTimeout(() => {
+        apiFlag.current = false
+        if (prevCoords.current) apiCall(prevCoords.current)
+        prevCoords.current = null
+      }, 3000)
+    }
+
+
+    if (curentCoords.length && !apiFlag.current) {
+      apiCall(curentCoords)
+    } else if (curentCoords.length && apiFlag.current) {
+      prevCoords.current = curentCoords
     }
   }, [curentCoords]);
 

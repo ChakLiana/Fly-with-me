@@ -1,6 +1,8 @@
 import { CURRENT_WEATHER_GET } from '../types/iventTypes';
 
 
+
+
 export const currentWeatherGetFromApi = (currentCoords) => async (dispatch) => {
   const latitude = currentCoords[0];
   const longitude = currentCoords[1];
