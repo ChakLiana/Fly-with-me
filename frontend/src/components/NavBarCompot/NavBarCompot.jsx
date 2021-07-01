@@ -1,21 +1,21 @@
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import "./NavBarCompot.css";
 // import SignalCompot from "../Signal/Signal";
-
+import logo from "./Fly with me-logos_black.png";
 const Nav = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            На главную
-          </Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+      <div className="container ">
+        <img src={logo} alt={"logo"} style={{ width: "150px" }} />
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+        <div className="container-fluid d-flex align-items-center ">
+          <div className="collapse navbar-collapse  " id="navbarNav ">
+            <ul className="navbar-nav container-fluid d-flex align-items-center justify-content-between">
+              <Link className="navbar-brand" to="/">
+                На главную
+              </Link>
               {user ? (
                 <>
                   <li className="nav-item">
@@ -28,7 +28,6 @@ const Nav = () => {
                       Выйти
                     </NavLink>
                   </li>
-
                   <li className="nav-item">
                     <NavLink
                       exact
@@ -56,13 +55,7 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                       color="primary"
-                    >
-                      {
-                        <p>
-                          Вы зашли как<b> {user.nickName} </b>
-                        </p>
-                      }
-                    </NavLink>
+                    ></NavLink>
                     {/* <SignalCompot /> */}
                   </li>
                 </>

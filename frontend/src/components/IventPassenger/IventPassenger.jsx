@@ -77,7 +77,12 @@ export default function IventPasseng({ el }) {
             <b>Место проведения:</b> {el.coords[0]} {el.coords[1]}
           </Typography>
           <Typography className={classes.wordDescript}>
-            Описание:{el.description}
+            <b>Описание:</b>
+            {el.description}
+          </Typography>
+          <Typography className={classes.wordDescript}>
+            <b>Пилот: </b>
+            {el.creator.nickName}
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
