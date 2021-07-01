@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import { Grid, Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import Dragger from "../Dragger/Drager";
+// import Dragger from "../Dragger/Drager";
 import { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
@@ -341,11 +341,11 @@ export default function ProfileTandem() {
                   alignItems="center"
                   spacing={3}
                 >
-                  <Grid item xs={8}>
+                  {/* <Grid item xs={8}>
                     <Paper className={classes.dragger}>
                       <Dragger />
                     </Paper>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <Card className={classes.root}>
                       <CardContent>

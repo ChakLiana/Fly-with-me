@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import { Grid, Container } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Dragger from "../Dragger/Drager";
+// import Dragger from "../Dragger/Drager";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
@@ -308,7 +308,7 @@ function ProfilePassenger() {
               </Card>
             </Grid>
           </Grid>
-          <Dragger />
+          {/* <Dragger /> */}
         </>
       )}
     </>
