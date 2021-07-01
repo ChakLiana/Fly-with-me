@@ -30,6 +30,7 @@ export default function IventListPassenger() {
     <>
       {pending.length ? (
         <>
+
           <Container maxWidth="sm">
             <Typography
               variant="h4"
@@ -42,6 +43,7 @@ export default function IventListPassenger() {
               Ожидает подтверждения:
             </Typography>
           </Container>
+
           <Grid container spacing={1} justify="center">
             {pending.map((el) => {
               return <IventPasseng key={el._id} el={el} />;
@@ -51,6 +53,7 @@ export default function IventListPassenger() {
       ) : null}
       {accept.length ? (
         <>
+
           <Container maxWidth="sm">
             <Typography
               variant="h4"
@@ -63,6 +66,7 @@ export default function IventListPassenger() {
               Подтверждено:
             </Typography>
           </Container>
+
 
           <Grid container spacing={1} justify="center">
             {accept.map((el) => {
