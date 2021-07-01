@@ -12,7 +12,8 @@ const options = {
 }
 
 
-const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
+// const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
+const dbConnectionURL = 'mongodb://127.0.0.1:27017/Fly-With-Me'
 // mongodb://localhost:27017/p1w3d3
 
 function connect() {
