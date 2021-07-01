@@ -1,0 +1,42 @@
+// const tokenFromLocal = window.localStorage.getItem("token");
+
+const initialState = {
+  user: null,
+  ivents: [],
+  sek: {"name:": "sek"},
+  curentCoords: [],
+  tokn: "",
+  currentWeather: {
+    todayWindSpeed: "",
+    tomorrowWindSpeed: "",
+    afterTomorrowWindSpeed: "",
+    inThreeDaysWindSpeed: "",
+    todayCloudBaseHeight: "",
+    tomorrowCloudBaseHeight: "",
+    afterTomorrowCloudBaseHeight: "",
+    inThreeDaysCloudBaseHeight: "",
+    todayWindDirection: "",
+    tomorrowWindDirection: "",
+    afterTomorrowWindDirection: "",
+    inThreeDaysWindDirection: "",
+    todayPrecipitationProbability: "",
+    tomorrowPrecipitationProbability: "",
+    afterTomorrowPrecipitationProbability: "",
+    inThreeDaysPrecipitationProbability: "",
+    todayTemp: "",
+    tomorrowTemp: "",
+    afterTomorrowTemp: "",
+    inThreeDaysTemp: "",
+    todayThunderstormActivity: "",
+    tomorrowThunderstormActivity: "",
+    afterTomorrowThunderstormActivity: "",
+    inThreeDaysThunderstormActivity: "",
+    todayCloudy: "",
+    tomorrowCloudy: "",
+    afterTomorrowCloudy: "",
+    inThreeDaysCloudy: "",
+  },
+  selectIvent: {},
+};
+
+export default initialState;
