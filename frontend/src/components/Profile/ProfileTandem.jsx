@@ -50,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
     "& label.Mui-focused": {
       color: "#fff",
     },
+    "& .MuiCardActions-root": {
+      backgroundColor: "#29b6f6",
+      display: "flex",
+      justifyContent: "center",
+    },
   },
   bullet: {
     margin: "0 2px",
@@ -178,7 +183,7 @@ export default function ProfileTandem() {
                 <Grid item>
                   <Card className={classes.root}>
                     <CardContent>
-                      <Typography className={classes.pos}>
+                      <Typography className={classes.fieldColor}>
                         Почтовый адрес:
                       </Typography>
                       <TextField
@@ -196,7 +201,10 @@ export default function ProfileTandem() {
                         helperText={formik.touched.email && formik.errors.email}
                       />
 
-                      <Typography className={classes.pos} color="textSecondary">
+                      <Typography
+                        className={classes.fieldColor}
+                        color="textSecondary"
+                      >
                         Ник:
                       </Typography>
 
@@ -218,7 +226,10 @@ export default function ProfileTandem() {
                         }
                       />
 
-                      <Typography className={classes.pos} color="textSecondary">
+                      <Typography
+                        className={classes.fieldColor}
+                        color="textSecondary"
+                      >
                         Опыт:
                       </Typography>
 
@@ -240,7 +251,10 @@ export default function ProfileTandem() {
                         }
                       />
 
-                      <Typography className={classes.pos} color="textSecondary">
+                      <Typography
+                        className={classes.fieldColor}
+                        color="textSecondary"
+                      >
                         Часы налета:
                       </Typography>
 
@@ -261,7 +275,10 @@ export default function ProfileTandem() {
                         }
                       />
 
-                      <Typography color="textSecondary" className={classes.pos}>
+                      <Typography
+                        color="textSecondary"
+                        className={classes.fieldColor}
+                      >
                         Контакт:
                       </Typography>
 
@@ -278,7 +295,11 @@ export default function ProfileTandem() {
                         helperText={formik.touched.tel && formik.errors.tel}
                       />
 
-                      <Typography variant="body2" component="p">
+                      <Typography
+                        className={classes.textColor}
+                        variant="body2"
+                        component="p"
+                      >
                         <br />
                         Для редактирования информации о себе нажмите кнопку:
                         <br />
@@ -287,16 +308,14 @@ export default function ProfileTandem() {
                     </CardContent>
 
                     <CardActions>
-                      <Container maxWidth="sm">
-                        <Button
-                          className={classes.btnColor}
-                          type="submit"
-                          size="big"
-                          variant="contained"
-                        >
-                          Принять изменения
-                        </Button>
-                      </Container>
+                      <Button
+                        className={classes.btnColor}
+                        type="submit"
+                        size="big"
+                        variant="contained"
+                      >
+                        Принять изменения
+                      </Button>
                     </CardActions>
                   </Card>
                 </Grid>
@@ -313,114 +332,120 @@ export default function ProfileTandem() {
               </Typography>
             </Grid>
           </Grid> */}
-          <Grid container spacing={3}>
-            <Grid item>
-              <Grid
-                container
-                direction="column"
-                alignItems="center"
-                spacing={3}
-              >
-                <Grid item xs={8}>
-                  <Paper className={classes.dragger}>
-                    <Dragger />
-                  </Paper>
-                </Grid>
-                <Grid item xs={12}>
-                  <Card className={classes.root}>
-                    <CardContent>
-                      <Typography className={classes.fieldColor}>
-                        Почтовый адрес:
-                      </Typography>
-                      <Typography
-                        className={classes.pos}
-                        component="span"
-                        color="textPrimary"
-                      >
-                        {curUser.email}
-                      </Typography>
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Ник:
-                      </Typography>
-                      <Typography
-                        className={classes.pos}
-                        component="span"
-                        color="textPrimary"
-                      >
-                        {curUser.nickName}
-                      </Typography>
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Опыт:
-                      </Typography>
-                      <Typography
-                        className={classes.pos}
-                        component="span"
-                        color="textPrimary"
-                      >
-                        {curUser.experience}
-                      </Typography>
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Часы налета:
-                      </Typography>
-                      <Typography
-                        className={classes.pos}
-                        component="span"
-                        color="textPrimary"
-                      >
-                        {curUser.fHours}
-                      </Typography>
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Контакт:
-                      </Typography>
-                      <Typography
-                        className={classes.pos}
-                        component="span"
-                        color="textPrimary"
-                      >
-                        {curUser.tel}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        <br />
-                        Для редактирования информации о себе нажмите кнопку:
-                        <br />
-                        {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        className={classes.btnColor}
-                        onClick={handleClick}
-                        size="big"
-                      >
-                        Отредактировать данные
-                      </Button>
-                    </CardActions>
-                  </Card>
+          <Container maxWidth="sm">
+            <Grid container spacing={3}>
+              <Grid item>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="center"
+                  spacing={3}
+                >
+                  <Grid item xs={8}>
+                    <Paper className={classes.dragger}>
+                      <Dragger />
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Card className={classes.root}>
+                      <CardContent>
+                        <Typography className={classes.fieldColor}>
+                          Почтовый адрес:
+                        </Typography>
+                        <Typography
+                          className={classes.pos}
+                          component="span"
+                          color="textPrimary"
+                        >
+                          {curUser.email}
+                        </Typography>
+                        <Typography
+                          className={classes.fieldColor}
+                          color="textSecondary"
+                        >
+                          Ник:
+                        </Typography>
+                        <Typography
+                          className={classes.pos}
+                          component="span"
+                          color="textPrimary"
+                        >
+                          {curUser.nickName}
+                        </Typography>
+                        <Typography
+                          className={classes.fieldColor}
+                          color="textSecondary"
+                        >
+                          Опыт:
+                        </Typography>
+                        <Typography
+                          className={classes.pos}
+                          component="span"
+                          color="textPrimary"
+                        >
+                          {curUser.experience}
+                        </Typography>
+                        <Typography
+                          className={classes.fieldColor}
+                          color="textSecondary"
+                        >
+                          Часы налета:
+                        </Typography>
+                        <Typography
+                          className={classes.pos}
+                          component="span"
+                          color="textPrimary"
+                        >
+                          {curUser.fHours}
+                        </Typography>
+                        <Typography
+                          className={classes.fieldColor}
+                          color="textSecondary"
+                        >
+                          Контакт:
+                        </Typography>
+                        <Typography
+                          className={classes.pos}
+                          component="span"
+                          color="textPrimary"
+                        >
+                          {curUser.tel}
+                        </Typography>
+                        <Typography
+                          className={classes.textColor}
+                          variant="body2"
+                          component="p"
+                        >
+                          <br />
+                          Для редактирования информации о себе нажмите кнопку:
+                          <br />
+                          {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          className={classes.btnColor}
+                          onClick={handleClick}
+                          size="big"
+                        >
+                          Отредактировать данные
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
                 </Grid>
               </Grid>
+              <Grid item>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  spacing={3}
+                ></Grid>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                spacing={3}
-              ></Grid>
-            </Grid>
-          </Grid>
+          </Container>
         </>
       )}
     </>
