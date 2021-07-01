@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,10 +25,26 @@ export default function Weather() {
   const dispatch = useDispatch();
   const curentCoords = useSelector((state) => state.curentCoords);
   const currentWeather = useSelector((state) => state.currentWeather);
+  const apiFlag = useRef(false)
+  const prevCoords = useRef(null)
 
   useEffect(() => {
-    if (curentCoords.length) {
-      dispatch(currentWeatherGetFromApi(curentCoords));
+
+    function apiCall(coords) {
+      dispatch(currentWeatherGetFromApi(coords))
+      apiFlag.current = true
+      setTimeout(() => {
+        apiFlag.current = false
+        if (prevCoords.current) apiCall(prevCoords.current)
+        prevCoords.current = null
+      }, 3000)
+    }
+
+
+    if (curentCoords.length && !apiFlag.current) {
+      apiCall(curentCoords)
+    } else if (curentCoords.length && apiFlag.current) {
+      prevCoords.current = curentCoords
     }
   }, [curentCoords]);
 

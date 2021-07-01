@@ -15,8 +15,8 @@ import {
 } from "../../redux/actions/iventActions";
 import { currentCoordsGet } from "../../redux/actions/currentCoordsActions";
 import { getSelectIventFromBack } from "../../redux/actions/selectIventActions";
-import { useHistory } from "react-router";
 import IventModal from "../IventModal/IventModal";
+import moment from "moment";
 
 // import styles from "./yandexMap.module.css";
 
@@ -79,8 +79,12 @@ function YandexMap() {
               ) : null}
 
               {allIvents.length && currentUser?.role === "passenger"
-                ? allIvents.map((elem) => (
-                  <Placemark
+                ? allIvents.map((elem) => {
+                  const date = elem.dateOfEvent;
+                  const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+
+
+                  return (<Placemark
                     key={elem._id}
 
                     preset={"islands#violetIcon"}
@@ -91,16 +95,20 @@ function YandexMap() {
                     properties={{
                       balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
                       balloonContentBody: `
-                <p> Когда: ${elem.dateOfEvent}</p>
-                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                <hr/><p><strong>Дата:</strong> ${formatDate}</p>
+                <p><strong>Стоимость:</strong> ${elem.price} р.</p>
+                <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
+                <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
                       balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                      // balloonContentFooter: `<button  class ='btn btn-info' onclick="window.addPassengerHalper(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
                     }}
-                  />
-                ))
+                  />)
+                })
                 : allIvents.length && currentUser?.role === "tandem"
-                  ? allIvents.map((elem) => (
-                    <Placemark
+                  ? allIvents.map((elem) => {
+                    const date = elem.dateOfEvent;
+                    const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+
+                    return (<Placemark
                       key={elem._id}
                       geometry={elem.coords}
                       modules={["geoObject.addon.balloon"]}
@@ -108,11 +116,13 @@ function YandexMap() {
                       properties={{
                         balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
                         balloonContentBody: `
-                <p> Когда: ${elem.dateOfEvent}</p>
-                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                        <hr/><p><strong>Дата:</strong> ${formatDate}</p>
+                        <p><strong>Стоимость:</strong> ${elem.price} р.</p>
+                        <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
+                        <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
                       }}
-                    />
-                  ))
+                    />)
+                  })
                   : null}
               {/* </Clusterer> */}
             </Map>
@@ -142,8 +152,11 @@ function YandexMap() {
             <ZoomControl options={{ float: "right" }} />
             {/* <Clusterer options={{ groupByCoordinates: false }}> */}
             {allIvents.length
-              ? allIvents.map((elem) => (
-                <Placemark
+              ? allIvents.map((elem) => {
+                const date = elem.dateOfEvent;
+                const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+
+                return (<Placemark
                   key={elem._id}
                   geometry={elem.coords}
                   modules={["geoObject.addon.balloon"]}
@@ -151,15 +164,15 @@ function YandexMap() {
                   options={{ iconColor: "#5cb85c" }}
 
                   properties={{
-                    balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                    balloonContentHeader: `<h5> Здесь летает ${elem.creator.nickName}</h5>`,
                     balloonContentBody: `
-                <p> Когда: ${elem.dateOfEvent}</p>
-                <p>Сколько стоит: ${elem.price} р.</p>
-                <p>Какие требования к пассажиру: ${elem.stopList}</p>
-                <p> Координаты старта: ${elem.coords[0]}, ${elem.coords[1]}</p>`,
+                    <hr/><p><strong>Дата:</strong> ${formatDate}</p>
+            <p><strong>Стоимость:</strong> ${elem.price} р.</p>
+            <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
+            <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
                   }}
-                />
-              ))
+                />)
+              })
               : null}
             {/* </Clusterer> */}
           </Map>
