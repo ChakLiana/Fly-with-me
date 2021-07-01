@@ -12,9 +12,13 @@ import {
 // import localization from "moment/locale/ru";
 // import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { iventRejectPassengerOnBack, iventPendingPassengerOnBack } from "../../redux/actions/iventActions";
+import {
+  iventRejectPassengerOnBack,
+  iventPendingPassengerOnBack,
+} from "../../redux/actions/iventActions";
 
 const useStyles = makeStyles((theme) => ({
+  item: { marginBottom: 10 },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -30,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    backgroundColor: "#7CFC00",
+    backgroundColor: "#D0D3DC",
     maxWidth: 250,
     height: "100%",
     display: "flex",
@@ -51,23 +55,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AcceptedPassenger({ currentIventId ,passenger }) {
+export default function AcceptedPassenger({ currentIventId, passenger }) {
   const dispatch = useDispatch();
 
   const pendingPasengerHandler = (currentIventId, passengerId) => {
     dispatch(iventPendingPassengerOnBack(currentIventId, passengerId));
-  }
+  };
 
   const rejectPasengerHandler = (currentIventId, passengerId) => {
     dispatch(iventRejectPassengerOnBack(currentIventId, passengerId));
-  }
+  };
 
   console.log("passenger ------------> ", passenger);
 
   const classes = useStyles();
 
   return (
-    <Grid item>
+    <Grid item className={classes.item}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
@@ -81,10 +85,20 @@ export default function AcceptedPassenger({ currentIventId ,passenger }) {
           </Typography>
         </CardContent>
         <CardActions className={classes.card}>
-          <Button onClick={() => pendingPasengerHandler(currentIventId, passenger._id)} size="small" color="secondary">
+          <Button
+            onClick={() =>
+              pendingPasengerHandler(currentIventId, passenger._id)
+            }
+            size="small"
+            color="default"
+          >
             Вернуть в ожидание
           </Button>
-          <Button onClick={() => rejectPasengerHandler(currentIventId, passenger._id)} size="small" color="secondary">
+          <Button
+            onClick={() => rejectPasengerHandler(currentIventId, passenger._id)}
+            size="small"
+            color="secondary"
+          >
             Отклонить заявку
           </Button>
         </CardActions>

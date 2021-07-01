@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Dragger from "../Dragger/Drager";
@@ -40,6 +40,41 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0,0, 0.5)",
+    textAlign: "left",
+    "& .MuiTextField-root": {
+      width: 400,
+      color: "#fff",
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "white",
+        color: "#fff",
+      },
+      "& .MuiInput-input": {
+        color: "#fff",
+        marginTop: 28,
+      },
+      "& .MuiInputLabel-animated": {
+        color: "#fff",
+        marginTop: 28,
+      },
+    },
+    "& label.Mui-focused": {
+      color: "#fff",
+    },
+    "& .MuiButtonBase-root": {
+      backgroundColor: "#29b6f6",
+      marginTop: 20,
+    },
+  },
+  rootcard: {
+    backgroundColor: "rgba(0, 0,0, 0.5)",
+    "& .MuiCardActions-root": {
+      backgroundColor: "#29b6f6",
+      display: "flex",
+      justifyContent: "center",
+    },
+    "$ .MuiTypography-root": {
+      textAlign: "left",
+    },
   },
   bullet: {
     margin: "0 2px",
@@ -51,12 +86,6 @@ const useStyles = makeStyles({
   pos: {
     marginTop: 16,
     marginBottom: 16,
-  },
-  multilineColor: {
-    color: "#ffffff !important",
-    "&::after": {
-      borderColor: "#ffffff",
-    },
   },
 });
 
@@ -136,151 +165,93 @@ function ProfilePassenger() {
     <>
       {isEdit ? (
         <>
-          <form className={classes.divPos} onSubmit={formik.handleSubmit}>
-            <Grid
-              classes={{
-                root: classes.root,
-              }}
-              justify-center
-            >
-              <Grid item>
-                <Typography variant="h5" component="h2">
-                  Форма для редактирования данных
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item>
-                <Typography> </Typography>
-              </Grid>
-              <Grid item>
-                <Card className={classes.root}>
-                  <CardContent>
-                    <TextField
-                      InputProps={{
-                        className: classes.multilineColor,
-                      }}
-                      InputLabelProps={{
-                        className: classes.multilineColor,
-                      }}
-                      fullWidth
-                      className={classes.textField}
-                      id="email"
-                      name="email"
-                      label="Почтовый адрес:"
-                      type="email"
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
-                      helperText={formik.touched.email && formik.errors.email}
-                    />
+          <Container maxWidth="sm">
+            <form className={classes.root} onSubmit={formik.handleSubmit}>
+              <Typography
+                className={classes.whiteText}
+                variant="h5"
+                component="h2"
+              >
+                Форма для редактирования данных
+              </Typography>
 
-                    <TextField
-                      InputProps={{
-                        className: classes.multilineColor,
-                      }}
-                      InputLabelProps={{
-                        className: classes.multilineColor,
-                      }}
-                      fullWidth
-                      className={classes.textField}
-                      id="nickName"
-                      name="nickName"
-                      label="Ваш ник"
-                      type="text"
-                      value={formik.values.nickName}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.nickName &&
-                        Boolean(formik.errors.nickName)
-                      }
-                      helperText={
-                        formik.touched.nickName && formik.errors.nickName
-                      }
-                    />
+              <TextField
+                fullWidth
+                id="email"
+                name="email"
+                label="Почтовый адрес:"
+                type="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
 
-                    <TextField
-                      InputProps={{
-                        className: classes.multilineColor,
-                      }}
-                      InputLabelProps={{
-                        className: classes.multilineColor,
-                      }}
-                      className={classes.textField}
-                      fullWidth
-                      id="age"
-                      name="age"
-                      label="Ваш возраст"
-                      type="text"
-                      value={formik.values.age}
-                      onChange={formik.handleChange}
-                      error={formik.touched.age && Boolean(formik.errors.age)}
-                      helperText={formik.touched.age && formik.errors.age}
-                    />
+              <TextField
+                id="nickName"
+                name="nickName"
+                label="Ваш ник"
+                type="text"
+                value={formik.values.nickName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.nickName && Boolean(formik.errors.nickName)
+                }
+                helperText={formik.touched.nickName && formik.errors.nickName}
+              />
 
-                    <TextField
-                      InputProps={{
-                        className: classes.multilineColor,
-                      }}
-                      InputLabelProps={{
-                        className: classes.multilineColor,
-                      }}
-                      className={classes.textField}
-                      fullWidth
-                      id="weight"
-                      name="weight"
-                      label="Ваш вес"
-                      type="text"
-                      value={formik.values.weight}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.weight && Boolean(formik.errors.weight)
-                      }
-                      helperText={formik.touched.weight && formik.errors.weight}
-                    />
+              <TextField
+                fullWidth
+                id="age"
+                name="age"
+                label="Ваш возраст"
+                type="text"
+                value={formik.values.age}
+                onChange={formik.handleChange}
+                error={formik.touched.age && Boolean(formik.errors.age)}
+                helperText={formik.touched.age && formik.errors.age}
+              />
 
-                    <TextField
-                      InputProps={{
-                        className: classes.multilineColor,
-                      }}
-                      InputLabelProps={{
-                        className: classes.multilineColor,
-                      }}
-                      className={classes.textField}
-                      fullWidth
-                      id="tel"
-                      name="tel"
-                      label="Контактная информация(телефон)"
-                      type="tel"
-                      value={formik.values.tel}
-                      onChange={formik.handleChange}
-                      error={formik.touched.tel && Boolean(formik.errors.tel)}
-                      helperText={formik.touched.tel && formik.errors.tel}
-                    />
+              <TextField
+                fullWidth
+                id="weight"
+                name="weight"
+                label="Ваш вес"
+                type="text"
+                value={formik.values.weight}
+                onChange={formik.handleChange}
+                error={formik.touched.weight && Boolean(formik.errors.weight)}
+                helperText={formik.touched.weight && formik.errors.weight}
+              />
 
-                    <Typography
-                      className={classes.whiteText}
-                      variant="body2"
-                      component="p"
-                    >
-                      <br />
-                      Для редактирования информации о себе нажмите кнопку:
-                      <br />
-                      {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
-                    </Typography>
-                  </CardContent>
+              <TextField
+                fullWidth
+                id="tel"
+                name="tel"
+                label="Контактная информация(телефон)"
+                type="tel"
+                value={formik.values.tel}
+                onChange={formik.handleChange}
+                error={formik.touched.tel && Boolean(formik.errors.tel)}
+                helperText={formik.touched.tel && formik.errors.tel}
+              />
 
-                  <CardActions>
-                    <Button type="submit" size="big" variant="contained">
-                      Отредактировать данные
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            </Grid>
-          </form>
+              <Typography
+                className={classes.whiteText}
+                variant="body2"
+                component="p"
+              >
+                <br />
+                Для редактирования информации о себе нажмите кнопку:
+                <br />
+                {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
+              </Typography>
+
+              <Button type="submit" size="big" variant="contained">
+                Отредактировать данные
+              </Button>
+            </form>
+          </Container>
         </>
       ) : (
         <>
@@ -291,12 +262,9 @@ function ProfilePassenger() {
               </Typography>
             </Grid>
           </Grid> */}
-          <Grid container>
+          <Grid container justify="center">
             <Grid item>
-              <Typography> </Typography>
-            </Grid>
-            <Grid item>
-              <Card className={classes.root}>
+              <Card className={classes.rootcard}>
                 <CardContent className={classes.whiteText}>
                   <Typography className={classes.pos}>
                     Почтовый адрес:

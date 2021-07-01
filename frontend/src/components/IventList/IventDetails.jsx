@@ -9,6 +9,7 @@ import {
   Button,
   Container,
   Box,
+  List,
 } from "@material-ui/core";
 import moment from "moment";
 import localization from "moment/locale/ru";
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wordDescript: {
     wordBreak: "break-all",
+    color: "white",
   },
   cardMedia: {
     paddingTop: "20%", // 16:9
@@ -90,7 +92,8 @@ export default function IventDetails() {
                 {curIvent.coords[1]}
               </Typography>
               <Typography gutterBottom component="h6">
-                <b>Количество участников:</b> 1
+                <b>Количество одобренных участников:</b>{" "}
+                {curIvent.passengerAccepted.length}
               </Typography>{" "}
               <Typography gutterBottom component="h6">
                 {/* <b>Место проведения:</b> {el.coords[0]} {el.coords[1]} */}
@@ -114,7 +117,6 @@ export default function IventDetails() {
               >
                 Назад
               </Button>
-
             </CardActions>
           </Card>
         </Grid>
@@ -128,21 +130,35 @@ export default function IventDetails() {
             <Grid item xs={5}>
               <Grid
                 container
+                spacing={2}
                 direction="column"
-                justify="space-around"
-                alignItems="center"
+                justify="flex-start"
+                alignItems="flex-start"
               >
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  container
+                  spacing={2}
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="flex-start"
+                  xs={12}
+                >
                   {" "}
                   <Typography className={classes.wordDescript}>
                     Ожидают:
                   </Typography>
                   {curIvent.passengerPending.length !== 0 ? (
                     curIvent.passengerPending.map((pas) => (
-                      <PendingPassenger currentIventId={curIvent._id} passenger={pas} />
+                      <PendingPassenger
+                        currentIventId={curIvent._id}
+                        passenger={pas}
+                      />
                     ))
                   ) : (
-                    <p>пока пусто </p>
+                    <Typography className={classes.wordDescript}>
+                      Пока пусто
+                    </Typography>
                   )}
                 </Grid>
               </Grid>
@@ -150,6 +166,7 @@ export default function IventDetails() {
             <Grid item xs={5}>
               <Grid
                 container
+                spacing={2}
                 direction="column"
                 justify="space-around"
                 alignItems="center"
@@ -161,10 +178,15 @@ export default function IventDetails() {
                   </Typography>
                   {curIvent.passengerAccepted.length !== 0 ? (
                     curIvent.passengerAccepted.map((pas) => (
-                      <AcceptedPassenger currentIventId={curIvent._id} passenger={pas} />
+                      <AcceptedPassenger
+                        currentIventId={curIvent._id}
+                        passenger={pas}
+                      />
                     ))
                   ) : (
-                    <h3>пока никто не одобрен </h3>
+                    <Typography className={classes.wordDescript}>
+                      Пока пусто{" "}
+                    </Typography>
                   )}
                 </Grid>
               </Grid>
