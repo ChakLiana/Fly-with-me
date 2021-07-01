@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { currentWeatherGetFromApi } from '../../redux/actions/currentWeatherAction';
-
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { useDispatch, useSelector } from "react-redux";
+import { currentWeatherGetFromApi } from "../../redux/actions/currentWeatherAction";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    height: 600,
+    fontSize: "14px",
+    "& .MuiTableCell-root": {
+      fontSize: "16px",
+      textAlign: "left",
+    },
   },
 });
 
@@ -36,13 +40,55 @@ export default function Weather() {
 
   // Название строк и содержание ячеек в строках
   const rows = [
-    createData('Температура воздуха (\u{00B0}C)', `${currentWeather.todayTemp}`, `${currentWeather.tomorrowTemp}`, `${currentWeather.afterTomorrowTemp}`, `${currentWeather.inThreeDaysTemp}`),
-    createData('Сила ветра (м/с)', `${currentWeather.todayWindSpeed}`, `${currentWeather.tomorrowWindSpeed}`, `${currentWeather.afterTomorrowWindSpeed}`, `${currentWeather.inThreeDaysWindSpeed}`),
-    createData('Направление ветра', `${currentWeather.todayWindDirection}`, `${currentWeather.tomorrowWindDirection}`, `${currentWeather.afterTomorrowWindDirection}`, `${currentWeather.inThreeDaysWindDirection}`),
-    createData('Высота облачной базы (м)', `${currentWeather.todayCloudBaseHeight}`, `${currentWeather.tomorrowCloudBaseHeight}`, `${currentWeather.afterTomorrowCloudBaseHeight}`, `${currentWeather.inThreeDaysCloudBaseHeight}`),
-    createData('Вероятность осадков (%)', `${currentWeather.todayPrecipitationProbability}`, `${currentWeather.tomorrowPrecipitationProbability}`, `${currentWeather.afterTomorrowPrecipitationProbability}`, `${currentWeather.inThreeDaysPrecipitationProbability}`),
-    createData('Грозовая активность (%)', `${currentWeather.todayThunderstormActivity}`, `${currentWeather.tomorrowThunderstormActivity}`, `${currentWeather.afterTomorrowThunderstormActivity}`, `${currentWeather.inThreeDaysThunderstormActivity}`),
-    createData('Облачность (%)', `${currentWeather.todayCloudy}`, `${currentWeather.tomorrowCloudy}`, `${currentWeather.afterTomorrowCloudy}`, `${currentWeather.inThreeDaysCloudy}`),
+    createData(
+      "Температура воздуха (\u{00B0}C)",
+      `${currentWeather.todayTemp}`,
+      `${currentWeather.tomorrowTemp}`,
+      `${currentWeather.afterTomorrowTemp}`,
+      `${currentWeather.inThreeDaysTemp}`
+    ),
+    createData(
+      "Сила ветра (м/с)",
+      `${currentWeather.todayWindSpeed}`,
+      `${currentWeather.tomorrowWindSpeed}`,
+      `${currentWeather.afterTomorrowWindSpeed}`,
+      `${currentWeather.inThreeDaysWindSpeed}`
+    ),
+    createData(
+      "Направление ветра",
+      `${currentWeather.todayWindDirection}`,
+      `${currentWeather.tomorrowWindDirection}`,
+      `${currentWeather.afterTomorrowWindDirection}`,
+      `${currentWeather.inThreeDaysWindDirection}`
+    ),
+    createData(
+      "Высота облачной базы (м)",
+      `${currentWeather.todayCloudBaseHeight}`,
+      `${currentWeather.tomorrowCloudBaseHeight}`,
+      `${currentWeather.afterTomorrowCloudBaseHeight}`,
+      `${currentWeather.inThreeDaysCloudBaseHeight}`
+    ),
+    createData(
+      "Вероятность осадков (%)",
+      `${currentWeather.todayPrecipitationProbability}`,
+      `${currentWeather.tomorrowPrecipitationProbability}`,
+      `${currentWeather.afterTomorrowPrecipitationProbability}`,
+      `${currentWeather.inThreeDaysPrecipitationProbability}`
+    ),
+    createData(
+      "Грозовая активность (%)",
+      `${currentWeather.todayThunderstormActivity}`,
+      `${currentWeather.tomorrowThunderstormActivity}`,
+      `${currentWeather.afterTomorrowThunderstormActivity}`,
+      `${currentWeather.inThreeDaysThunderstormActivity}`
+    ),
+    createData(
+      "Облачность (%)",
+      `${currentWeather.todayCloudy}`,
+      `${currentWeather.tomorrowCloudy}`,
+      `${currentWeather.afterTomorrowCloudy}`,
+      `${currentWeather.inThreeDaysCloudy}`
+    ),
   ];
 
   return (
@@ -62,7 +108,7 @@ export default function Weather() {
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
-                {row.name}
+                <b>{row.name}</b>
               </TableCell>
               <TableCell align="right">{row.now}</TableCell>
               <TableCell align="right">{row.tomorrow}</TableCell>

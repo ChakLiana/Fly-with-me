@@ -18,6 +18,7 @@ import {
 } from "../../redux/actions/iventActions";
 
 const useStyles = makeStyles((theme) => ({
+  item: { marginBottom: 10 },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -70,7 +71,7 @@ export default function AcceptedPassenger({ currentIventId, passenger }) {
   const classes = useStyles();
 
   return (
-    <Grid item>
+    <Grid item className={classes.item}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
@@ -89,7 +90,7 @@ export default function AcceptedPassenger({ currentIventId, passenger }) {
               pendingPasengerHandler(currentIventId, passenger._id)
             }
             size="small"
-            color="secondary"
+            color="default"
           >
             Вернуть в ожидание
           </Button>

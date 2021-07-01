@@ -20,6 +20,7 @@ import {
 // import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  item: { marginBottom: 10 },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -69,7 +70,7 @@ export default function PendingPassenger({ passenger, currentIventId }) {
   const classes = useStyles();
 
   return (
-    <Grid item>
+    <Grid item className={classes.item}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography>
@@ -83,7 +84,7 @@ export default function PendingPassenger({ passenger, currentIventId }) {
           <Button
             onClick={() => acceptPasengerHandler(currentIventId, passenger._id)}
             size="small"
-            color="primary"
+            style={{ color: "green" }}
           >
             Принять заявку
           </Button>

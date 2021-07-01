@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { FormGroup, Container, FormControlLabel } from "@material-ui/core";
+import { FormGroup, Container, FormControlLabel, Box } from "@material-ui/core";
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import TandemRegisterForm from "./TandemRegisterForm";
@@ -84,7 +84,9 @@ export default function RoleSwitches() {
             Зарегистрироваться в качестве:{" "}
             {state.checkedA ? <b>Пилота</b> : <b>Пассажира</b>}
           </Typography>
+
           <FormControlLabel
+            style={{ width: 50 }}
             control={
               <IOSSwitch
                 checked={state.checkedA}
