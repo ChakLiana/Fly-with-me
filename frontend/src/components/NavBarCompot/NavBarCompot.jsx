@@ -1,22 +1,21 @@
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 // import SignalCompot from "../Signal/Signal";
-// import logo from "./ok.png";       /// тут показано
+import logo from "./Fly with me-logos_black.png";
 const Nav = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        сюда добавить лого
-        {/* <img src={logo} alt={"logo"} width="100" heigth="50" />    /// тут показано */}
-        <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            На главную
-          </Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+      <div className="container ">
+        <img src={logo} alt={"logo"} style={{ width: "150px" }} />
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+        <div className="container-fluid d-flex align-items-center ">
+          <div className="collapse navbar-collapse  " id="navbarNav ">
+            <ul className="navbar-nav container-fluid d-flex align-items-center justify-content-between">
+              <Link className="navbar-brand" to="/">
+                На главную
+              </Link>
               {user ? (
                 <>
                   <li className="nav-item">
@@ -57,13 +56,7 @@ const Nav = () => {
                       className="nav-link"
                       activeClassName="active"
                       color="primary"
-                    >
-                      {
-                        <p>
-                          Вы зашли как <b> {user.nickName} </b>
-                        </p>
-                      }
-                    </NavLink>
+                    ></NavLink>
                     {/* <SignalCompot /> */}
                   </li>
                 </>

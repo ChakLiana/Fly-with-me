@@ -179,147 +179,145 @@ export default function ProfileTandem() {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid container>
-                <Grid item>
-                  <Card className={classes.root}>
-                    <CardContent>
-                      <Typography className={classes.fieldColor}>
-                        Почтовый адрес:
-                      </Typography>
-                      <TextField
-                        fullWidth
-                        className={classes.textField}
-                        id="email"
-                        name="email"
-                        label="Почтовый адрес:"
-                        type="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        error={
-                          formik.touched.email && Boolean(formik.errors.email)
-                        }
-                        helperText={formik.touched.email && formik.errors.email}
-                      />
+              {/* <Grid container> */}
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardContent>
+                    <Typography className={classes.fieldColor}>
+                      Почтовый адрес:
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      className={classes.textField}
+                      id="email"
+                      name="email"
+                      label="Почтовый адрес:"
+                      type="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
+                      helperText={formik.touched.email && formik.errors.email}
+                    />
 
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Ник:
-                      </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Ник:
+                    </Typography>
 
-                      <TextField
-                        fullWidth
-                        className={classes.textField}
-                        id="nickName"
-                        name="nickName"
-                        label="Ваш ник"
-                        type="text"
-                        value={formik.values.nickName}
-                        onChange={formik.handleChange}
-                        error={
-                          formik.touched.nickName &&
-                          Boolean(formik.errors.nickName)
-                        }
-                        helperText={
-                          formik.touched.nickName && formik.errors.nickName
-                        }
-                      />
+                    <TextField
+                      fullWidth
+                      className={classes.textField}
+                      id="nickName"
+                      name="nickName"
+                      label="Ваш ник"
+                      type="text"
+                      value={formik.values.nickName}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.nickName &&
+                        Boolean(formik.errors.nickName)
+                      }
+                      helperText={
+                        formik.touched.nickName && formik.errors.nickName
+                      }
+                    />
 
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Опыт:
-                      </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Опыт:
+                    </Typography>
 
-                      <TextField
-                        className={classes.textField}
-                        fullWidth
-                        id="experience"
-                        name="experience"
-                        label="Ваш опыт"
-                        type="text"
-                        value={formik.values.experience}
-                        onChange={formik.handleChange}
-                        error={
-                          formik.touched.experience &&
-                          Boolean(formik.errors.experience)
-                        }
-                        helperText={
-                          formik.touched.experience && formik.errors.experience
-                        }
-                      />
+                    <TextField
+                      className={classes.textField}
+                      fullWidth
+                      id="experience"
+                      name="experience"
+                      label="Ваш опыт"
+                      type="text"
+                      value={formik.values.experience}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.experience &&
+                        Boolean(formik.errors.experience)
+                      }
+                      helperText={
+                        formik.touched.experience && formik.errors.experience
+                      }
+                    />
 
-                      <Typography
-                        className={classes.fieldColor}
-                        color="textSecondary"
-                      >
-                        Часы налета:
-                      </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Часы налета:
+                    </Typography>
 
-                      <TextField
-                        className={classes.textField}
-                        fullWidth
-                        id="fHours"
-                        name="fHours"
-                        label="часы налета"
-                        type="text"
-                        value={formik.values.fHours}
-                        onChange={formik.handleChange}
-                        error={
-                          formik.touched.fHours && Boolean(formik.errors.fHours)
-                        }
-                        helperText={
-                          formik.touched.fHours && formik.errors.fHours
-                        }
-                      />
+                    <TextField
+                      className={classes.textField}
+                      fullWidth
+                      id="fHours"
+                      name="fHours"
+                      label="часы налета"
+                      type="text"
+                      value={formik.values.fHours}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.fHours && Boolean(formik.errors.fHours)
+                      }
+                      helperText={formik.touched.fHours && formik.errors.fHours}
+                    />
 
-                      <Typography
-                        color="textSecondary"
-                        className={classes.fieldColor}
-                      >
-                        Контакт:
-                      </Typography>
+                    <Typography
+                      color="textSecondary"
+                      className={classes.fieldColor}
+                    >
+                      Контакт:
+                    </Typography>
 
-                      <TextField
-                        className={classes.textField}
-                        fullWidth
-                        id="tel"
-                        name="tel"
-                        label="Контактная информация"
-                        type="text"
-                        value={formik.values.tel}
-                        onChange={formik.handleChange}
-                        error={formik.touched.tel && Boolean(formik.errors.tel)}
-                        helperText={formik.touched.tel && formik.errors.tel}
-                      />
+                    <TextField
+                      className={classes.textField}
+                      fullWidth
+                      id="tel"
+                      name="tel"
+                      label="Контактная информация"
+                      type="text"
+                      value={formik.values.tel}
+                      onChange={formik.handleChange}
+                      error={formik.touched.tel && Boolean(formik.errors.tel)}
+                      helperText={formik.touched.tel && formik.errors.tel}
+                    />
 
-                      <Typography
-                        className={classes.textColor}
-                        variant="body2"
-                        component="p"
-                      >
-                        <br />
-                        Для редактирования информации о себе нажмите кнопку:
-                        <br />
-                        {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
-                      </Typography>
-                    </CardContent>
+                    <Typography
+                      className={classes.textColor}
+                      variant="body2"
+                      component="p"
+                    >
+                      <br />
+                      Для редактирования информации о себе нажмите кнопку:
+                      <br />
+                      {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
+                    </Typography>
+                  </CardContent>
 
-                    <CardActions>
-                      <Button
-                        className={classes.btnColor}
-                        type="submit"
-                        size="big"
-                        variant="contained"
-                      >
-                        Принять изменения
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
+                  <CardActions>
+                    <Button
+                      className={classes.btnColor}
+                      type="submit"
+                      size="big"
+                      variant="contained"
+                    >
+                      Принять изменения
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
+              {/* </Grid> */}
             </form>
           </Container>
         </>
@@ -333,116 +331,98 @@ export default function ProfileTandem() {
             </Grid>
           </Grid> */}
           <Container maxWidth="sm">
-            <Grid container spacing={3}>
-              <Grid item>
-                <Grid
-                  container
-                  direction="column"
-                  alignItems="center"
-                  spacing={3}
-                >
-                  {/* <Grid item xs={8}>
+            <Grid item>
+              {/* <Grid item xs={8}>
                     <Paper className={classes.dragger}>
                       <Dragger />
                     </Paper>
                   </Grid> */}
-                  <Grid item xs={12}>
-                    <Card className={classes.root}>
-                      <CardContent>
-                        <Typography className={classes.fieldColor}>
-                          Почтовый адрес:
-                        </Typography>
-                        <Typography
-                          className={classes.pos}
-                          component="span"
-                          color="textPrimary"
-                        >
-                          {curUser.email}
-                        </Typography>
-                        <Typography
-                          className={classes.fieldColor}
-                          color="textSecondary"
-                        >
-                          Ник:
-                        </Typography>
-                        <Typography
-                          className={classes.pos}
-                          component="span"
-                          color="textPrimary"
-                        >
-                          {curUser.nickName}
-                        </Typography>
-                        <Typography
-                          className={classes.fieldColor}
-                          color="textSecondary"
-                        >
-                          Опыт:
-                        </Typography>
-                        <Typography
-                          className={classes.pos}
-                          component="span"
-                          color="textPrimary"
-                        >
-                          {curUser.experience}
-                        </Typography>
-                        <Typography
-                          className={classes.fieldColor}
-                          color="textSecondary"
-                        >
-                          Часы налета:
-                        </Typography>
-                        <Typography
-                          className={classes.pos}
-                          component="span"
-                          color="textPrimary"
-                        >
-                          {curUser.fHours}
-                        </Typography>
-                        <Typography
-                          className={classes.fieldColor}
-                          color="textSecondary"
-                        >
-                          Контакт:
-                        </Typography>
-                        <Typography
-                          className={classes.pos}
-                          component="span"
-                          color="textPrimary"
-                        >
-                          {curUser.tel}
-                        </Typography>
-                        <Typography
-                          className={classes.textColor}
-                          variant="body2"
-                          component="p"
-                        >
-                          <br />
-                          Для редактирования информации о себе нажмите кнопку:
-                          <br />
-                          {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button
-                          className={classes.btnColor}
-                          onClick={handleClick}
-                          size="big"
-                        >
-                          Отредактировать данные
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item>
-                <Grid
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  spacing={3}
-                ></Grid>
+              <Grid item xs={12}>
+                <Card className={classes.root}>
+                  <CardContent>
+                    <Typography className={classes.fieldColor}>
+                      Почтовый адрес:
+                    </Typography>
+                    <Typography
+                      className={classes.pos}
+                      component="span"
+                      color="textPrimary"
+                    >
+                      {curUser.email}
+                    </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Ник:
+                    </Typography>
+                    <Typography
+                      className={classes.pos}
+                      component="span"
+                      color="textPrimary"
+                    >
+                      {curUser.nickName}
+                    </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Опыт:
+                    </Typography>
+                    <Typography
+                      className={classes.pos}
+                      component="span"
+                      color="textPrimary"
+                    >
+                      {curUser.experience}
+                    </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Часы налета:
+                    </Typography>
+                    <Typography
+                      className={classes.pos}
+                      component="span"
+                      color="textPrimary"
+                    >
+                      {curUser.fHours}
+                    </Typography>
+                    <Typography
+                      className={classes.fieldColor}
+                      color="textSecondary"
+                    >
+                      Контакт:
+                    </Typography>
+                    <Typography
+                      className={classes.pos}
+                      component="span"
+                      color="textPrimary"
+                    >
+                      {curUser.tel}
+                    </Typography>
+                    <Typography
+                      className={classes.textColor}
+                      variant="body2"
+                      component="p"
+                    >
+                      <br />
+                      Для редактирования информации о себе нажмите кнопку:
+                      <br />
+                      {'"ОТРЕДАКТИРОВАТЬ ДАННЫЕ"'}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      className={classes.btnColor}
+                      onClick={handleClick}
+                      size="big"
+                    >
+                      Отредактировать данные
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
             </Grid>
           </Container>
