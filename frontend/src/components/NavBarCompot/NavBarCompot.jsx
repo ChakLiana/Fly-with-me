@@ -28,7 +28,6 @@ const Nav = () => {
                       Выйти
                     </NavLink>
                   </li>
-
                   <li className="nav-item">
                     <NavLink
                       exact
