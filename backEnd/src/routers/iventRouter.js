@@ -69,7 +69,7 @@ router.route('/')
     // const inThreeDays = new Date(todayNotFormat.getTime() + ((24 * 60 * 60 * 1000) * 3)).toISOString().split('.')[0];
 
     // const windSpeedCode = 'wind_speed_10m:ms'; //Сила ветра (м/с)
-    // const cloudBaseHeightCode = 'cloud_base_agl:m'; //Высата облачной базы (м)
+    // const cloudBaseHeightCode = 'cloud_base_agl:m'; //Высота облачной базы 
     // const windDirectionCode = 'wind_dir_10m:d'; //Направление ветра (от вет от api в градусах)
     // const precipitationProbabilityCode = 'prob_precip_1h:p'; //Вероятность осадков (%)
     // const tempCode = 't_0m:C'; //Температура воздуха (град Цельсия)
