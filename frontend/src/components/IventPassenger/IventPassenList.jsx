@@ -30,7 +30,11 @@ export default function IventListPassenger() {
     <>
       {pending.length ? (
         <>
-          <h3>Ожидает подтверждения</h3>
+          <h3>
+            {" "}
+            <font color="white"> Ожидает подтверждения </font>
+          </h3>
+          <br />
           <Grid container spacing={1} justify="center">
             {pending.map((el) => {
               return <IventPasseng key={el._id} el={el} />;
@@ -40,8 +44,11 @@ export default function IventListPassenger() {
       ) : null}
       {accept.length ? (
         <>
-          <h3>Подтверждено </h3>
-
+          <h3>
+            {" "}
+            <font color="white"> Подтверждено </font>
+          </h3>
+          <br />
           <Grid container spacing={1} justify="center">
             {accept.map((el) => {
               return <IventPasseng key={el._id} el={el} />;
