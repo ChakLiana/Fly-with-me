@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import "./NavBarCompot.css";
 // import SignalCompot from "../Signal/Signal";
-
+// import logo from "./ok.png";       /// тут показано
 const Nav = () => {
   const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
+        сюда добавить лого
+        {/* <img src={logo} alt={"logo"} width="100" heigth="50" />    /// тут показано */}
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">
             На главную
@@ -59,7 +60,7 @@ const Nav = () => {
                     >
                       {
                         <p>
-                          Вы зашли как<b> {user.nickName} </b>
+                          Вы зашли как <b> {user.nickName} </b>
                         </p>
                       }
                     </NavLink>
