@@ -66,8 +66,8 @@ router.route('/')
     }
   })
   .put(async (req, res) => {
-    const meteomaticsLogin = 'student_lianova';
-    const meteomaticsParol = '9TMhNyZF5g0kd';
+    const meteomaticsLogin = 'none_voronov';
+    const meteomaticsParol = 'r9I5Q8LhFbsqA';
 
     const { latitude, longitude } = req.body;
 

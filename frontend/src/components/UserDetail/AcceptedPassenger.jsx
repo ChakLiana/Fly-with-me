@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    backgroundColor: "#ADD8E6",
+    backgroundColor: "#eff2c9",
     // width: 200,
     height: "100%",
     display: "flex",
