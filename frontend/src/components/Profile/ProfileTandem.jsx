@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 16,
     marginBottom: 16,
     color: "white",
+    textAlign: "center",
   },
   fieldColor: {
     color: "#00bfff",
