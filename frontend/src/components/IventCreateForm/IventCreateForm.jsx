@@ -38,7 +38,7 @@ const validationSchema = yup.object({
   price: yup
     .number("Укажите цену")
     .max(10000, "Вы ввели слишком большое число, проверьте еще раз")
-    .required("* Поле вес обязательно для заполнения")
+    .required("* Поле цена обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
   stopList: yup.string().required("* Заполните поле ограничения"),
 });
@@ -159,7 +159,6 @@ export default function IventCreateForm() {
           <Button color="textSecondary" variant="contained" type="submit">
             Создать событие
           </Button>
-
         </form>
       </Paper>
     </div>
