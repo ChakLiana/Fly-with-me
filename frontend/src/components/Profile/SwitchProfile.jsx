@@ -36,7 +36,6 @@ export default function ProfileSwitches() {
               Добро пожаловать в личный кабинет: <b>{curUser.nickName}</b>
             </Typography>
           </Fade>
-
           <Grid item xs={12}>
             <Fade in={true} timeout={2000}>
               <Typography className={classes.textColor}>
