@@ -1,6 +1,12 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { FormGroup, Container, FormControlLabel, Box } from "@material-ui/core";
+import {
+  FormGroup,
+  Container,
+  FormControlLabel,
+  Box,
+  Fade,
+} from "@material-ui/core";
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import TandemRegisterForm from "./TandemRegisterForm";
@@ -63,6 +69,7 @@ const IOSSwitch = withStyles((theme) => ({
 const useStyles = makeStyles({
   whiteText: {
     color: "white",
+    textAlign: "center",
   },
 });
 
@@ -81,20 +88,23 @@ export default function RoleSwitches() {
       <Container maxWidth="sm">
         <FormGroup>
           <Typography className={classes.whiteText}>
-            Зарегистрироваться в качестве:{" "}
-            {state.checkedA ? <b>Пилота</b> : <b>Пассажира</b>}
+            <IOSSwitch
+              checked={state.checkedA}
+              onChange={handleChange}
+              name="checkedA"
+            />{" "}
+            Зарегистрироваться в качестве:
+            <Fade in={state.checkedA} timeout={2000}>
+              <Typography className={classes.whiteText}>
+                <b>Пилота</b>{" "}
+              </Typography>
+            </Fade>
+            <Fade in={!state.checkedA} timeout={2000}>
+              <Typography className={classes.whiteText}>
+                <b>Пассажира</b>
+              </Typography>
+            </Fade>
           </Typography>
-
-          <FormControlLabel
-            style={{ width: 50 }}
-            control={
-              <IOSSwitch
-                checked={state.checkedA}
-                onChange={handleChange}
-                name="checkedA"
-              />
-            }
-          />
         </FormGroup>
 
         {state.checkedA ? <TandemRegisterForm /> : <UserRegisterForm />}

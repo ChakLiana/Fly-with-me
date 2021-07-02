@@ -1,13 +1,11 @@
-
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { TextField, Container, Typography } from "@material-ui/core";
+import { TextField, Container, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
 import { useHistory } from "react-router";
-
 
 const useStyles = makeStyles({
   textField: {
@@ -19,7 +17,6 @@ const useStyles = makeStyles({
     borderRadius: "3px",
     backgroundColor: "rgba(0, 0,0, 0.5)",
     color: "white",
-    maxWidth: 500,
   },
   multilineColor: {
     color: "#ffffff !important",
@@ -40,7 +37,7 @@ const validationSchema = yup.object({
 
   nickName: yup
     .string("Имя")
-    .min(4, "Имя должно состоять не менне чем из 5 букв")
+    .min(4, "Имя должно состоять не менне чем из 4 букв")
     .required("*Имя обязательно для заполнения"),
   experience: yup
     .number("Введите  возраст")
@@ -156,7 +153,7 @@ export default function UserRegisterForm() {
             fullWidth
             id="experience"
             name="experience"
-            label="Ваш опыт"
+            label="Ваш опыт(в годах)"
             type="text"
             value={formik.values.experience}
             onChange={formik.handleChange}
@@ -176,7 +173,7 @@ export default function UserRegisterForm() {
             fullWidth
             id="fHours"
             name="fHours"
-            label="часы налета"
+            label="Часы налета"
             type="text"
             value={formik.values.fHours}
             onChange={formik.handleChange}
@@ -205,10 +202,15 @@ export default function UserRegisterForm() {
             //   inputComponent: CustomInput,
             // }}
           />
-
-          <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
-          </Button>
+          <Grid container justify="center">
+            <Button
+              style={{ color: "#2d2d2c", backgroundColor: "#29b6f6" }}
+              variant="contained"
+              type="submit"
+            >
+              Зарегистрироваться
+            </Button>
+          </Grid>
         </form>
       </Container>
     </div>
