@@ -12,8 +12,8 @@ const options = {
 }
 
 
-const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
-// mongodb://localhost:27017/p1w3d3
+// const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
+const dbConnectionURL =  'mongodb://localhost:27017/p1w3d3'
 
 function connect() {
   mongoose.connect(dbConnectionURL, options, (err) => {

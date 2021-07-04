@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 // import { useHistory } from "react-router";
 import { TextField, Typography, Container } from "@material-ui/core";
 import IventList from "../IventList/IventList";
+import Dragger from "../Dragger/Drager"
 
 const useStyles = makeStyles((theme) => ({
   span: {
@@ -341,8 +342,10 @@ export default function ProfileTandem() {
               <Grid item xs={12}>
                 <Card className={classes.root}>
                   <CardContent>
+                    <Dragger /> 
                     <Typography className={classes.fieldColor}>
                       Почтовый адрес:
+                      
                     </Typography>
                     <Typography
                       className={classes.pos}
