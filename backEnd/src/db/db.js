@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const options = {
   useNewUrlParser: true, // говорим mongoose, что строка подключения будет в новом формате (новый формат должен обязательно содеражт порт)
@@ -9,23 +9,24 @@ const options = {
   poolSize: 10, // максимальное количество сокетов, которые драйвер MongoDB будет держать открытыми для этого соединения
   bufferMaxEntries: 0, // говорим mongoose перестать выполнять любые операции с базой данных, после того как произодет отключение от последней.
   // В противном случае mongoose пытается дождаться восстановления соездинения, для завершения  операций
-}
+};
+
+const dbConnectionURL = "mongodb://localhost:27017/fly-with-me1";
 
 
-// const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
-const dbConnectionURL = 'mongodb://127.0.0.1:27017/Fly-With-Me'
+const dbConnectionURL = 'mongodb+srv://admin:admin@myclaster.juvuz.mongodb.net/Fly-With-Me?retryWrites=true&w=majority'
 // mongodb://localhost:27017/p1w3d3
 
 function connect() {
   mongoose.connect(dbConnectionURL, options, (err) => {
-    if (err) console.error('ERROR WITH DB')
+    if (err) console.error("ERROR WITH DB");
 
-    console.log('Connect to DB')
-  })
+    console.log("Connect to DB");
+  });
 }
 
 function disconnect() {
-  mongoose.disconnect()
+  mongoose.disconnect();
 }
 
-module.exports = { connect, disconnect, dbConnectionURL }
+module.exports = { connect, disconnect, dbConnectionURL };
