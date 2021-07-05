@@ -158,6 +158,7 @@ function YandexMap() {
                   const date = elem.dateOfEvent;
                   const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
 
+
                   return (
                     <Placemark
                       key={elem._id}
@@ -167,6 +168,7 @@ function YandexMap() {
                       properties={{
                         balloonContentHeader: `<h5> Здесь летает ${elem.creator?.nickName}</h5>`,
                         balloonContentBody: `
+
                     <hr/><p><strong>Дата:</strong> ${formatDate}</p>
             <p><strong>Стоимость:</strong> ${elem.price} р.</p>
             <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
