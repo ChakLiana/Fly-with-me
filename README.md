@@ -1,2 +1,2 @@
 # Fly-with-me.
-Будет офигенный проект!
+https://github.com/ChakLiana/Fly-with-me/issues/66#issue-937033944
