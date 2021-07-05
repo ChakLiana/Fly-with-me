@@ -164,7 +164,7 @@ function YandexMap() {
                   options={{ iconColor: "#5cb85c" }}
 
                   properties={{
-                    balloonContentHeader: `<h5> Здесь летает ${elem.creator.nickName}</h5>`,
+                    balloonContentHeader: `<h5> Здесь летает ${elem.creator?.nickName}</h5>`,
                     balloonContentBody: `
                     <hr/><p><strong>Дата:</strong> ${formatDate}</p>
             <p><strong>Стоимость:</strong> ${elem.price} р.</p>
