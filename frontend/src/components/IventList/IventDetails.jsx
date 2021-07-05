@@ -44,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
   wordDescript: {
     wordBreak: "break-all",
     color: "white",
+    fontSize: "30px",
+    textAlign: "center",
   },
   cardMedia: {
     paddingTop: "20%", // 16:9
@@ -76,7 +78,7 @@ export default function IventDetails() {
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.cardMedia}
@@ -120,19 +122,20 @@ export default function IventDetails() {
             </CardActions>
           </Card>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <Grid
             container
             direction="row"
             justify="space-around"
             alignItems="center"
+            alignItems="flex-start"
           >
-            <Grid item xs={5}>
+            <Grid item xs={12} md={6}>
               <Grid
                 container
                 spacing={2}
-                direction="column"
-                justify="flex-start"
+                direction="row"
+                justify="space-around"
                 alignItems="flex-start"
               >
                 <Grid
@@ -140,8 +143,8 @@ export default function IventDetails() {
                   container
                   spacing={2}
                   direction="column"
-                  justify="flex-start"
-                  alignItems="flex-start"
+                  justify="center"
+                  alignItems="stretch"
                   xs={12}
                 >
                   {" "}
@@ -163,15 +166,23 @@ export default function IventDetails() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={6}>
               <Grid
                 container
                 spacing={2}
-                direction="column"
+                direction="row"
                 justify="space-around"
-                alignItems="center"
+                alignItems="flex-start"
               >
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  container
+                  spacing={2}
+                  direction="column"
+                  justify="center"
+                  alignItems="stretch"
+                  xs={12}
+                >
                   {" "}
                   <Typography className={classes.wordDescript}>
                     Одобренные:

@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { TextField, Container, Typography } from "@material-ui/core";
+import { TextField, Container, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.ac";
@@ -19,7 +19,6 @@ const useStyles = makeStyles({
     borderRadius: "3px",
     backgroundColor: "rgba(0, 0,0, 0.5)",
     color: "white",
-    maxWidth: 500,
   },
   container: {
     backgroundColor: 'rgba("200, 200,200, 0.5")',
@@ -210,9 +209,15 @@ export default function UserRegisterForm() {
             // }}
           />
 
-          <Button color="textSecondary" variant="contained" type="submit">
-            Зарегистрироваться
-          </Button>
+          <Grid container justify="center">
+            <Button
+              style={{ color: "#2d2d2c", backgroundColor: "#29b6f6" }}
+              variant="contained"
+              type="submit"
+            >
+              Зарегистрироваться
+            </Button>
+          </Grid>
         </form>
       </Container>
     </div>

@@ -8,6 +8,7 @@ import {
   Typography,
   InputAdornment,
   Paper,
+  Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +38,7 @@ const validationSchema = yup.object({
   price: yup
     .number("Укажите цену")
     .max(10000, "Вы ввели слишком большое число, проверьте еще раз")
-    .required("* Поле вес обязательно для заполнения")
+    .required("* Поле цена обязательно для заполнения")
     .typeError("Убедитесь что вы ввели число"),
   stopList: yup.string().required("* Заполните поле ограничения"),
 });
@@ -154,6 +155,7 @@ export default function IventCreateForm() {
             }
             helperText={formik.touched.description && formik.errors.description}
           />
+
           <Button color="textSecondary" variant="contained" type="submit">
             Создать событие
           </Button>

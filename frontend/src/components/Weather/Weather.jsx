@@ -1,25 +1,28 @@
-
-import React, { useEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { currentWeatherGetFromApi } from '../../redux/actions/currentWeatherAction';
-
-
+import React, { useEffect, useRef } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { useDispatch, useSelector } from "react-redux";
+import { currentWeatherGetFromApi } from "../../redux/actions/currentWeatherAction";
 
 const useStyles = makeStyles({
   table: {
+    th: {
+      "& .MuiTableCell-root": {
+        fontSize: "16px",
+        textAlign: "left",
+      },
+    },
     height: 600,
     fontSize: "14px",
     "& .MuiTableCell-root": {
       fontSize: "16px",
-      textAlign: "left",
+      textAlign: "center",
     },
   },
 });
@@ -32,26 +35,24 @@ export default function Weather() {
   const dispatch = useDispatch();
   const curentCoords = useSelector((state) => state.curentCoords);
   const currentWeather = useSelector((state) => state.currentWeather);
-  const apiFlag = useRef(false)
-  const prevCoords = useRef(null)
+  const apiFlag = useRef(false);
+  const prevCoords = useRef(null);
 
   useEffect(() => {
-
     function apiCall(coords) {
-      dispatch(currentWeatherGetFromApi(coords))
-      apiFlag.current = true
+      dispatch(currentWeatherGetFromApi(coords));
+      apiFlag.current = true;
       setTimeout(() => {
-        apiFlag.current = false
-        if (prevCoords.current) apiCall(prevCoords.current)
-        prevCoords.current = null
-      }, 3000)
+        apiFlag.current = false;
+        if (prevCoords.current) apiCall(prevCoords.current);
+        prevCoords.current = null;
+      }, 5000);
     }
 
-
     if (curentCoords.length && !apiFlag.current) {
-      apiCall(curentCoords)
+      apiCall(curentCoords);
     } else if (curentCoords.length && apiFlag.current) {
-      prevCoords.current = curentCoords
+      prevCoords.current = curentCoords;
     }
   }, [curentCoords]);
 
@@ -117,10 +118,10 @@ export default function Weather() {
           <TableRow>
             {/* Заголовки */}
             <TableCell>Погодные условия</TableCell>
-            <TableCell align="right">Сейчас</TableCell>
-            <TableCell align="right">Завтра</TableCell>
-            <TableCell align="right">Послезавтра</TableCell>
-            <TableCell align="right">Через 3 дня</TableCell>
+            <TableCell>Сейчас</TableCell>
+            <TableCell>Завтра</TableCell>
+            <TableCell>Послезавтра</TableCell>
+            <TableCell>Через 3 дня</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -129,10 +130,10 @@ export default function Weather() {
               <TableCell component="th" scope="row">
                 <b>{row.name}</b>
               </TableCell>
-              <TableCell align="right">{row.now}</TableCell>
-              <TableCell align="right">{row.tomorrow}</TableCell>
-              <TableCell align="right">{row.afterTomorrow}</TableCell>
-              <TableCell align="right">{row.inThreeDays}</TableCell>
+              <TableCell>{row.now}</TableCell>
+              <TableCell>{row.tomorrow}</TableCell>
+              <TableCell>{row.afterTomorrow}</TableCell>
+              <TableCell>{row.inThreeDays}</TableCell>
             </TableRow>
           ))}
         </TableBody>

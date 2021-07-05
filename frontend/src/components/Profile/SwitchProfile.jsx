@@ -1,4 +1,4 @@
-import Typography from "@material-ui/core/Typography";
+import { Typography, Fade } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import ProfileTandem from "./ProfileTandem";
 import ProfilePassenger from "./ProfilePassenger";
@@ -31,15 +31,18 @@ export default function ProfileSwitches() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography className={classes.textColor}>
-            Добро пожаловать в личный кабинет: <b>{curUser.nickName}</b>
-          </Typography>
-
-          <Grid item xs={12}>
+          <Fade in={true} timeout={2000}>
             <Typography className={classes.textColor}>
-              Вы выступаете в роли{" "}
-              {curUser?.role === "tandem" ? "Пилота" : "Пассажира"}
+              Добро пожаловать в личный кабинет: <b>{curUser.nickName}</b>
             </Typography>
+          </Fade>
+          <Grid item xs={12}>
+            <Fade in={true} timeout={2000}>
+              <Typography className={classes.textColor}>
+                Вы выступаете в роли{" "}
+                {curUser?.role === "tandem" ? "Пилота" : "Пассажира"}
+              </Typography>
+            </Fade>
           </Grid>
         </Grid>
 

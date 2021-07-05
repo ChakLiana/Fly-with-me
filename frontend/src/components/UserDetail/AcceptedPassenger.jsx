@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    backgroundColor: "#D0D3DC",
-    maxWidth: 250,
+    backgroundColor: "#eff2c9",
+    // width: 200,
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     wordBreak: "break-all",
   },
   cardContent: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
 }));
 

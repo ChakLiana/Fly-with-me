@@ -46,7 +46,7 @@ const signUp = async (req, res) => {
       });
       console.log(chalk.black.bgGreen("NEW USER Created"), newUser);
 
-      return res.json({ newUser });
+      return res.json({ newUser,token });
     } catch (error) {
       console.error(error.message);
       return res.sendStatus(500);
