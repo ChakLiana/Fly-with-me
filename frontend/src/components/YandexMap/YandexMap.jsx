@@ -20,7 +20,6 @@ import moment from "moment";
 
 // import styles from "./yandexMap.module.css";
 
-
 function YandexMap() {
   const key = "20c11914-368f-4020-b7de-e59f81f0ea0b";
 
@@ -80,50 +79,53 @@ function YandexMap() {
 
               {allIvents.length && currentUser?.role === "passenger"
                 ? allIvents.map((elem) => {
-                  const date = elem.dateOfEvent;
-                  const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+                    const date = elem.dateOfEvent;
+                    const formatDate =
+                      moment(date).format("MMMM Do YYYY, h:mm");
 
-
-                  return (<Placemark
-                    key={elem._id}
-
-                    preset={"islands#violetIcon"}
-                    geometry={elem.coords}
-                    modules={["geoObject.addon.balloon"]}
-                    options={{ iconColor: "#5cb85c" }}
-
-                    properties={{
-                      balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                      balloonContentBody: `
+                    return (
+                      <Placemark
+                        key={elem._id}
+                        preset={"islands#violetIcon"}
+                        geometry={elem.coords}
+                        modules={["geoObject.addon.balloon"]}
+                        options={{ iconColor: "#5cb85c" }}
+                        properties={{
+                          balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                          balloonContentBody: `
                 <hr/><p><strong>Дата:</strong> ${formatDate}</p>
                 <p><strong>Стоимость:</strong> ${elem.price} р.</p>
                 <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
                 <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                      balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
-                    }}
-                  />)
-                })
+                          balloonContentFooter: `<button  class ='btn btn-info' onclick="window.handleOpenModalAndSelectIvent(${elem.coords[0]}, ${elem.coords[1]})" >Подробнее</button>`,
+                        }}
+                      />
+                    );
+                  })
                 : allIvents.length && currentUser?.role === "tandem"
-                  ? allIvents.map((elem) => {
+                ? allIvents.map((elem) => {
                     const date = elem.dateOfEvent;
-                    const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+                    const formatDate =
+                      moment(date).format("MMMM Do YYYY, h:mm");
 
-                    return (<Placemark
-                      key={elem._id}
-                      geometry={elem.coords}
-                      modules={["geoObject.addon.balloon"]}
-                      options={{ iconColor: "#5cb85c" }}
-                      properties={{
-                        balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
-                        balloonContentBody: `
+                    return (
+                      <Placemark
+                        key={elem._id}
+                        geometry={elem.coords}
+                        modules={["geoObject.addon.balloon"]}
+                        options={{ iconColor: "#5cb85c" }}
+                        properties={{
+                          balloonContentHeader: `<h5>Здесь летает ${elem.creator.nickName}</h5>`,
+                          balloonContentBody: `
                         <hr/><p><strong>Дата:</strong> ${formatDate}</p>
                         <p><strong>Стоимость:</strong> ${elem.price} р.</p>
                         <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
                         <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                      }}
-                    />)
+                        }}
+                      />
+                    );
                   })
-                  : null}
+                : null}
               {/* </Clusterer> */}
             </Map>
           </YMaps>
@@ -153,26 +155,26 @@ function YandexMap() {
             {/* <Clusterer options={{ groupByCoordinates: false }}> */}
             {allIvents.length
               ? allIvents.map((elem) => {
-                const date = elem.dateOfEvent;
-                const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
+                  const date = elem.dateOfEvent;
+                  const formatDate = moment(date).format("MMMM Do YYYY, h:mm");
 
-                return (<Placemark
-                  key={elem._id}
-                  geometry={elem.coords}
-                  modules={["geoObject.addon.balloon"]}
-
-                  options={{ iconColor: "#5cb85c" }}
-
-                  properties={{
-                    balloonContentHeader: `<h5> Здесь летает ${elem.creator.nickName}</h5>`,
-                    balloonContentBody: `
+                  return (
+                    <Placemark
+                      key={elem._id}
+                      geometry={elem.coords}
+                      modules={["geoObject.addon.balloon"]}
+                      options={{ iconColor: "#5cb85c" }}
+                      properties={{
+                        balloonContentHeader: `<h5> Здесь летает ${elem.creator?.nickName}</h5>`,
+                        balloonContentBody: `
                     <hr/><p><strong>Дата:</strong> ${formatDate}</p>
             <p><strong>Стоимость:</strong> ${elem.price} р.</p>
             <p><strong>Требования к пассажиру:</strong> ${elem.stopList}</p>
             <p><strong>Координаты старта:</strong> ${elem.coords[0]}, ${elem.coords[1]}</p>`,
-                  }}
-                />)
-              })
+                      }}
+                    />
+                  );
+                })
               : null}
             {/* </Clusterer> */}
           </Map>

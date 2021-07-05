@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import "./Dragger.css";
 import { addPhotoAC } from "../../redux/actions/photoAC";
-
+import Avatar from "@material-ui/core/Avatar";
 
 const Dragger = () => {
   //small function to console.log in 'then`s`
@@ -13,10 +13,10 @@ const Dragger = () => {
     return income;
   }
 
-  // find is the user logged 
+  // find is the user logged
 
-  const photo = useSelector( state => state.user.photo)
-  console.log("USER PHOTO", photo)
+  const photo = useSelector((state) => state.user.photo);
+  console.log("USER PHOTO", photo);
   const dispatch = useDispatch();
 
   const curUser = useSelector((state) => state.user._id);
@@ -72,29 +72,39 @@ const Dragger = () => {
       .post("http://localhost:8080/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => middle( res.data))
+      .then((res) => middle(res.data))
       .then((res) => dispatch(addPhotoAC(res)));
   };
 
   return (
     <>
-    { photo ? <div className="userPhoto"> <img src={photo} />  </div>:
-      <div className="Dragger">
-        <div
-          className="drop_zone"
-          onDragOver={handleOndragOver}
-          onDrop={handleOndrop}
-        >
-          {flag ? (
-            <div className="pic">
-              <img src={url} style={{ height: 200, width: 200 }} />
-            </div>
-          ) : (
-            <h5> перетащите картинку сюда</h5>
-          )}
+      {photo ? (
+        <Avatar
+          src={photo}
+          style={{ width: "250px", height: "250px" }}
+          alt="Photo"
+        />
+      ) : (
+        <div className="Dragger">
+          <div
+            className="drop_zone"
+            onDragOver={handleOndragOver}
+            onDrop={handleOndrop}
+          >
+            {flag ? (
+              <div className="pic">
+                <Avatar
+                  src={photo}
+                  style={{ width: "250px", height: "250px" }}
+                  alt="Photo"
+                />
+              </div>
+            ) : (
+              <h5> перетащите картинку сюда</h5>
+            )}
+          </div>
         </div>
-      </div>
-}
+      )}
     </>
   );
 };
